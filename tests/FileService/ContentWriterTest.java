@@ -4,23 +4,41 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
+import java.util.function.Function;
 
 
 class ContentWriterTest {
 
+    static Path dir;
+
+    @BeforeAll
+    static void createTemporaryDirectory() throws IOException {
+        dir = Files.createTempDirectory("TEST");
+    }
+
+
+    @AfterAll
+    static void removeAllDirs() throws IOException {
+        Files.walk(dir)
+                .sorted(Comparator.reverseOrder())
+                .map(Path::toFile)
+                .forEach(File::delete);
+    }
+
+
 
     @Test
     void write2FileWhenFileDoesNotExist() throws IOException, CouldNotWrite2FileAlreadyExists {
-        Path dir = Files.createTempDirectory("TEST");
-        Path filePath = Paths.get(dir.toString(),"doc.txt");
-        System.out.println(dir.toString());
+        Path filePath = dir.resolve("doc.txt");
         int nLines = 12;
         Random newRandom = new Random();
 
@@ -31,19 +49,12 @@ class ContentWriterTest {
         newFileWriter.writeContent(newContent);
         assertTrue(Files.exists(filePath));
 
-
-        Path dirFile = filePath.getParent();
-        filePath.toFile().delete();
-        Files.delete(dirFile);
-
     }
 
 
     @Test
     void write2FileWhenFileExist() throws IOException, CouldNotWrite2FileAlreadyExists {
-        Path filePath = Files.createTempFile("doc", ".txt");
-        Path dir = filePath.getParent();
-        System.out.println(dir.toString());
+        Path filePath = Files.createTempFile(dir, "doc", ".txt");
         int nLines = 5;
         Random newRandom = new Random();
 
@@ -59,7 +70,6 @@ class ContentWriterTest {
         filePath.toFile().deleteOnExit();
 
     }
-
 
 
 }

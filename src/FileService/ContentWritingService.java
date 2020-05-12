@@ -7,12 +7,12 @@ import java.util.Collection;
 
 class ContentWritingService<T extends Serializable> {
 
-    private ContentWriter<T> fileWriter;
+    private ContentWriter<T> contentWriter;
     private ContentGenerator<T> contentGenerator;
 
 
     public ContentWritingService(ContentWriter fw, ContentGenerator rig) {
-        this.fileWriter = fw;
+        this.contentWriter = fw;
         this.contentGenerator = rig;
     }
 
@@ -20,7 +20,7 @@ class ContentWritingService<T extends Serializable> {
     public void processFile(int nLines) throws IOException, CouldNotWrite2FileAlreadyExists {
 
         Collection<T> content = contentGenerator.generateContent(nLines);
-        fileWriter.writeContent(content);
+        contentWriter.writeContent(content);
         System.out.print("File has been created successfully");
 
     }

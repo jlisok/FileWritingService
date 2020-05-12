@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.Collection;
 
-class CouldNotWrite2FileAlreadyExists extends Exception{};
+class CouldNotWrite2FileAlreadyExists extends Exception {
+};
 
 class FileWriter implements ContentWriter<Integer> {
 
@@ -32,19 +33,13 @@ class FileWriter implements ContentWriter<Integer> {
                 writer.newLine();
             }
 
-        } catch (IOException e) {
-            throw e;
         }
 
     }
 
 
     private void createNonExistingDirs(Path filePath) throws IOException {
-        try {
-            Files.createDirectories(filePath.getParent());
-        } catch (IOException e) {
-            throw e;
-        }
+        Files.createDirectories(filePath.getParent());
     }
 
 
