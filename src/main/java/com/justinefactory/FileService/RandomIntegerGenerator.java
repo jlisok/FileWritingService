@@ -1,4 +1,4 @@
-package FileService;
+package com.justinefactory.FileService;
 
 import java.util.ArrayList;
 import java.util.Random;

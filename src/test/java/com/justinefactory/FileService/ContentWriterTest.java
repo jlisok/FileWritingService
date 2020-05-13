@@ -1,4 +1,4 @@
-package FileService;
+package com.justinefactory.FileService;
 
 import org.junit.jupiter.api.*;
 
@@ -8,12 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
-import java.util.function.Function;
 
 
 class ContentWriterTest {

@@ -1,4 +1,4 @@
-package FileService;
+package com.justinefactory.FileService;
 
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

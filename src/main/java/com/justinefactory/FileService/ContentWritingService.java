@@ -1,4 +1,4 @@
-package FileService;
+package com.justinefactory.FileService;
 
 import java.io.IOException;
 import java.io.Serializable;

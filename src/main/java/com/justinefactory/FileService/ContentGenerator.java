@@ -1,4 +1,4 @@
-package FileService;
+package com.justinefactory.FileService;
 
 import java.io.Serializable;
 import java.util.Collection;

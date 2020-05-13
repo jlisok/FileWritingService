@@ -2,5 +2,6 @@
 .idea/
 out/
 *.iml
-*log
-
+*.log
+*.ini
+/target
