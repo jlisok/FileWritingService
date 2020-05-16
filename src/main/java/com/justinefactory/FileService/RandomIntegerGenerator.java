@@ -24,4 +24,5 @@ class RandomIntegerGenerator implements ContentGenerator<Integer> {
         return randomContent;
     }
 
+
 }

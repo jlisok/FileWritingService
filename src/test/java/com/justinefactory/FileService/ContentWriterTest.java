@@ -50,7 +50,7 @@ class ContentWriterTest {
 
 
     @Test
-    void write2FileWhenFileExist() throws IOException, CouldNotWrite2FileAlreadyExists {
+    void write2FileWhenFileExist() throws IOException {
         Path filePath = Files.createTempFile(dir, "doc", ".txt");
         int nLines = 5;
         Random newRandom = new Random();

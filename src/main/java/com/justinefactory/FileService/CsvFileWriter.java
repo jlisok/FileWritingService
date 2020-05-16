@@ -3,17 +3,16 @@ package com.justinefactory.FileService;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
-class CouldNotWrite2FileAlreadyExists extends Exception {
-};
-
-class FileWriter<T extends Serializable> implements ContentWriter<T> {
+public class CsvFileWriter<T extends ContentParser & Serializable> implements ContentWriter<T> {
 
     private final Path filePath;
 
-    FileWriter(Path fp) {
+    CsvFileWriter(Path fp) {
         filePath = fp;
     }
 
@@ -31,7 +30,8 @@ class FileWriter<T extends Serializable> implements ContentWriter<T> {
 
 
             for (T items : content) {
-                writer.write(items.toString());
+                String newStringLine = items.parseVars();
+                writer.write(newStringLine);
                 writer.newLine();
             }
 
