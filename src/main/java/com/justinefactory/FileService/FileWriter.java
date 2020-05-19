@@ -1,52 +1,55 @@
 package com.justinefactory.FileService;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Serializable;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 
 class CouldNotWrite2FileAlreadyExists extends Exception {
-};
+}
 
-class FileWriter<T extends Serializable> implements ContentWriter<T> {
+class FileWriter<T> implements ContentWriter<T> {
 
-    private final Path filePath;
+    private final FileData fileData;
+    private static final Logger logger = LogManager.getLogger(FileWriter.class);
 
-    FileWriter(Path fp) {
-        filePath = fp;
+
+    FileWriter(FileData fd) {
+        fileData = fd;
     }
+
 
     @Override
     public void writeContent(Collection<T> content) throws IOException, CouldNotWrite2FileAlreadyExists {
 
-        if (checkIfFileAlreadyExists(filePath)) {
-            System.out.println("Could not create a file. This file already exists.");
+        if (checkIfFileAlreadyExists(fileData.getFilePath())) {
+            logger.info("Could not create file {}. File {} already exists.", fileData.getFileId().toString(), fileData.getFilePath().toString());
             throw new CouldNotWrite2FileAlreadyExists();
         }
+        createNonExistingDirs(fileData.getFilePath());
+        logger.info("Initializing writing to File {}.", fileData.getFileId().toString());
 
-        createNonExistingDirs(filePath);
-
-        try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
-
-
+        try (BufferedWriter writer = Files.newBufferedWriter(fileData.getFilePath())) {
             for (T items : content) {
                 writer.write(items.toString());
                 writer.newLine();
             }
-
+            logger.info("File {} has been created and written into successfully.", fileData.getFileId().toString());
         }
-
     }
 
 
-    private void createNonExistingDirs(Path filePath) throws IOException {
-        Files.createDirectories(filePath.getParent());
+    private void createNonExistingDirs(Path fileData) throws IOException {
+        Files.createDirectories(fileData.getParent());
     }
 
 
-    private boolean checkIfFileAlreadyExists(Path filePath) {
-        return Files.exists(filePath);
+    private boolean checkIfFileAlreadyExists(Path fileData) {
+        return Files.exists(fileData);
     }
 
 }

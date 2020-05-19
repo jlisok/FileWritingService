@@ -1,52 +1,56 @@
 package com.justinefactory.FileService;
 
+import com.opencsv.CSVWriter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
-public class CsvFileWriter<T extends ContentParser & Serializable> implements ContentWriter<T> {
+public class CsvFileWriter<T extends ContentToCsvLine> implements ContentWriter<T> {
 
-    private final Path filePath;
+    private final FileData fileData;
+    private static final Logger logger = LogManager.getLogger(CsvFileWriter.class);
 
-    CsvFileWriter(Path fp) {
-        filePath = fp;
+
+    CsvFileWriter(FileData fp) {
+        fileData = fp;
     }
 
     @Override
     public void writeContent(Collection<T> content) throws IOException, CouldNotWrite2FileAlreadyExists {
+        logger.debug("Initializing writing content to file {}.", fileData.getFileId().toString());
 
-        if (checkIfFileAlreadyExists(filePath)) {
-            System.out.println("Could not create a file. This file already exists.");
+        if (checkIfFileAlreadyExists(fileData.getFilePath())) {
+            logger.info("Could not create file {}. File {} already exists.", fileData.getFileId().toString(), fileData.getFilePath().toString());
             throw new CouldNotWrite2FileAlreadyExists();
         }
 
-        createNonExistingDirs(filePath);
+        createNonExistingDirs(fileData.getFilePath());
 
-        try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
-
-
+        try (BufferedWriter writer = Files.newBufferedWriter(fileData.getFilePath());
+             CSVWriter csvWriter = new CSVWriter(writer)
+        ) {
             for (T items : content) {
-                String newStringLine = items.parseVars();
-                writer.write(newStringLine);
-                writer.newLine();
+                String[] newStringLine = items.varsToCsvLine();
+                csvWriter.writeNext(newStringLine);
             }
-
-        }
+            logger.info("File {} has been created and appended successfully.", fileData.getFileId().toString());
+        } // catch i logger??
 
     }
 
 
-    private void createNonExistingDirs(Path filePath) throws IOException {
-        Files.createDirectories(filePath.getParent());
+    private void createNonExistingDirs(Path fileData) throws IOException {
+        Files.createDirectories(fileData.getParent());
     }
 
 
-    private boolean checkIfFileAlreadyExists(Path filePath) {
-        return Files.exists(filePath);
+    private boolean checkIfFileAlreadyExists(Path fileData) {
+        return Files.exists(fileData);
     }
 
 }

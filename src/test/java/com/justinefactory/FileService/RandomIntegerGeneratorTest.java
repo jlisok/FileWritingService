@@ -12,21 +12,17 @@ class RandomIntegerGeneratorTest {
     void generateRandomContent() {
         int nLines = 5;
         Random newRandom = new Random();
-
         RandomIntegerGenerator newGenerator = new RandomIntegerGenerator(newRandom);
         ArrayList<Integer> newContent = newGenerator.generateContent(nLines);
-        assertEquals(newContent.size(),5);
+        assertEquals(newContent.size(),nLines);
     }
 
     @Test
     void generateRandomContentWhen0() {
         int nLines = 0;
         Random newRandom = new Random();
-
         RandomIntegerGenerator randomGenerator = new RandomIntegerGenerator(newRandom);
         ArrayList<Integer> content = randomGenerator.generateContent(nLines);
         assertEquals(content.size(),0);
     }
-
-
 }

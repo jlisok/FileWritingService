@@ -1,12 +1,8 @@
 package com.justinefactory.FileService;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
-class ThreeElemContent implements ContentParser<String>, Serializable {
+class ThreeElemContent implements ContentToCsvLine<String>, Serializable {
 
     private final Long timeStamp;
     private final Integer randomInt;
@@ -18,16 +14,8 @@ class ThreeElemContent implements ContentParser<String>, Serializable {
         this.randomString = randomString;
     }
 
-
     @Override
-    public String parseVars() {
-
-        List<String> varList = Arrays.asList(timeStamp.toString(), randomInt.toString(), randomString);
-        String stringLine = (String) varList.stream().collect(Collectors.joining(","));
-        return stringLine;
-
+    public String[] varsToCsvLine() {
+        return new String[]{timeStamp.toString(), randomInt.toString(), randomString};
     }
-
-
-
 }
