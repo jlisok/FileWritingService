@@ -1,8 +1,6 @@
 package com.justinefactory.FileService;
 
-import java.io.Serializable;
-
-class ThreeElemContent implements ContentToCsvLine<String>, Serializable {
+class ThreeElemContent implements ContentToCsvLine<String> {
 
     private final Long timeStamp;
     private final Integer randomInt;

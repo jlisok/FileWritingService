@@ -1,31 +1,30 @@
 package com.justinefactory.FileService;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Collection;
 
 
-class ContentWritingService<T extends Serializable> {
+class ContentWritingService<T> {
 
-    private ContentWriter<T> contentWriter;
-    private ContentGenerator<T> contentGenerator;
+    private final ContentWriter<T> contentWriter;
+    private final ContentGenerator<T> contentGenerator;
     private static final Logger logger = LogManager.getLogger(ContentWritingService.class);
 
 
-    public ContentWritingService(ContentWriter fw, ContentGenerator rig) {
+    public ContentWritingService(ContentWriter<T> fw, ContentGenerator<T> rig) {
+        logger.info("Writing service - initialization.");
         this.contentWriter = fw;
         this.contentGenerator = rig;
     }
 
 
-    public void processFile(int nLines) throws IOException, CouldNotWrite2FileAlreadyExists, ContentGeneratingException {
-        logger.info("Initializing writing service.");
+    public void processContent(int nLines) throws IOException, ContentWritingException, ContentGeneratingException {
         Collection<T> content = contentGenerator.generateContent(nLines);
         contentWriter.writeContent(content);
-        logger.info("Writing service has finished processing successfully.");
-
+        logger.info("Writing service - finished processing successfully.");
     }
 
 }

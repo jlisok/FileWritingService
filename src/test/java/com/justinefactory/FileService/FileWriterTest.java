@@ -16,7 +16,7 @@ import static com.justinefactory.FileService.CreateAndDeleteFilesBeforeAfterAll.
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-class ContentWriterTest {
+class FileWriterTest {
 
     static Path dir;
     @BeforeAll
@@ -30,30 +30,40 @@ class ContentWriterTest {
     }
 
     @Test
-    void write2FileWhenFileDoesNotExist() throws IOException, CouldNotWrite2FileAlreadyExists {
+    void write2FileWhenFileDoesNotExist() throws IOException, ContentWritingException {
+        //given
         Path filePath = dir.resolve("doc.csv");
         FileData file2writeData = new FileData(filePath);
-        //System.out.println(dir.toString());
-        int nLines = 12;
         Random newRandom = new Random();
         RandomIntegerGenerator newGenerator = new RandomIntegerGenerator(newRandom);
+
+        //when
+        int nLines = 12;
         ArrayList<Integer> newContent = newGenerator.generateContent(nLines);
         FileWriter newFileWriter = new FileWriter(file2writeData);
         newFileWriter.writeContent(newContent);
+
+        //then
         assertTrue(Files.exists(filePath));
+        assertTrue(Files.size(filePath) > 0);
     }
 
 
     @Test
-    void write2FileWhenFileExist() throws IOException {
+    void write2FileWhenFileExists() throws IOException {
+        //given
         Path filePath = Files.createTempFile(dir, "doc", ".csv");
         FileData file2writeData = new FileData(filePath);
-        int nLines = 5;
         Random newRandom = new Random();
         RandomIntegerGenerator newGenerator = new RandomIntegerGenerator(newRandom);
-        ArrayList<Integer> newContent = newGenerator.generateContent(nLines);
         FileWriter newFileWriter = new FileWriter(file2writeData);
-        Assertions.assertThrows(CouldNotWrite2FileAlreadyExists.class, () -> {
+
+        //when
+        int nLines = 5;
+        ArrayList<Integer> newContent = newGenerator.generateContent(nLines);
+
+        //then
+        Assertions.assertThrows(ContentWritingException.class, () -> {
             newFileWriter.writeContent(newContent);
         });
     }

@@ -8,7 +8,7 @@ import java.util.Random;
 
 class RandomIntegerGenerator implements ContentGenerator<Integer> {
 
-    private Random newNumber;
+    private final Random newNumber;
     private static final Logger logger = LogManager.getLogger(RandomIntegerGenerator.class);
 
     RandomIntegerGenerator(Random newNumber) {
@@ -17,7 +17,7 @@ class RandomIntegerGenerator implements ContentGenerator<Integer> {
 
     @Override
     public ArrayList<Integer> generateContent(int nLines) {
-        logger.debug("Initializing generating random Integers.");
+        logger.debug("Generating random Integers.");
         ArrayList<Integer> randomContent = new ArrayList<>(nLines);
         for (int i = 0; i < nLines; i++) {
             randomContent.add(newNumber.nextInt());
@@ -28,10 +28,10 @@ class RandomIntegerGenerator implements ContentGenerator<Integer> {
 
     @Override
     public ArrayList<Integer> generateContent() {
-        logger.debug("Initializing generating 1 random Integer.");
+        logger.debug("Generating 1 random Integer.");
         ArrayList<Integer> randomContent = new ArrayList<>(1);
         randomContent.add(newNumber.nextInt());
-        logger.debug("Random Integer has been generated successfully.");
+        logger.debug("1 random Integer has been generated successfully.");
         return randomContent;
     }
 

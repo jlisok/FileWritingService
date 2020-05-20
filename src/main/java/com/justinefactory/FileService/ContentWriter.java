@@ -5,6 +5,6 @@ import java.util.Collection;
 
 interface ContentWriter<T> {
 
-    void writeContent(Collection<T> content) throws IOException, CouldNotWrite2FileAlreadyExists;
+    void writeContent(Collection<T> content) throws IOException, ContentWritingException;
 
 }

@@ -1,8 +1,6 @@
 package com.justinefactory.FileService;
 
-import java.io.Serializable;
-
-class TwoElemContent implements ContentToCsvLine<String>, Serializable {
+class TwoElemContent {
 
     private final Long timeStamp;
     private final String randomString;
@@ -10,11 +8,6 @@ class TwoElemContent implements ContentToCsvLine<String>, Serializable {
     TwoElemContent(Long tstmp, String rs) {
         this.timeStamp = tstmp;
         this.randomString = rs;
-    }
-
-    @Override
-    public String[] varsToCsvLine() {
-        return new String[]{timeStamp.toString(), randomString};
     }
 
     Long getTimeStamp() {

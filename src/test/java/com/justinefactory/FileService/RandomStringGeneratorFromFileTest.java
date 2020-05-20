@@ -1,27 +1,45 @@
 package com.justinefactory.FileService;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-import static com.justinefactory.testutil.PathToResourcesGetter.getPath;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.justinefactory.testutil.PathToResourcesGetter.getPathToResource;
+import static writing.service.util.CurrentTimStampWithPrecisionConversion.getCurrentTimeInNanoSeconds;
 
 class RandomStringGeneratorFromFileTest {
 
     @Test
-    void generateStringContentWhen1String() throws Exception {
-        int nLines = 5;
+    void generateStringContentWhenStringFileEmpty() throws Exception {
+        //given
         Random newRandom = new Random();
-        Path filePathRanStrings = getPath("stringcontentonly1string.csv");
+        Path filePathRanStrings = getPathToResource("emptystringcontent.csv");
+
+        //when
+        FileData fileDataRanStr = new FileData(filePathRanStrings);
+
+        //then
+        Assertions.assertThrows(ContentIsEmptyException.class, () -> new RandomStringGeneratorFromFile(newRandom, fileDataRanStr));
+    }
+
+    @Test
+    void generateStringContentWhen1String() throws Exception {
+        //given
+        Random newRandom = new Random();
+        Path filePathRanStrings = getPathToResource("stringcontentonly1string.csv");
         FileData fileDataRanStr = new FileData(filePathRanStrings);
         RandomStringGeneratorFromFile newGenerator = new RandomStringGeneratorFromFile(newRandom, fileDataRanStr);
+
+        //when
+        int nLines = 5;
         ArrayList<TwoElemContent> newContent = newGenerator.generateContent(nLines);
+
+        //then
         assertEquals(newContent.size(), nLines);
         for (TwoElemContent item : newContent) {
             assertEquals(item.getRandomString(), "Jagulars");
@@ -31,28 +49,23 @@ class RandomStringGeneratorFromFileTest {
 
     @Test
     void generateTimeStampContent() throws Exception {
-        Long timeStart = getCurrentTime();
-        int nLines = 3;
+        //given
         Random newRandom = new Random();
-        Path filePathRanStrings = getPath("stringcontentfortests.csv");
+        Path filePathRanStrings = getPathToResource("stringcontentfortests.csv");
         FileData fileDataRanStr = new FileData(filePathRanStrings);
         RandomStringGeneratorFromFile newGenerator = new RandomStringGeneratorFromFile(newRandom, fileDataRanStr);
+
+        //when
+        Long timeStart = getCurrentTimeInNanoSeconds();
+        int nLines = 3;
         ArrayList<TwoElemContent> newContent = newGenerator.generateContent(nLines);
-        Long timeStop = getCurrentTime();
+        Long timeStop = getCurrentTimeInNanoSeconds();
+
+        //then
         assertEquals(newContent.size(), nLines);
         for (TwoElemContent item : newContent) {
             assertTrue(item.getTimeStamp() >= timeStart && item.getTimeStamp() <= timeStop);
         }
-    }
-
-
-    private Long recalculateInstantToNanoSeconds(Instant tstmp) {
-        return TimeUnit.SECONDS.toNanos(tstmp.getEpochSecond()) + tstmp.getNano();
-    }
-
-    private Long getCurrentTime(){
-        Instant now = Instant.now();
-        return recalculateInstantToNanoSeconds(now);
     }
 
 }

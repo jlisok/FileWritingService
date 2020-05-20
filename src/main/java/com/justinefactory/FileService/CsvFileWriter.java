@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 
-public class CsvFileWriter<T extends ContentToCsvLine> implements ContentWriter<T> {
+class CsvFileWriter<T extends ContentToCsvLine<T>> implements ContentWriter<T> {
 
     private final FileData fileData;
     private static final Logger logger = LogManager.getLogger(CsvFileWriter.class);
@@ -21,12 +21,12 @@ public class CsvFileWriter<T extends ContentToCsvLine> implements ContentWriter<
     }
 
     @Override
-    public void writeContent(Collection<T> content) throws IOException, CouldNotWrite2FileAlreadyExists {
-        logger.debug("Initializing writing content to file {}.", fileData.getFileId().toString());
+    public void writeContent(Collection<T> content) throws IOException, ContentWritingException {
+        logger.debug("Writing content to CSV file id {}.", fileData.getFileId());
 
         if (checkIfFileAlreadyExists(fileData.getFilePath())) {
-            logger.info("Could not create file {}. File {} already exists.", fileData.getFileId().toString(), fileData.getFilePath().toString());
-            throw new CouldNotWrite2FileAlreadyExists();
+            logger.info("Could not create CSV file {}. File {} already exists.", fileData.getFileId(), fileData.getFilePath());
+            throw new ContentWritingException();
         }
 
         createNonExistingDirs(fileData.getFilePath());
@@ -38,8 +38,8 @@ public class CsvFileWriter<T extends ContentToCsvLine> implements ContentWriter<
                 String[] newStringLine = items.varsToCsvLine();
                 csvWriter.writeNext(newStringLine);
             }
-            logger.info("File {} has been created and appended successfully.", fileData.getFileId().toString());
-        } // catch i logger??
+            logger.info("CSV file {} has been created and appended successfully.", fileData.getFileId());
+        }
 
     }
 

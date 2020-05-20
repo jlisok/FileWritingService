@@ -9,9 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 
-class CouldNotWrite2FileAlreadyExists extends Exception {
-}
-
 class FileWriter<T> implements ContentWriter<T> {
 
     private final FileData fileData;
@@ -24,14 +21,14 @@ class FileWriter<T> implements ContentWriter<T> {
 
 
     @Override
-    public void writeContent(Collection<T> content) throws IOException, CouldNotWrite2FileAlreadyExists {
+    public void writeContent(Collection<T> content) throws IOException, ContentWritingException {
 
         if (checkIfFileAlreadyExists(fileData.getFilePath())) {
             logger.info("Could not create file {}. File {} already exists.", fileData.getFileId().toString(), fileData.getFilePath().toString());
-            throw new CouldNotWrite2FileAlreadyExists();
+            throw new ContentWritingException();
         }
         createNonExistingDirs(fileData.getFilePath());
-        logger.info("Initializing writing to File {}.", fileData.getFileId().toString());
+        logger.info("Writing to File {}.", fileData.getFileId().toString());
 
         try (BufferedWriter writer = Files.newBufferedWriter(fileData.getFilePath())) {
             for (T items : content) {

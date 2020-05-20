@@ -1,6 +1,7 @@
 package com.justinefactory.FileService;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,19 +11,29 @@ class RandomIntegerGeneratorTest {
 
     @Test
     void generateRandomContent() {
-        int nLines = 5;
+        //given
         Random newRandom = new Random();
         RandomIntegerGenerator newGenerator = new RandomIntegerGenerator(newRandom);
+
+        //when
+        int nLines = 5;
         ArrayList<Integer> newContent = newGenerator.generateContent(nLines);
-        assertEquals(newContent.size(),nLines);
+
+        //then
+        assertEquals(newContent.size(), nLines);
     }
 
     @Test
     void generateRandomContentWhen0() {
-        int nLines = 0;
+        //given
         Random newRandom = new Random();
         RandomIntegerGenerator randomGenerator = new RandomIntegerGenerator(newRandom);
+
+        //when
+        int nLines = 0;
         ArrayList<Integer> content = randomGenerator.generateContent(nLines);
-        assertEquals(content.size(),0);
+
+        //then
+        assertEquals(content.size(), 0);
     }
 }

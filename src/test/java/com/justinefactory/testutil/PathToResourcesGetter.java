@@ -5,15 +5,15 @@ import java.nio.file.Paths;
 
 public class PathToResourcesGetter {
 
-    public static Path getPath(String name) throws Exception {
+    public static Path getPathToResource(String name) throws Exception {
         if (name.startsWith("/")) {
-            return getPath2(name);
+            return getPath(name);
         } else {
-            return getPath2("/" + name);
+            return getPath("/" + name);
         }
     }
 
-    private static Path getPath2(String name) throws Exception {
+    private static Path getPath(String name) throws Exception {
         return Paths.get(PathToResourcesGetter.class.getResource(name).toURI());
     }
 }

@@ -1,8 +1,6 @@
 package com.justinefactory.FileService;
 
-import java.io.Serializable;
-
-interface ContentToCsvLine<T extends Serializable> {
+interface ContentToCsvLine<T> {
 
     public String[] varsToCsvLine();
 
