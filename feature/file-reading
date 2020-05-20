@@ -1,0 +1,18 @@
+after merging ver0 to master
+create a new branch - feature/file-reading
+
+you are to write the following "reader" classes to match your "writers":
+- interface ContentReader<T>
+- class PlainContentReader<T> implements ContentReader<T>
+- class CsvContentReader<T extends FromCsvLine> implements ContentReader<T>
+
+and implementations:
+- IntegerPlainContentReader extends PlainContentReader<Integer>
+- 3ElemCsvContentReader extends CsvContentReader<3ElemContent>
+
+also, write a class that will process the read content:
+- ContentStatsService<T> {
+  getCount() - return number of lines
+  getDistinctCount() - return number of DISTINCT lines (for 3elem content ignore the timestamp)
+  getMax() - return the "biggest" element (eg. for 3ElemContent - by random int)
+}
