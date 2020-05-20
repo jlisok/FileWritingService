@@ -26,7 +26,7 @@ class CsvFileWriter<T extends ContentToCsvLine<T>> implements ContentWriter<T> {
 
         if (checkIfFileAlreadyExists(fileData.getFilePath())) {
             logger.info("Could not create CSV file {}. File {} already exists.", fileData.getFileId(), fileData.getFilePath());
-            throw new ContentWritingException();
+            throw new ContentWritingException("Could not create CSV file. File already exists.");
         }
 
         createNonExistingDirs(fileData.getFilePath());

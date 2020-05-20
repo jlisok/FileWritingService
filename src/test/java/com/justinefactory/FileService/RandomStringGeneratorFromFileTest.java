@@ -24,7 +24,7 @@ class RandomStringGeneratorFromFileTest {
         FileData fileDataRanStr = new FileData(filePathRanStrings);
 
         //then
-        Assertions.assertThrows(ContentIsEmptyException.class, () -> new RandomStringGeneratorFromFile(newRandom, fileDataRanStr));
+        Assertions.assertThrows(SourceFileIsEmptyException.class, () -> new RandomStringGeneratorFromFile(newRandom, fileDataRanStr));
     }
 
     @Test

@@ -24,18 +24,18 @@ class FileWriter<T> implements ContentWriter<T> {
     public void writeContent(Collection<T> content) throws IOException, ContentWritingException {
 
         if (checkIfFileAlreadyExists(fileData.getFilePath())) {
-            logger.info("Could not create file {}. File {} already exists.", fileData.getFileId().toString(), fileData.getFilePath().toString());
-            throw new ContentWritingException();
+            logger.info("Could not create file {}. File {} already exists.", fileData.getFileId(), fileData.getFilePath());
+            throw new ContentWritingException("Could not create file. File already exists.");
         }
         createNonExistingDirs(fileData.getFilePath());
-        logger.info("Writing to File {}.", fileData.getFileId().toString());
+        logger.info("Writing to File {}.", fileData.getFileId());
 
         try (BufferedWriter writer = Files.newBufferedWriter(fileData.getFilePath())) {
             for (T items : content) {
                 writer.write(items.toString());
                 writer.newLine();
             }
-            logger.info("File {} has been created and written into successfully.", fileData.getFileId().toString());
+            logger.info("File {} has been created and written into successfully.", fileData.getFileId());
         }
     }
 

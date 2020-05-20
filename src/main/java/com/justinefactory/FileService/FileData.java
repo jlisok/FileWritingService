@@ -15,7 +15,7 @@ class FileData {
     FileData(Path filePath) {
         this.filePath = filePath;
         this.fileId = UUID.randomUUID();
-        logger.debug("New file {} has been initialized with path {}", fileId.toString(), filePath.toString());
+        logger.debug("New file {} has been initialized with path {}", fileId, filePath);
     }
 
     Path getFilePath() {

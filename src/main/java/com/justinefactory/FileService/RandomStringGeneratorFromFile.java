@@ -2,6 +2,7 @@ package com.justinefactory.FileService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.Message;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +19,7 @@ class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemContent> 
     private final int stringListSize;
     private static final Logger logger = LogManager.getLogger(RandomStringGeneratorFromFile.class);
 
-    RandomStringGeneratorFromFile(Random newNumber, FileData fileWithRandomStrings) throws Exception {
+    RandomStringGeneratorFromFile(Random newNumber, FileData fileWithRandomStrings) throws ContentInitializationException {
         this.newNumber = newNumber;
         this.stringList = readStringsFromFile(fileWithRandomStrings);
         stringListSize = stringList.size();
@@ -72,21 +73,21 @@ class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemContent> 
 
 
 
-    private List<String> readStringsFromFile(FileData stringFile) throws Exception {
-        logger.debug("Reading file id {} containing strings for random generator.", stringFile.getFileId().toString());
+    private List<String> readStringsFromFile(FileData stringFile) throws ContentInitializationException {
+        logger.debug("Reading file id {} containing strings for random generator.", stringFile.getFileId());
         try {
             List<String> randomStrings = Files.readAllLines(stringFile.getFilePath());
 
             if (randomStrings.isEmpty()) {
-                logger.warn("File id {} containing strings for random generator is empty.", stringFile.getFileId().toString());
-                throw new ContentIsEmptyException();
+                logger.warn("File id {} containing strings for random generator is empty.", stringFile.getFileId());
+                throw new SourceFileIsEmptyException("File containing strings for random generator is empty.");
             }
 
-            logger.info("File id {} containing strings for random generator has been read successfully.", stringFile.getFileId().toString());
+            logger.info("File id {} containing strings for random generator has been read successfully.", stringFile.getFileId());
             return randomStrings;
         } catch (IOException e) {
-            logger.error("Could not read file id {} containing strings for random generator.", stringFile.getFileId().toString());
-            throw new ContentGeneratingException(e);
+            logger.error("Could not read file id {} containing strings for random generator.", stringFile.getFileId());
+            throw new ContentGeneratingException(e, "Could not read file containing strings for random generator.");
         }
     }
 }
