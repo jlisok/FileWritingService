@@ -1,5 +1,10 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.domain.FileData;
+import com.justinefactory.domain.TwoElemContent;
+import com.justinefactory.writing.service.exceptions.CSVFileIsEmptyException;
+import com.justinefactory.writing.service.exceptions.ContentGeneratingException;
+import com.justinefactory.writing.service.exceptions.ContentInitializationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static writing.service.util.CurrentTimStampWithPrecisionConversion.getCurrentTimeInNanoSeconds;
+import static com.justinefactory.util.CurrentTimStampWithPrecisionConversion.getCurrentTimeInNanoSeconds;
 
 class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemContent> {
 
@@ -79,7 +84,7 @@ class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemContent> 
 
             if (randomStrings.isEmpty()) {
                 logger.warn("File id {} containing strings for random generator is empty.", stringFile.getFileId());
-                throw new SourceFileIsEmptyException("File containing strings for random generator is empty.");
+                throw new CSVFileIsEmptyException("File containing strings for random generator is empty.");
             }
 
             logger.info("File id {} containing strings for random generator has been read successfully.", stringFile.getFileId());

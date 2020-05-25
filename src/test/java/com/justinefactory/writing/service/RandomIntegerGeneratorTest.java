@@ -1,5 +1,6 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.writing.service.RandomIntegerGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.domain.FileData;
+import com.justinefactory.writing.service.exceptions.ContentWritingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

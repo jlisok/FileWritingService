@@ -1,5 +1,10 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.domain.FileData;
+import com.justinefactory.domain.ThreeElemContent;
+import com.justinefactory.writing.service.RandomIntegerGenerator;
+import com.justinefactory.writing.service.RandomStringGeneratorFromFile;
+import com.justinefactory.writing.service.ThreeElementContentGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;

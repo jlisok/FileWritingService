@@ -1,5 +1,7 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.writing.service.exceptions.ContentGeneratingException;
+
 import java.util.Collection;
 
 public interface ContentGenerator<T> {

@@ -1,5 +1,7 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.writing.service.exceptions.ContentWritingException;
+
 import java.io.IOException;
 import java.util.Collection;
 

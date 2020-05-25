@@ -1,5 +1,7 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.domain.ThreeElemContent;
+import com.justinefactory.domain.TwoElemContent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

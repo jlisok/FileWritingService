@@ -1,5 +1,9 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.domain.FileData;
+import com.justinefactory.domain.TwoElemContent;
+import com.justinefactory.writing.service.exceptions.CSVFileIsEmptyException;
+import com.justinefactory.writing.service.exceptions.ContentGeneratingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +14,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.justinefactory.testutil.PathToResourcesGetter.getPathToResource;
-import static writing.service.util.CurrentTimStampWithPrecisionConversion.getCurrentTimeInNanoSeconds;
+import static com.justinefactory.util.CurrentTimStampWithPrecisionConversion.getCurrentTimeInNanoSeconds;
 
 class RandomStringGeneratorFromFileTest {
 
@@ -24,7 +28,7 @@ class RandomStringGeneratorFromFileTest {
         FileData fileDataRanStr = new FileData(filePathRanStrings);
 
         //then
-        Assertions.assertThrows(ContentGeneratingException.class, () -> new RandomStringGeneratorFromFile(newRandom, fileDataRanStr));
+        Assertions.assertThrows(CSVFileIsEmptyException.class, () -> new RandomStringGeneratorFromFile(newRandom, fileDataRanStr));
     }
 
     @Test

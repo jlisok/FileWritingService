@@ -1,5 +1,9 @@
 package com.justinefactory.writing.service;
 
+import com.justinefactory.domain.FileData;
+import com.justinefactory.domain.ThreeElemContent;
+import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
+import com.justinefactory.writing.service.exceptions.ContentWritingException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
