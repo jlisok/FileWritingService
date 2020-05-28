@@ -1,11 +1,14 @@
 package com.justinefactory.writing.service;
 
-import com.justinefactory.writing.service.exceptions.ContentGeneratingException;
-import com.justinefactory.writing.service.exceptions.ContentWritingException;
+import com.justinefactory.writing.generators.ContentGenerator;
+import com.justinefactory.writing.exceptions.ContentGeneratingException;
+import com.justinefactory.writing.exceptions.ContentWritingException;
+import com.justinefactory.writing.writers.ContentWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.Collection;
 
 
@@ -13,7 +16,7 @@ class ContentWritingService<T> {
 
     private final ContentWriter<T> contentWriter;
     private final ContentGenerator<T> contentGenerator;
-    private static final Logger logger = LogManager.getLogger(ContentWritingService.class);
+    private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 
     public ContentWritingService(ContentWriter<T> fw, ContentGenerator<T> rig) {

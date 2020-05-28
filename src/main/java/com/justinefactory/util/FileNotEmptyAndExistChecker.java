@@ -1,15 +1,16 @@
 package com.justinefactory.util;
 
-import com.justinefactory.reading.service.exceptions.ContentReadingException;
+import com.justinefactory.reading.exceptions.ContentReadingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileNotEmptyAndExistChecker {
 
-    private static final Logger logger = LogManager.getLogger(FileNotEmptyAndExistChecker.class);
+    private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     public static boolean checkIfFileExistsIsNotDirAndNotEmpty(Path filePath) throws ContentReadingException {
         try {

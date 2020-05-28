@@ -1,6 +1,6 @@
 package com.justinefactory.domain;
 
-import com.justinefactory.writing.service.ContentToCsvLine;
+import com.justinefactory.writing.writers.ContentToCsvLine;
 
 import java.util.Objects;
 
@@ -34,6 +34,15 @@ public class ThreeElemContent implements ContentToCsvLine<String> {
     @Override
     public int hashCode() {
         return Objects.hash(timeStamp, randomInt, randomString);
+    }
+
+
+    public int getDistinctStats() {
+        return Objects.hash(randomInt, randomString);
+    }
+
+    public Integer getRandomInt() {
+        return randomInt;
     }
 }
 
