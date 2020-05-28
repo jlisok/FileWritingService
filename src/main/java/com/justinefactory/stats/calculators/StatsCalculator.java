@@ -5,8 +5,8 @@ import com.justinefactory.stats.exceptions.StatsCalculatingException;
 
 import java.util.Collection;
 
-interface StatsCalculator<OutContent, MaxContent> {
+interface StatsCalculator<OutContent> {
 
-    Stats<MaxContent> calculateStats(Collection<OutContent> content) throws StatsCalculatingException;
+    Stats<OutContent> calculateStats(Collection<OutContent> content) throws StatsCalculatingException;
 
 }

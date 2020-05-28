@@ -11,26 +11,23 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class IntegerContentStatsCalculator implements StatsCalculator<Integer, Integer> {
+public class IntegerContentStatsCalculator implements StatsCalculator<Integer> {
 
     private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     @Override
     public Stats<Integer> calculateStats(Collection<Integer> content) throws StatsCalculatingException {
         logger.debug("Calculating stats from Integer content.");
-        if (content.isEmpty()) {
+        if (content == null || content.isEmpty()) {
             logger.warn("Calculating stats from Integer content - failed. Collection {} was empty.", content);
             throw new StatsCalculatingException("Calculating stats from Integer content - failed. Collection " + content + " was empty.");
         }
-        try {
-            Integer count = calculateCount(content);
-            Integer uniqueCount = calculateUniqueCount(content);
-            Integer max = calculateMax(content);
-            logger.debug("Calculating stats from Integer content - success.");
-            return new Stats<>(count, uniqueCount, max);
-        } catch (Throwable e) {
-            throw new StatsCalculatingException(e, "Calculating stats from Integer content - failed. Trouble while calculating statistics from Collection " + content);
-        }
+        Integer count = calculateCount(content);
+        Integer uniqueCount = calculateUniqueCount(content);
+        Integer max = calculateMax(content);
+        Stats<Integer> stats = new Stats<>(count, uniqueCount, max);
+        logger.debug("Calculating stats from Integer content - success.");
+        return stats;
     }
 
 
@@ -46,4 +43,6 @@ public class IntegerContentStatsCalculator implements StatsCalculator<Integer, I
     private Integer calculateMax(Collection<Integer> content) {
         return Collections.max(content);
     }
+
+
 }

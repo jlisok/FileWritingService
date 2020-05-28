@@ -36,9 +36,8 @@ public class ThreeElemContent implements ContentToCsvLine<String> {
         return Objects.hash(timeStamp, randomInt, randomString);
     }
 
-
-    public int getDistinctStats() {
-        return Objects.hash(randomInt, randomString);
+    public String getRandomString() {
+        return randomString;
     }
 
     public Integer getRandomInt() {
