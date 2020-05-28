@@ -36,8 +36,9 @@ class CsvContentReader implements ContentReader<String[]> {
         try (Reader reader = Files.newBufferedReader(fileData.getFilePath());
              CSVReader csvReader = new CSVReader(reader)
         ) {
+            List<String[]> list = csvReader.readAll();
             logger.debug("Reading data from file id {} - success.", fileData.getFileId());
-            return csvReader.readAll();
+            return list;
         } catch (Throwable e) {
             logger.warn("Reading data from file id {} failed. Message: {}", fileData.getFileId(), e.getMessage());
             throw new ReadingContentFromFileException(e, "Reading data from file id " + fileData.getFileId() + " - failed.");

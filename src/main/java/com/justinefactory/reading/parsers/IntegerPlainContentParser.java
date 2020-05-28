@@ -17,8 +17,9 @@ public class IntegerPlainContentParser implements PlainContentParser<Integer> {
             throw new ContentParsingException("Parsing file line to Integer - failed. The line " + rawLine + " does not equal required number of columns (1).");
         }
         try {
+            Integer integer = Integer.parseInt(rawLine);
             logger.debug("Parsing file line to Integer - success.");
-            return Integer.parseInt(rawLine);
+            return integer;
         } catch (Throwable e) {
             logger.warn("Parsing file line to Integer - failed. Line: {} could not be parsed to Integer. Message: {}", rawLine, e.getMessage());
             throw new ContentParsingException(e, "Parsing file line to Integer - failed. Line " + rawLine + "could not be parsed to Integer.");

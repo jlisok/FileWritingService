@@ -37,7 +37,7 @@ class ThreeElementCsvParserTest {
 
     @ParameterizedTest
     @MethodSource("parseLineWhenLineInFileCorruptTestData")
-    void parseLineWhenLineInFileCorrupt(String[] content) throws ContentParsingException {
+    void parseLineWhenLineInFileCorrupt(String[] content) {
         //when
         ThreeElementCsvParser csvParser = new ThreeElementCsvParser();
 

@@ -33,8 +33,9 @@ class PlainContentReader implements ContentReader<String> {
         }
 
         try{
+            List<String> list = Files.readAllLines(fileData.getFilePath());
             logger.debug("Reading data from file id {} - success.", fileData.getFileId());
-            return Files.readAllLines(fileData.getFilePath());
+            return list;
         } catch (Throwable e) {
             logger.warn("Reading data from file id {} failed. Message: {}", fileData.getFileId(), e.getMessage());
             throw new ReadingContentFromFileException(e, "Reading data from file id " + fileData.getFileId() + " - failed. Problem while reading all lines.");
