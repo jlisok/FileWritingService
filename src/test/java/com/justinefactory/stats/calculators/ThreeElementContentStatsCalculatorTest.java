@@ -37,9 +37,10 @@ class ThreeElementContentStatsCalculatorTest {
     @Test
     void calculateStatsWhen1Element() throws StatsCalculatingException {
         //given
+        ThreeElemContent maxThreeElemContent = new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin");
         List<ThreeElemContent> content = new ArrayList<>();
-        content.add(new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin"));
-        Stats<ThreeElemContent> expectedStats = new Stats<>(1, 1, content.get(0));
+        content.add(maxThreeElemContent);
+        Stats<ThreeElemContent> expectedStats = new Stats<>(1, 1, maxThreeElemContent);
 
         //when
         ThreeElementContentStatsCalculator calculator = new ThreeElementContentStatsCalculator();
@@ -52,10 +53,11 @@ class ThreeElementContentStatsCalculatorTest {
     @Test
     void calculateStatsWhen2DistinctElements() throws StatsCalculatingException {
         //given
+        ThreeElemContent maxThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, "Owl");
         List<ThreeElemContent> content = new ArrayList<>();
         content.add(new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin"));
-        content.add(new ThreeElemContent(1590147349818750700L, 1345882450, "Owl"));
-        Stats<ThreeElemContent> expectedStats = new Stats<>(2, 2, content.get(1));
+        content.add(maxThreeElemContent);
+        Stats<ThreeElemContent> expectedStats = new Stats<>(2, 2, maxThreeElemContent);
 
         //when
         ThreeElementContentStatsCalculator calculator = new ThreeElementContentStatsCalculator();
@@ -68,11 +70,12 @@ class ThreeElementContentStatsCalculatorTest {
     @Test
     void calculateStatsWhen3ElementsBut2Distinct() throws StatsCalculatingException {
         //given
+        ThreeElemContent maxThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, "Owl");
         List<ThreeElemContent> content = new ArrayList<>();
         content.add(new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin"));
-        content.add(new ThreeElemContent(1590147349818750700L, 1345882450, "Owl"));
-        content.add(new ThreeElemContent(1590147349818750800L, 1345882450, "Owl"));
-        Stats<ThreeElemContent> expectedStats = new Stats<>(3, 2, content.get(1));
+        content.add(maxThreeElemContent);
+        content.add(maxThreeElemContent);
+        Stats<ThreeElemContent> expectedStats = new Stats<>(3, 2, maxThreeElemContent);
 
         //when
         ThreeElementContentStatsCalculator calculator = new ThreeElementContentStatsCalculator();
@@ -85,11 +88,12 @@ class ThreeElementContentStatsCalculatorTest {
     @Test
     void calculateStatsWhen2ElementsBut1Distinct_MakingSureTimeStampIsExcludedFromDefiningDistinct() throws StatsCalculatingException {
         //given
+        ThreeElemContent maxThreeElemContent = new ThreeElemContent(1590147349818750700L, 1434010513, "Owl");
         List<ThreeElemContent> content = new ArrayList<>();
-        content.add(new ThreeElemContent(1590147349818750700L, 1434010513, "Owl"));
+        content.add(maxThreeElemContent);
         content.add(new ThreeElemContent(1590147349818750888L, 1434010513, "Owl"));
 
-        Stats<ThreeElemContent> expectedStats = new Stats<>(2, 1, content.get(0));
+        Stats<ThreeElemContent> expectedStats = new Stats<>(2, 1, maxThreeElemContent);
 
         //when
         ThreeElementContentStatsCalculator calculator = new ThreeElementContentStatsCalculator();
@@ -102,11 +106,12 @@ class ThreeElementContentStatsCalculatorTest {
     @Test
     void calculateStatsWhen2DistinctElements_MakingSureACombinationOfStringAndRandomIntIsTakenToDefineDistinct() throws StatsCalculatingException {
         //given
+        ThreeElemContent maxThreeElementContent = new ThreeElemContent(1590147349818750800L, 1434010513, "ChristopherRobin");
         List<ThreeElemContent> content = new ArrayList<>();
         content.add(new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin"));
-        content.add(new ThreeElemContent(1590147349818750800L, 1434010513, "ChristopherRobin"));
+        content.add(maxThreeElementContent);
 
-        Stats<ThreeElemContent> expectedStats = new Stats<>(2, 2, content.get(1));
+        Stats<ThreeElemContent> expectedStats = new Stats<>(2, 2, maxThreeElementContent);
 
         //when
         ThreeElementContentStatsCalculator calculator = new ThreeElementContentStatsCalculator();

@@ -12,6 +12,7 @@ import java.util.*;
 public class ThreeElementContentStatsCalculator implements StatsCalculator<ThreeElemContent> {
 
     private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+    private static final ThreeElementContentComparatorByRandomInt comparator = new ThreeElementContentComparatorByRandomInt();
 
     @Override
     public Stats<ThreeElemContent> calculateStats(Collection<ThreeElemContent> content) throws StatsCalculatingException {
@@ -34,17 +35,16 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
 
 
     private Integer calculateUniqueCount(Collection<ThreeElemContent> content) {
-        List<StringIntContent> stringIntContent = new ArrayList<>(content.size());
+        Set<StringIntContent> uniqueContent = new HashSet<>();
         for (ThreeElemContent item : content) {
-            stringIntContent.add(new StringIntContent(item));
+            uniqueContent.add(new StringIntContent(item));
         }
-        Set<StringIntContent> uniqueContent = new HashSet<>(stringIntContent);
         return uniqueContent.size();
     }
 
 
     private ThreeElemContent calculateMax(Collection<ThreeElemContent> content) {
-        return Collections.max(content, new ThreeElementContentComparatorByRandomInt());
+        return Collections.max(content, comparator);
     }
 
 
@@ -74,18 +74,10 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
     }
 
 
-    private class ThreeElementContentComparatorByRandomInt implements Comparator<ThreeElemContent> {
+    private static class ThreeElementContentComparatorByRandomInt implements Comparator<ThreeElemContent> {
 
-        public int compare(ThreeElemContent tec1, ThreeElemContent tec2) {
-            ThreeElemContent threeElemContent1 = tec1;
-            ThreeElemContent threeElemContent2 = tec2;
-
-            if (threeElemContent1.getRandomInt() == threeElemContent2.getRandomInt())
-                return 0;
-            else if (threeElemContent1.getRandomInt() > threeElemContent2.getRandomInt())
-                return 1;
-            else
-                return -1;
+        public int compare(ThreeElemContent threeElemContent1, ThreeElemContent threeElemContent2) {
+            return (threeElemContent2.getRandomInt() - threeElemContent1.getRandomInt());
         }
     }
 
