@@ -34,8 +34,8 @@ class FileWriter<T> implements ContentWriter<T> {
         logger.info("Writing to File {}.", fileData.getFileId());
 
         try (BufferedWriter writer = Files.newBufferedWriter(fileData.getFilePath())) {
-            for (T items : content) {
-                writer.write(items.toString());
+            for (T item : content) {
+                writer.write(item.toString());
                 writer.newLine();
             }
             logger.info("File {} has been created and written into successfully.", fileData.getFileId());

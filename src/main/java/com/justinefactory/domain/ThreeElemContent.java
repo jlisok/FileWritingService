@@ -1,10 +1,8 @@
 package com.justinefactory.domain;
 
-import com.justinefactory.writing.writers.ContentToCsvLine;
-
 import java.util.Objects;
 
-public class ThreeElemContent implements ContentToCsvLine<String> {
+public class ThreeElemContent {
 
     private final Long timeStamp;
     private final Integer randomInt;
@@ -16,10 +14,6 @@ public class ThreeElemContent implements ContentToCsvLine<String> {
         this.randomString = randomString;
     }
 
-    @Override
-    public String[] varsToCsvLine() {
-        return new String[]{timeStamp.toString(), randomInt.toString(), randomString};
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -42,6 +36,10 @@ public class ThreeElemContent implements ContentToCsvLine<String> {
 
     public Integer getRandomInt() {
         return randomInt;
+    }
+
+    public Long getTimeStamp() {
+        return timeStamp;
     }
 }
 
