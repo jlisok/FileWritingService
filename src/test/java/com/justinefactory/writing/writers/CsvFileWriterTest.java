@@ -3,6 +3,7 @@ package com.justinefactory.writing.writers;
 import com.justinefactory.domain.FileData;
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
+import com.justinefactory.writing.converters.ThreeElementContentToCsvConverter;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import com.justinefactory.writing.generators.RandomIntegerGenerator;
 import com.justinefactory.writing.generators.RandomStringGeneratorFromFile;
@@ -50,7 +51,8 @@ class CsvFileWriterTest {
         //when
         int nLines = 12;
         ArrayList<ThreeElemContent> threeElemContent = new3ElemGenerator.generateContent(nLines);
-        CsvFileWriter newFileWriter = new CsvFileWriter(file2writeData);
+        ThreeElementContentToCsvConverter converter = new ThreeElementContentToCsvConverter();
+        CsvFileWriter<ThreeElemContent> newFileWriter = new CsvFileWriter<>(file2writeData, converter);
         newFileWriter.writeContent(threeElemContent);
 
         //then
@@ -73,7 +75,8 @@ class CsvFileWriterTest {
         //when
         int nLines = 5;
         ArrayList<ThreeElemContent> threeElemContent = new3ElemGenerator.generateContent(nLines);
-        CsvFileWriter newFileWriter = new CsvFileWriter(file2writeData);
+        ThreeElementContentToCsvConverter converter = new ThreeElementContentToCsvConverter();
+        CsvFileWriter<ThreeElemContent> newFileWriter = new CsvFileWriter<>(file2writeData, converter);
 
         //then
         Assertions.assertThrows(ContentWritingException.class, () -> newFileWriter.writeContent(threeElemContent));

@@ -1,6 +1,7 @@
 package com.justinefactory.writing.writers;
 
 import com.justinefactory.domain.FileData;
+import com.justinefactory.writing.converters.ContentToCsvLineConverter;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import com.opencsv.CSVWriter;
 import org.apache.logging.log4j.LogManager;
@@ -13,14 +14,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 
-class CsvFileWriter<T extends ContentToCsvLine<T>> implements ContentWriter<T> {
+class CsvFileWriter<T> implements ContentWriter<T> {
 
     private final FileData fileData;
+    private final ContentToCsvLineConverter<T> converter;
     private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 
-    CsvFileWriter(FileData fp) {
+    CsvFileWriter(FileData fp, ContentToCsvLineConverter<T> cr) {
         fileData = fp;
+        converter = cr;
     }
 
     @Override
@@ -37,8 +40,8 @@ class CsvFileWriter<T extends ContentToCsvLine<T>> implements ContentWriter<T> {
         try (BufferedWriter writer = Files.newBufferedWriter(fileData.getFilePath());
              CSVWriter csvWriter = new CSVWriter(writer)
         ) {
-            for (T items : content) {
-                String[] newStringLine = items.varsToCsvLine();
+            for (T item : content) {
+                String[] newStringLine = converter.varsToCsvLine(item);
                 csvWriter.writeNext(newStringLine);
             }
             logger.info("CSV file {} has been created and appended successfully.", fileData.getFileId());
