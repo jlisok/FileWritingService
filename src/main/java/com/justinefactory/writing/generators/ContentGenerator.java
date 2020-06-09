@@ -1,13 +1,10 @@
 package com.justinefactory.writing.generators;
 
+import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentGeneratingException;
 
-import java.util.Collection;
+public interface ContentGenerator<Content> {
 
-public interface ContentGenerator<T> {
-
-    Collection<T> generateContent(int nLines) throws ContentGeneratingException;
-
-    Collection<T> generateContent() throws ContentGeneratingException;
+    ContentStorage<Content> generateContent(int nLines) throws ContentGeneratingException;
 
 }

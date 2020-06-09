@@ -1,11 +1,11 @@
 package com.justinefactory.writing.generators;
 
+import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RandomIntegerGeneratorTest {
 
@@ -17,10 +17,10 @@ class RandomIntegerGeneratorTest {
 
         //when
         int nLines = 5;
-        ArrayList<Integer> newContent = newGenerator.generateContent(nLines);
+        ContentStorage<Integer> newContent = newGenerator.generateContent(nLines);
 
         //then
-        assertEquals(newContent.size(), nLines);
+        assertEquals(newContent.getContentSize(), nLines);
     }
 
     @Test
@@ -31,9 +31,9 @@ class RandomIntegerGeneratorTest {
 
         //when
         int nLines = 0;
-        ArrayList<Integer> content = randomGenerator.generateContent(nLines);
+        ContentStorage<Integer> content = randomGenerator.generateContent(nLines);
 
         //then
-        assertEquals(content.size(), 0);
+        assertEquals(content.getContentSize(), 0);
     }
 }

@@ -1,11 +1,10 @@
 package com.justinefactory.reading.readers;
 
 import com.justinefactory.reading.exceptions.ContentReadingException;
-
-import java.util.List;
+import com.justinefactory.writing.domain.ContentStorage;
 
 public interface ContentReader<RawContent> {
 
-    List<RawContent> readContent() throws ContentReadingException;
+    ContentStorage<RawContent> readContent() throws ContentReadingException;
 
 }

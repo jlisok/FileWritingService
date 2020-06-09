@@ -1,16 +1,14 @@
 package com.justinefactory.reading.readers;
 
-import com.justinefactory.domain.FileData;
+import com.justinefactory.domain.PathData;
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.reading.parsers.IntegerPlainContentParser;
 import com.justinefactory.reading.parsers.ThreeElementCsvParser;
 import com.justinefactory.reading.service.ContentReadingService;
+import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.justinefactory.testutil.PathToResourcesGetter.getPathToResource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,19 +19,19 @@ class ContentReadingServiceTest {
     void processContentWhenProcessingCSVFile() throws Exception {
         //given
         Path filePath = getPathToResource("example-csv-file-for-tests.csv");
-        List<ThreeElemContent> expectedContent = new ArrayList<>();
-        expectedContent.add(new ThreeElemContent(Long.parseLong("1590147349818750700"), -840762737, "ChristopherRobin"));
-        expectedContent.add(new ThreeElemContent(Long.parseLong("1590147349820800800"), -1345882450, "Owl"));
-        expectedContent.add(new ThreeElemContent(Long.parseLong("1590147349822277700"), 1434010513, "Heffalumps"));
-        expectedContent.add(new ThreeElemContent(Long.parseLong("1590147349823733800"), 1822510187, "Woozles"));
+        ContentStorage<ThreeElemContent> expectedContent = new ContentStorage<>();
+        expectedContent.addContent(new ThreeElemContent(Long.parseLong("1590147349818750700"), -840762737, "ChristopherRobin"));
+        expectedContent.addContent(new ThreeElemContent(Long.parseLong("1590147349820800800"), -1345882450, "Owl"));
+        expectedContent.addContent(new ThreeElemContent(Long.parseLong("1590147349822277700"), 1434010513, "Heffalumps"));
+        expectedContent.addContent(new ThreeElemContent(Long.parseLong("1590147349823733800"), 1822510187, "Woozles"));
 
 
         //when
-        FileData fileData = new FileData(filePath);
+        PathData fileData = new PathData(filePath);
         CsvContentReader contentReader = new CsvContentReader(fileData);
         ThreeElementCsvParser csvParser = new ThreeElementCsvParser();
         ContentReadingService contentReadingService = new ContentReadingService(contentReader, csvParser);
-        List<ThreeElemContent> content = contentReadingService.processContent();
+        ContentStorage<ThreeElemContent> content = contentReadingService.processContent();
 
 
         //then
@@ -43,14 +41,18 @@ class ContentReadingServiceTest {
     @Test
     void processContentWhenProcessingPlainFile() throws Exception {
         //given
-        FileData fileData = new FileData(getPathToResource("txt-file-content-integers.txt"));
-        List<Integer> expectedContent = Arrays.asList(40000000,800000,3245,2143567);
+        PathData fileData = new PathData(getPathToResource("txt-file-content-integers.txt"));
+        ContentStorage<Integer> expectedContent = new ContentStorage<>();
+        expectedContent.addContent(40000000);
+        expectedContent.addContent(800000);
+        expectedContent.addContent(3245);
+        expectedContent.addContent(2143567);
 
         //when
         PlainContentReader contentReader = new PlainContentReader(fileData);
         IntegerPlainContentParser intParser = new IntegerPlainContentParser();
         ContentReadingService contentReadingService = new ContentReadingService(contentReader, intParser);
-        List<Integer> content = contentReadingService.processContent();
+        ContentStorage<Integer> content = contentReadingService.processContent();
 
 
         //then

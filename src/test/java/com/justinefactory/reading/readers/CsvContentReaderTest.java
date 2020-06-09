@@ -1,15 +1,15 @@
 package com.justinefactory.reading.readers;
 
-import com.justinefactory.domain.FileData;
+import com.justinefactory.domain.PathData;
 import com.justinefactory.reading.exceptions.SourceFileIsEmptyException;
+import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
-import java.util.List;
 
 import static com.justinefactory.testutil.PathToResourcesGetter.getPathToResource;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CsvContentReaderTest {
 
@@ -18,11 +18,11 @@ class CsvContentReaderTest {
         //given
         Path filePath = getPathToResource("example-csv-file-for-tests.csv");
         //when
-        FileData fileData = new FileData(filePath);
+        PathData fileData = new PathData(filePath);
         CsvContentReader contentReader = new CsvContentReader(fileData);
-        List<String[]> content = contentReader.readContent();
+        ContentStorage<String[]> content = contentReader.readContent();
         //then
-        assertFalse(content.isEmpty());
+        assertNotEquals(0, content.getContentSize());
     }
 
 
@@ -31,10 +31,10 @@ class CsvContentReaderTest {
         //given
         Path filePath = getPathToResource("empty-string-content.csv");
         //when
-        FileData fileData = new FileData(filePath);
+        PathData fileData = new PathData(filePath);
         CsvContentReader contentReader = new CsvContentReader(fileData);
         //then
-        Assertions.assertThrows(SourceFileIsEmptyException.class, () -> contentReader.readContent());
+        Assertions.assertThrows(SourceFileIsEmptyException.class, contentReader::readContent);
     }
 
 

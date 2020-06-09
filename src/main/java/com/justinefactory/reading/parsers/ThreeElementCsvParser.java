@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class ThreeElementCsvParser implements CsvLineParser<ThreeElemContent> {
 
-    private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+    private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     @Override
     public ThreeElemContent parseLine(String[] csvLine) throws ContentParsingException {

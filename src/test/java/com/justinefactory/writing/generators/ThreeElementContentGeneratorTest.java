@@ -1,11 +1,11 @@
 package com.justinefactory.writing.generators;
 
-import com.justinefactory.domain.FileData;
+import com.justinefactory.domain.PathData;
 import com.justinefactory.domain.ThreeElemContent;
+import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Random;
 
 import static com.justinefactory.testutil.PathToResourcesGetter.getPathToResource;
@@ -17,7 +17,7 @@ class ThreeElementContentGeneratorTest {
     void generateContentWhenRandom() throws Exception {
         //given
         Path filePathRanStrings = getPathToResource("string-content-for-tests.csv");
-        FileData fileDataRanStr = new FileData(filePathRanStrings);
+        PathData fileDataRanStr = new PathData(filePathRanStrings);
         Random newRandom = new Random();
         RandomIntegerGenerator newIntGenerator = new RandomIntegerGenerator(newRandom);
         RandomStringGeneratorFromFile new2ElemGenerator = new RandomStringGeneratorFromFile(newRandom, fileDataRanStr);
@@ -25,10 +25,10 @@ class ThreeElementContentGeneratorTest {
 
         //when
         int nLines = 12;
-        ArrayList<ThreeElemContent> new3ElemContent = new3ElemGenerator.generateContent(nLines);
+        ContentStorage<ThreeElemContent> new3ElemContent = new3ElemGenerator.generateContent(nLines);
 
         //then
-        assertEquals(new3ElemContent.size(), nLines);
+        assertEquals(new3ElemContent.getContentSize(), nLines);
     }
 
 }
