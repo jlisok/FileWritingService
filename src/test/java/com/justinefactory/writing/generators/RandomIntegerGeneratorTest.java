@@ -1,5 +1,6 @@
 package com.justinefactory.writing.generators;
 
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class RandomIntegerGeneratorTest {
 
     @Test
-    void generateRandomContent() {
+    void generateRandomContent() throws ContentStoringException {
         //given
         Random newRandom = new Random();
         RandomIntegerGenerator newGenerator = new RandomIntegerGenerator(newRandom);
@@ -24,7 +25,7 @@ class RandomIntegerGeneratorTest {
     }
 
     @Test
-    void generateRandomContentWhen0() {
+    void generateRandomContentWhen0() throws ContentStoringException {
         //given
         Random newRandom = new Random();
         RandomIntegerGenerator randomGenerator = new RandomIntegerGenerator(newRandom);

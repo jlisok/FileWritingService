@@ -1,6 +1,7 @@
 package com.justinefactory.writing.converters;
 
 import com.justinefactory.domain.ThreeElemContent;
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.apache.logging.log4j.LogManager;
@@ -13,11 +14,10 @@ public class ThreeElementContentToCsvLinesConverter implements ContentToCsvLines
     private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     @Override
-    public ContentStorage<String[]> convertContent(ContentStorage<ThreeElemContent> content) throws ContentConversion2ReadyToWriteException {
+    public ContentStorage<String[]> convertContent(ContentStorage<ThreeElemContent> content) throws ContentConversion2ReadyToWriteException, ContentStoringException {
         checkIfContentEmpty(content);
         ContentStorage<String[]> readyToWriteContent = new ContentStorage<>();
         for (ThreeElemContent item : content.getAllContent()) {
-            checkIfIsNull(item);
             readyToWriteContent.addContent(new String[]{item.getTimeStamp().toString(), item.getRandomInt().toString(), item.getRandomString()});
             logger.debug("Converting ThreeElemContent object {} into csvFile lines - success.", content);
         }
@@ -27,12 +27,6 @@ public class ThreeElementContentToCsvLinesConverter implements ContentToCsvLines
     private void checkIfContentEmpty(ContentStorage<ThreeElemContent> content) throws ContentConversion2ReadyToWriteException {
         if (content.getAllContent().isEmpty()) {
             throw new ContentConversion2ReadyToWriteException("Converting content " + content + " into csvFile lines - failed. Content was empty.");
-        }
-    }
-
-    private void checkIfIsNull(ThreeElemContent item) throws ContentConversion2ReadyToWriteException {
-        if (item == null || item.getRandomString() == null || item.getRandomString().isEmpty() || item.getRandomInt() == null || item.getTimeStamp() == null) {
-            throw new ContentConversion2ReadyToWriteException("Converting ThreeElemContent object " + item + " into csvFile line - failed. Content item was empty.");
         }
     }
 

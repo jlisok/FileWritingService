@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -32,9 +33,7 @@ class PlainFileWriterTest {
         //given
         Path filePath = dir.resolve("doc.csv");
         PathData file2writeData = new PathData(filePath);
-        ContentStorage<String> readyToWriteContent = new ContentStorage<>();
-        readyToWriteContent.addContent("1");
-        readyToWriteContent.addContent("2");
+        ContentStorage<String> readyToWriteContent = new ContentStorage<>(List.of("1","2"));
 
         //when
         PlainFileWriter writer = new PlainFileWriter();

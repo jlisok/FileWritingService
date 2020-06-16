@@ -18,7 +18,7 @@ public class IntegerContentStatsCalculator implements StatsCalculator<Integer> {
     @Override
     public Stats<Integer> calculateStats(ContentStorage<Integer> content) throws StatsCalculatingException {
         logger.debug("Calculating stats from Integer content.");
-        if (content == null || content.getContentSize() == 0) {
+        if (content == null || content.isEmpty()) {
             logger.warn("Calculating stats from Integer content - failed. Collection {} was empty.", content);
             throw new StatsCalculatingException("Calculating stats from Integer content - failed. Collection " + content + " was empty.");
         }

@@ -18,7 +18,7 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
     @Override
     public Stats<ThreeElemContent> calculateStats(ContentStorage<ThreeElemContent> content) throws StatsCalculatingException {
         logger.debug("Calculating stats from ThreeElementContent content.");
-        if (content == null || content.getContentSize() == 0) {
+        if (content == null || content.isEmpty()) {
             logger.warn("Calculating stats from ThreeElementContent content - failed. Storage class {} is empty or does not exist.", content);
             throw new StatsCalculatingException("Calculating stats from ThreeElementContent content - failed. Inserted input storage class " + content + " is empty or does not exist.");
         }

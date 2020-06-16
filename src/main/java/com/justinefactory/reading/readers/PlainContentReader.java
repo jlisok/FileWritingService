@@ -37,7 +37,7 @@ class PlainContentReader implements ContentReader<String> {
             logger.debug("Reading data from file id {} - success.", fileData.getFileId());
             return rawContent;
         } catch (Throwable e) {
-            logger.warn("Reading data from file id {} failed. Message: {}", fileData.getFileId(), e.getMessage());
+            logger.warn("Reading data from file id {} failed.", fileData.getFileId(), e);
             throw new ReadingContentFromFileException(e, "Reading data from file id " + fileData.getFileId() + " - failed. Problem while reading all lines.");
         }
     }

@@ -27,7 +27,7 @@ public class ThreeElementCsvParser implements CsvLineParser<ThreeElemContent> {
             logger.debug("Parsing csvFile line to ThreeElemContent class - success.");
             return threeElemContent;
         } catch (Throwable e) {
-            logger.warn("Parsing csvFile line to ThreeElemContent class - CSV line: {} does not match column type requirements. Message: {}", csvLine, e.getMessage());
+            logger.warn("Parsing csvFile line to ThreeElemContent class - CSV line: {} does not match column type requirements.", csvLine, e);
             throw new ContentParsingException(e, "CSV content - " + Arrays.toString(csvLine) + " - does not match column type requirements.");
         }
 

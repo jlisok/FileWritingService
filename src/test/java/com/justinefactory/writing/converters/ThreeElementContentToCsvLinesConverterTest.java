@@ -1,6 +1,7 @@
 package com.justinefactory.writing.converters;
 
 import com.justinefactory.domain.ThreeElemContent;
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.junit.jupiter.api.Test;
@@ -25,71 +26,10 @@ class ThreeElementContentToCsvLinesConverterTest {
         assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(input));
     }
 
-    @Test
-    void convertDataWhenItemIsNull() {
-        //given
-        ThreeElemContent firstThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, "Owl");
-        ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
-        ContentStorage<ThreeElemContent> input = new ContentStorage<>();
-        input.addContent(firstThreeElemContent);
-        input.addContent(null);
-
-        //then
-        assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(input));
-    }
-
-    @Test
-    void convertDataWhenStringIsEmpty() {
-        //given
-        ThreeElemContent firstThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, "");
-        ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
-        ContentStorage<ThreeElemContent> input = new ContentStorage<>();
-        input.addContent(firstThreeElemContent);
-
-        //then
-        assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(input));
-    }
-
-    @Test
-    void convertDataWhenStringIsNull() {
-        //given
-        ThreeElemContent firstThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, null);
-        ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
-        ContentStorage<ThreeElemContent> input = new ContentStorage<>();
-        input.addContent(firstThreeElemContent);
-
-        //then
-        assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(input));
-    }
-
-    @Test
-    void convertDataWhenTimeStampIsNull() {
-        //given
-        ThreeElemContent firstThreeElemContent = new ThreeElemContent(null, 1345882450, "Owl");
-        ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
-        ContentStorage<ThreeElemContent> input = new ContentStorage<>();
-        input.addContent(firstThreeElemContent);
-
-        //then
-        assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(input));
-    }
-
-    @Test
-    void convertDataWhenRandomStringIsNull() {
-        //given
-        ThreeElemContent firstThreeElemContent = new ThreeElemContent(1590147349818750700L, null, "Owl");
-        ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
-        ContentStorage<ThreeElemContent> input = new ContentStorage<>();
-        input.addContent(firstThreeElemContent);
-
-        //then
-        assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(input));
-    }
-
 
     @ParameterizedTest
     @MethodSource("conversionData")
-    void convertDataWhenContentMeetsConditions(ContentStorage<ThreeElemContent> input, ContentStorage<String[]> expectedContent) throws ContentConversion2ReadyToWriteException {
+    void convertDataWhenContentMeetsConditions(ContentStorage<ThreeElemContent> input, ContentStorage<String[]> expectedContent) throws ContentConversion2ReadyToWriteException, ContentStoringException {
         //given
         ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
 
@@ -104,7 +44,7 @@ class ThreeElementContentToCsvLinesConverterTest {
         }
     }
 
-    static Stream<Arguments> conversionData() {
+    static Stream<Arguments> conversionData() throws ContentStoringException {
         ThreeElemContent firstThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, "Owl");
         ThreeElemContent secondThreeElemContent = new ThreeElemContent(1590147349818759790L, -45882470, "Fluff");
 

@@ -29,7 +29,7 @@ public class CsvFileWriter implements ContentWriter<ContentStorage<String[]>> {
 
         } catch (IOException e) {
             logger.warn("Problem while writing to file. Message: {}. Writing aborted.", e.getMessage());
-            throw new ContentWritingException(e, "Problem while writing to file. Message: " + e.getMessage() + " Writing aborted.");
+            throw new ContentWritingException(e, "Problem while writing to file. Writing aborted.");
         }
     }
 }

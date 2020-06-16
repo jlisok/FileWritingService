@@ -1,5 +1,6 @@
 package com.justinefactory.sending.domain;
 
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.domain.ContentStorage;
 
@@ -10,9 +11,17 @@ public class ContentAndStatsStorage<Content> {
     private final ContentStorage<Content> content;
     private final Stats<Content> stats;
 
-    public ContentAndStatsStorage(ContentStorage<Content> ct, Stats<Content> st) {
+    public ContentAndStatsStorage(ContentStorage<Content> ct, Stats<Content> st) throws ContentStoringException {
+        checkIfIsNullOrEmpty(ct, st);
         content = ct;
         stats = st;
+    }
+
+
+    private void checkIfIsNullOrEmpty(ContentStorage<Content> content, Stats<Content> stats) throws ContentStoringException {
+        if (content == null || content.getAllContent() == null || content.getAllContent().isEmpty() || stats == null) {
+            throw new ContentStoringException("Trouble while writing content: " + content + " and stats: " + stats + " to ContentStorage. Content or stats are empty or null.");
+        }
     }
 
     public ContentStorage<Content> getContent() {

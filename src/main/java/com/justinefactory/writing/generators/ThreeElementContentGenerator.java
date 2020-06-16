@@ -1,6 +1,7 @@
 package com.justinefactory.writing.generators;
 
 import com.justinefactory.domain.ThreeElemContent;
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.domain.TwoElemContent;
 import org.apache.logging.log4j.LogManager;
@@ -22,11 +23,11 @@ public class ThreeElementContentGenerator implements ContentGenerator<ThreeElemC
 
 
     @Override
-    public ContentStorage<ThreeElemContent> generateContent(int nLines) {
+    public ContentStorage<ThreeElemContent> generateContent(int nLines) throws ContentStoringException {
         logger.debug("Generating {} items of 3 element content.", nLines);
         ContentStorage<Integer> randomInt = intGenerator.generateContent(nLines);
         ContentStorage<TwoElemContent> randomStrTStamp = strAndTStampGenerator.generateContent(nLines);
-        ContentStorage<ThreeElemContent> randomContent = new ContentStorage<>(nLines);
+        ContentStorage<ThreeElemContent> randomContent = new ContentStorage<>();
 
         for (int i = 0; i < nLines; i++) {
             ThreeElemContent threeContent = createThreeElemContentObject(randomInt.getContent(i), randomStrTStamp.getContent(i));
@@ -38,7 +39,7 @@ public class ThreeElementContentGenerator implements ContentGenerator<ThreeElemC
     }
 
 
-    private ThreeElemContent createThreeElemContentObject(Integer rInt, TwoElemContent rTwoElem) {
+    private ThreeElemContent createThreeElemContentObject(Integer rInt, TwoElemContent rTwoElem) throws ContentStoringException {
         return new ThreeElemContent(rTwoElem.getTimeStamp(), rInt, rTwoElem.getRandomString());
     }
 

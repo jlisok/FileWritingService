@@ -1,5 +1,6 @@
 package com.justinefactory.writing.converters;
 
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ class IntegersToLinesConverterTest {
 
     @ParameterizedTest
     @MethodSource("conversionData")
-    void convertDataWhenContentMeetsConditions(ContentStorage<Integer> input, ContentStorage<String> expectedContent) throws ContentConversion2ReadyToWriteException {
+    void convertDataWhenContentMeetsConditions(ContentStorage<Integer> input, ContentStorage<String> expectedContent) throws ContentConversion2ReadyToWriteException, ContentStoringException {
         //given
         IntegersToLinesConverter converter = new IntegersToLinesConverter();
 
@@ -49,7 +50,7 @@ class IntegersToLinesConverterTest {
         assertEquals(actualContent, expectedContent);
     }
 
-    static Stream<Arguments> conversionData() {
+    static Stream<Arguments> conversionData() throws ContentStoringException {
         return Stream.of(
                 Arguments.arguments(new ContentStorage<>(Collections.singletonList(1)), new ContentStorage<>(Collections.singletonList("1"))),
                 Arguments.arguments(new ContentStorage<>(Arrays.asList(1, 2)), new ContentStorage<>(Arrays.asList("1", "2"))),

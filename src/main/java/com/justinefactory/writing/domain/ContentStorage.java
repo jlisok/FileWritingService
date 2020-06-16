@@ -1,21 +1,38 @@
 package com.justinefactory.writing.domain;
 
-import java.util.*;
+import com.justinefactory.reading.exceptions.ContentStoringException;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 public class ContentStorage<Content> {
 
     private final List<Content> content;
 
-    public ContentStorage(int nLines) {
-        content = new ArrayList<>(nLines);
-    }
-
     public ContentStorage() {
         content = new ArrayList<>();
     }
 
-    public ContentStorage(List<Content> rc){
+
+    public ContentStorage(List<Content> rc) throws ContentStoringException {
+        for (Content item : rc) {
+            checkIfContentNull(item);
+        }
         content = rc;
+    }
+
+    public ContentStorage(Content rc) throws ContentStoringException {
+        checkIfContentNull(rc);
+        content = new ArrayList<>();
+        content.add(rc);
+    }
+
+    private void checkIfContentNull(Content content) throws ContentStoringException {
+        if (content == null) {
+            throw new ContentStoringException("Trouble while writing content " + content + " into Storage. Content is null.");
+        }
     }
 
     public Content getContent(int i) {
@@ -26,7 +43,8 @@ public class ContentStorage<Content> {
         return content.size();
     }
 
-    public void addContent(Content content) {
+    public void addContent(Content content) throws ContentStoringException {
+        checkIfContentNull(content);
         this.content.add(content);
     }
 

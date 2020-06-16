@@ -1,9 +1,12 @@
 package com.justinefactory.stats.calculators;
 
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.stats.exceptions.StatsCalculatingException;
 import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -33,10 +36,9 @@ class IntegerContentStatsCalculatorTest {
 
 
     @Test
-    void calculateStatsWhenContentHas1Element() throws StatsCalculatingException {
+    void calculateStatsWhenContentHas1Element() throws StatsCalculatingException, ContentStoringException {
         //given
         ContentStorage<Integer> content = new ContentStorage<>(10);
-        content.addContent(10);
         Stats<Integer> expectedStats = new Stats<>(1, 1, 10);
         IntegerContentStatsCalculator calculator = new IntegerContentStatsCalculator();
 
@@ -49,16 +51,9 @@ class IntegerContentStatsCalculatorTest {
 
 
     @Test
-    void calculateStatsWhenContentHasMoreElementsAndAllUnique() throws StatsCalculatingException {
+    void calculateStatsWhenContentHasMoreElementsAndAllUnique() throws StatsCalculatingException, ContentStoringException {
         //given
-        ContentStorage<Integer> content = new ContentStorage<>(10);
-        content.addContent(10);
-        content.addContent(50);
-        content.addContent(40);
-        content.addContent(20);
-        content.addContent(70);
-        content.addContent(130);
-        content.addContent(1);
+        ContentStorage<Integer> content = new ContentStorage<>(List.of(10, 50, 40, 20, 70, 130, 1));
         Stats<Integer> expectedStats = new Stats<>(7, 7, 130);
         IntegerContentStatsCalculator calculator = new IntegerContentStatsCalculator();
 
@@ -71,16 +66,9 @@ class IntegerContentStatsCalculatorTest {
 
 
     @Test
-    void calculateStatsWhenContentHasMoreNonUniqueElements() throws StatsCalculatingException {
+    void calculateStatsWhenContentHasMoreNonUniqueElements() throws StatsCalculatingException, ContentStoringException {
         //given
-        ContentStorage<Integer> content = new ContentStorage<>(10);
-        content.addContent(10);
-        content.addContent(20);
-        content.addContent(14);
-        content.addContent(20);
-        content.addContent(20);
-        content.addContent(12);
-        content.addContent(1);
+        ContentStorage<Integer> content = new ContentStorage<>(List.of(10, 20, 14, 20, 20, 12, 1));
         Stats<Integer> expectedStats = new Stats<>(7, 5, 20);
         IntegerContentStatsCalculator calculator = new IntegerContentStatsCalculator();
 

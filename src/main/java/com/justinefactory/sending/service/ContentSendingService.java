@@ -1,6 +1,7 @@
 package com.justinefactory.sending.service;
 
 import com.justinefactory.reading.exceptions.ContentReadingException;
+import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.reading.service.ContentReadingService;
 import com.justinefactory.sending.domain.ContentAndStatsStorage;
 import com.justinefactory.stats.calculators.StatsCalculator;
@@ -30,7 +31,7 @@ public class ContentSendingService<RawContent, Content, ReadyToSendContent> {
     }
 
 
-    public void processContent() throws ContentReadingException, StatsCalculatingException, ContentWritingException {
+    public void readContent() throws ContentReadingException, StatsCalculatingException, ContentWritingException, ContentStoringException {
         ContentStorage<Content> content = contentReadingService.processContent();
         Stats<Content> stats = statsCalculator.calculateStats(content);
         ContentAndStatsStorage<Content> contentAndStats = new ContentAndStatsStorage<>(content, stats);

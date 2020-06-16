@@ -33,8 +33,7 @@ class CsvFileWriterTest {
         //given
         Path filePath = dir.resolve("doc.csv");
         PathData file2writeData = new PathData(filePath);
-        ContentStorage<String[]> readyToWriteContent = new ContentStorage<>();
-        readyToWriteContent.addContent(new String[]{"1590147349818750700", "1345882450", "Owl"});
+        ContentStorage<String[]> readyToWriteContent = new ContentStorage<>(new String[]{"1590147349818750700", "1345882450", "Owl"});
         CsvFileWriter newFileWriter = new CsvFileWriter();
 
         //when
