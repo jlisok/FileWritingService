@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class ThreeElementCsvParser implements CsvLineParser<ThreeElemContent> {
 
-    private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+    private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     @Override
     public ThreeElemContent parseLine(String[] csvLine) throws ContentParsingException {
@@ -27,7 +27,7 @@ public class ThreeElementCsvParser implements CsvLineParser<ThreeElemContent> {
             logger.debug("Parsing csvFile line to ThreeElemContent class - success.");
             return threeElemContent;
         } catch (Throwable e) {
-            logger.warn("Parsing csvFile line to ThreeElemContent class - CSV line: {} does not match column type requirements. Message: {}", csvLine, e.getMessage());
+            logger.warn("Parsing csvFile line to ThreeElemContent class - CSV line: {} does not match column type requirements.", csvLine, e);
             throw new ContentParsingException(e, "CSV content - " + Arrays.toString(csvLine) + " - does not match column type requirements.");
         }
 

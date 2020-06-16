@@ -3,6 +3,7 @@ package com.justinefactory.stats.calculators;
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.stats.exceptions.StatsCalculatingException;
+import com.justinefactory.writing.domain.ContentStorage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,15 +12,15 @@ import java.util.*;
 
 public class ThreeElementContentStatsCalculator implements StatsCalculator<ThreeElemContent> {
 
-    private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+    private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
     private static final ThreeElementContentComparatorByRandomInt comparator = new ThreeElementContentComparatorByRandomInt();
 
     @Override
-    public Stats<ThreeElemContent> calculateStats(Collection<ThreeElemContent> content) throws StatsCalculatingException {
+    public Stats<ThreeElemContent> calculateStats(ContentStorage<ThreeElemContent> content) throws StatsCalculatingException {
         logger.debug("Calculating stats from ThreeElementContent content.");
         if (content == null || content.isEmpty()) {
-            logger.warn("Calculating stats from ThreeElementContent content - failed. Collection {} was empty.", content);
-            throw new StatsCalculatingException("Calculating stats from ThreeElementContent content - failed. Inserted input Collection " + content + " is empty.");
+            logger.warn("Calculating stats from ThreeElementContent content - failed. Storage class {} is empty or does not exist.", content);
+            throw new StatsCalculatingException("Calculating stats from ThreeElementContent content - failed. Inserted input storage class " + content + " is empty or does not exist.");
         }
         Integer count = calculateCount(content);
         Integer uniqueCount = calculateUniqueCount(content);
@@ -29,22 +30,22 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
         return stats;
     }
 
-    private Integer calculateCount(Collection<ThreeElemContent> content) {
-        return content.size();
+    private Integer calculateCount(ContentStorage<ThreeElemContent> content) {
+        return content.getContentSize();
     }
 
 
-    private Integer calculateUniqueCount(Collection<ThreeElemContent> content) {
+    private Integer calculateUniqueCount(ContentStorage<ThreeElemContent> content) {
         Set<StringIntContent> uniqueContent = new HashSet<>();
-        for (ThreeElemContent item : content) {
+        for (ThreeElemContent item : content.getAllContent()) {
             uniqueContent.add(new StringIntContent(item));
         }
         return uniqueContent.size();
     }
 
 
-    private ThreeElemContent calculateMax(Collection<ThreeElemContent> content) {
-        return Collections.max(content, comparator);
+    private ThreeElemContent calculateMax(ContentStorage<ThreeElemContent> content) {
+        return Collections.max(content.getAllContent(), comparator);
     }
 
 

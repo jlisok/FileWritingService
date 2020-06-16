@@ -1,18 +1,18 @@
 package com.justinefactory.writing.generators;
 
 import com.justinefactory.domain.ThreeElemContent;
-import com.justinefactory.domain.TwoElemContent;
+import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.TwoElemContent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
-import java.util.ArrayList;
 
 public class ThreeElementContentGenerator implements ContentGenerator<ThreeElemContent> {
 
     private final RandomIntegerGenerator intGenerator;
     private final RandomStringGeneratorFromFile strAndTStampGenerator;
-    private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+    private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 
     public ThreeElementContentGenerator(RandomIntegerGenerator randomIntegerGenerator, RandomStringGeneratorFromFile randomStringAndTStampGenerator) {
@@ -22,31 +22,18 @@ public class ThreeElementContentGenerator implements ContentGenerator<ThreeElemC
 
 
     @Override
-    public ArrayList<ThreeElemContent> generateContent(int nLines) {
+    public ContentStorage<ThreeElemContent> generateContent(int nLines) {
         logger.debug("Generating {} items of 3 element content.", nLines);
-        ArrayList<Integer> randomInt = intGenerator.generateContent(nLines);
-        ArrayList<TwoElemContent> randomStrTStamp = strAndTStampGenerator.generateContent(nLines);
-        ArrayList<ThreeElemContent> randomContent = new ArrayList<>(nLines);
+        ContentStorage<Integer> randomInt = intGenerator.generateContent(nLines);
+        ContentStorage<TwoElemContent> randomStrTStamp = strAndTStampGenerator.generateContent(nLines);
+        ContentStorage<ThreeElemContent> randomContent = new ContentStorage<>();
 
         for (int i = 0; i < nLines; i++) {
-            ThreeElemContent threeContent = createThreeElemContentObject(randomInt.get(i), randomStrTStamp.get(i));
-            randomContent.add(threeContent);
+            ThreeElemContent threeContent = createThreeElemContentObject(randomInt.getContent(i), randomStrTStamp.getContent(i));
+            randomContent.addContent(threeContent);
         }
 
         logger.debug("{} items of 3 element content have been created successfully.", nLines);
-        return randomContent;
-    }
-
-
-    @Override
-    public ArrayList<ThreeElemContent> generateContent() {
-        logger.debug("Generating 1 item of 3 element content.");
-        ArrayList<Integer> randomInt = intGenerator.generateContent(1);
-        ArrayList<TwoElemContent> randomStrTStamp = strAndTStampGenerator.generateContent(1);
-        ArrayList<ThreeElemContent> randomContent = new ArrayList<>(1);
-        ThreeElemContent threeContent = createThreeElemContentObject(randomInt.get(0), randomStrTStamp.get(0));
-        randomContent.add(threeContent);
-        logger.debug("1 item of 3 element content has been created successfully.");
         return randomContent;
     }
 

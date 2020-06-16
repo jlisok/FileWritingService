@@ -1,5 +1,6 @@
 package com.justinefactory.domain;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class ThreeElemContent {
@@ -8,7 +9,8 @@ public class ThreeElemContent {
     private final Integer randomInt;
     private final String randomString;
 
-    public ThreeElemContent(Long timeStamp, Integer randomInt, String randomString) {
+    public ThreeElemContent(Long timeStamp, Integer randomInt, String randomString) throws IllegalArgumentException {
+        checkIfNotNullAndNotEmpty(timeStamp, randomInt, randomString);
         this.timeStamp = timeStamp;
         this.randomInt = randomInt;
         this.randomString = randomString;
@@ -41,6 +43,14 @@ public class ThreeElemContent {
     public Long getTimeStamp() {
         return timeStamp;
     }
+
+
+    private void checkIfNotNullAndNotEmpty(Long timeStamp, Integer randomInt, String randomString) {
+        if (timeStamp == null || randomInt == null || randomString == null || randomString.isEmpty()) {
+            throw new IllegalArgumentException("Trouble while converting 3 elements: " + Arrays.toString(new String[]{String.valueOf(timeStamp), String.valueOf(randomInt), randomString}) + " into ThreeElemContent object. Content is empty or null.");
+        }
+    }
+
 }
 
 

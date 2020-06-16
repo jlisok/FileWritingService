@@ -21,7 +21,7 @@ public class IntegerPlainContentParser implements PlainContentParser<Integer> {
             logger.debug("Parsing file line to Integer - success.");
             return integer;
         } catch (Throwable e) {
-            logger.warn("Parsing file line to Integer - failed. Line: {} could not be parsed to Integer. Message: {}", rawLine, e.getMessage());
+            logger.warn("Parsing file line to Integer - failed. Line: {} could not be parsed to Integer.", rawLine, e);
             throw new ContentParsingException(e, "Parsing file line to Integer - failed. Line " + rawLine + "could not be parsed to Integer.");
         }
     }

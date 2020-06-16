@@ -1,13 +1,13 @@
 package com.justinefactory.reading.service;
 
+import com.justinefactory.reading.exceptions.ContentReadingException;
 import com.justinefactory.reading.parsers.ContentParser;
 import com.justinefactory.reading.readers.ContentReader;
+import com.justinefactory.writing.domain.ContentStorage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ContentReadingService<RawContent, OutContent> {
 
@@ -23,11 +23,11 @@ public class ContentReadingService<RawContent, OutContent> {
     }
 
 
-    public List<OutContent> processContent() throws Exception {
-        List<RawContent> rawContent = contentReader.readContent();
-        List<OutContent> content = new ArrayList<>();
-        for (RawContent item : rawContent) {
-            content.add(contentParser.parseLine(item));
+    public ContentStorage<OutContent> processContent() throws ContentReadingException {
+        ContentStorage<RawContent> rawContent = contentReader.readContent();
+        ContentStorage<OutContent> content = new ContentStorage<>();
+        for (int i = 0; i < rawContent.getContentSize(); i++) {
+            content.addContent(contentParser.parseLine(rawContent.getContent(i)));
         }
         logger.info("Reading service - finished processing successfully.");
         return content;

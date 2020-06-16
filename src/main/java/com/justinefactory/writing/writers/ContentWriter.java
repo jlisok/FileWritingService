@@ -1,12 +1,12 @@
 package com.justinefactory.writing.writers;
 
+import com.justinefactory.domain.PathData;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 
 import java.io.IOException;
-import java.util.Collection;
 
-public interface ContentWriter<T> {
+public interface ContentWriter<Content> {
 
-    void writeContent(Collection<T> content) throws IOException, ContentWritingException;
+    void writeContent(Content content, PathData pathData) throws ContentWritingException;
 
 }
