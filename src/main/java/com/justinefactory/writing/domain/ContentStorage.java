@@ -14,15 +14,16 @@ public class ContentStorage<Content> {
     }
 
 
-    public ContentStorage(List<Content> rc) {
-        if (rc == null) throw new IllegalArgumentException("Trouble while writing content " + rc + " into Storage. Content is null.");
+    public ContentStorage(List<Content> rc) throws IllegalArgumentException {
+        if (rc == null)
+            throw new IllegalArgumentException("Trouble while writing content " + rc + " into Storage. Content is null.");
         for (Content item : rc) {
             checkIfContentNull(item);
         }
         content = rc;
     }
 
-    public ContentStorage(Content rc) {
+    public ContentStorage(Content rc) throws IllegalArgumentException {
         checkIfContentNull(rc);
         content = new ArrayList<>();
         content.add(rc);

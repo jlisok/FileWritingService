@@ -10,7 +10,7 @@ public class ContentAndStatsStorage<Content> {
     private final ContentStorage<Content> content;
     private final Stats<Content> stats;
 
-    public ContentAndStatsStorage(ContentStorage<Content> ct, Stats<Content> st) {
+    public ContentAndStatsStorage(ContentStorage<Content> ct, Stats<Content> st) throws IllegalArgumentException {
         checkIfIsNullOrEmpty(ct, st);
         content = ct;
         stats = st;
