@@ -21,6 +21,6 @@ jobs:
       with:
         java-version: 9
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn compile --file pom.xml
     - name: Run tests
       run: mvn test --file pom.xml
