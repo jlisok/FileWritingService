@@ -2,7 +2,6 @@ package com.justinefactory.reading.parsers;
 
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.reading.exceptions.ContentParsingException;
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,7 +25,7 @@ class ThreeElementCsvParserTest {
     }
 
 
-    static Stream<Arguments> parseLineWhenContentMeetsConditionsTestData() throws ContentStoringException {
+    static Stream<Arguments> parseLineWhenContentMeetsConditionsTestData() {
         return Stream.of(
                 Arguments.arguments(new String[]{"1590147349818750700", "-840762737", "ChristopherRobin"}, new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin")),
                 Arguments.arguments(new String[]{"1590147349820800800", "-1345882450", "Owl"}, new ThreeElemContent(1590147349820800800L, -1345882450, "Owl")),

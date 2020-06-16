@@ -1,13 +1,12 @@
 package com.justinefactory.writing.converters;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 
 public class IntegersToLinesConverter implements ContentConverter<ContentStorage<Integer>, ContentStorage<String>> {
 
     @Override
-    public ContentStorage<String> convertContent(ContentStorage<Integer> content) throws ContentConversion2ReadyToWriteException, ContentStoringException {
+    public ContentStorage<String> convertContent(ContentStorage<Integer> content) throws ContentConversion2ReadyToWriteException {
         checkIfContentNull(content);
         ContentStorage<String> readyToWriteContent = new ContentStorage<>();
         for (Integer item : content.getAllContent()) {

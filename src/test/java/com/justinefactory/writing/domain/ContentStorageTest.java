@@ -1,6 +1,5 @@
 package com.justinefactory.writing.domain;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,11 +16,11 @@ class ContentStorageTest {
         String string = null;
 
         //then
-        assertThrows(ContentStoringException.class, () -> new ContentStorage<>(string));
+        assertThrows(IllegalArgumentException.class, () -> new ContentStorage<>(string));
     }
 
     @Test
-    void createContentStorageWhenInstertingContentThatMeetsConditions() throws ContentStoringException {
+    void createContentStorageWhenInstertingContentThatMeetsConditions() {
         //given
         String string = "Tiger";
 
@@ -34,17 +33,26 @@ class ContentStorageTest {
 
 
     @Test
-    void createContentStorageWhenInstertingListOfContentAsNull() {
+    void createContentStorageWhenInstertingListOfContentWithNullItem() {
         //given
         List<String> list = new ArrayList<>();
         list.add(null);
 
         //then
-        assertThrows(ContentStoringException.class, () -> new ContentStorage<>(list));
+        assertThrows(IllegalArgumentException.class, () -> new ContentStorage<>(list));
     }
 
     @Test
-    void createContentStorageWhenInstertingListOfContentThatMeetsConditions() throws ContentStoringException {
+    void createContentStorageWhenInstertingListOfContentNull() {
+        //given
+        List<String> list = null;
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> new ContentStorage<>(list));
+    }
+
+    @Test
+    void createContentStorageWhenInstertingListOfContentThatMeetsConditions() {
         //given
         List<Integer> list = new ArrayList<>(List.of(1, 15, 32));
 
@@ -62,12 +70,12 @@ class ContentStorageTest {
         ContentStorage<String> content = new ContentStorage<>();
 
         //then
-        assertThrows(ContentStoringException.class, () -> content.addContent(null));
+        assertThrows(IllegalArgumentException.class, () -> content.addContent(null));
     }
 
 
     @Test
-    void createContentStorageWhenAddingContentThatMeetsConditions() throws ContentStoringException {
+    void createContentStorageWhenAddingContentThatMeetsConditions() {
         //given
         ContentStorage<String> content = new ContentStorage<>();
         String string = "Tiger";

@@ -1,7 +1,5 @@
 package com.justinefactory.domain;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
-
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -11,7 +9,7 @@ public class ThreeElemContent {
     private final Integer randomInt;
     private final String randomString;
 
-    public ThreeElemContent(Long timeStamp, Integer randomInt, String randomString) throws ContentStoringException {
+    public ThreeElemContent(Long timeStamp, Integer randomInt, String randomString) throws IllegalArgumentException {
         checkIfNotNullAndNotEmpty(timeStamp, randomInt, randomString);
         this.timeStamp = timeStamp;
         this.randomInt = randomInt;
@@ -47,9 +45,9 @@ public class ThreeElemContent {
     }
 
 
-    private void checkIfNotNullAndNotEmpty(Long timeStamp, Integer randomInt, String randomString) throws ContentStoringException {
+    private void checkIfNotNullAndNotEmpty(Long timeStamp, Integer randomInt, String randomString) {
         if (timeStamp == null || randomInt == null || randomString == null || randomString.isEmpty()) {
-            throw new ContentStoringException("Trouble while converting 3 elements: " + Arrays.toString(new String[]{String.valueOf(timeStamp), String.valueOf(randomInt), randomString}) + " into ThreeElemContent object. Content is empty or null.");
+            throw new IllegalArgumentException("Trouble while converting 3 elements: " + Arrays.toString(new String[]{String.valueOf(timeStamp), String.valueOf(randomInt), randomString}) + " into ThreeElemContent object. Content is empty or null.");
         }
     }
 

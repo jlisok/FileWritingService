@@ -1,7 +1,5 @@
 package com.justinefactory.writing.domain;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,22 +14,23 @@ public class ContentStorage<Content> {
     }
 
 
-    public ContentStorage(List<Content> rc) throws ContentStoringException {
+    public ContentStorage(List<Content> rc) {
+        if (rc == null) throw new IllegalArgumentException("Trouble while writing content " + rc + " into Storage. Content is null.");
         for (Content item : rc) {
             checkIfContentNull(item);
         }
         content = rc;
     }
 
-    public ContentStorage(Content rc) throws ContentStoringException {
+    public ContentStorage(Content rc) {
         checkIfContentNull(rc);
         content = new ArrayList<>();
         content.add(rc);
     }
 
-    private void checkIfContentNull(Content content) throws ContentStoringException {
+    private void checkIfContentNull(Content content) throws IllegalArgumentException {
         if (content == null) {
-            throw new ContentStoringException("Trouble while writing content " + content + " into Storage. Content is null.");
+            throw new IllegalArgumentException("Trouble while writing content " + content + " into Storage. Content is null.");
         }
     }
 
@@ -43,7 +42,7 @@ public class ContentStorage<Content> {
         return content.size();
     }
 
-    public void addContent(Content content) throws ContentStoringException {
+    public void addContent(Content content) throws IllegalArgumentException {
         checkIfContentNull(content);
         this.content.add(content);
     }

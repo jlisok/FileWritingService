@@ -1,7 +1,6 @@
 package com.justinefactory.writing.converters;
 
 import com.justinefactory.domain.ThreeElemContent;
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,7 @@ class ThreeElementContentToCsvLinesConverterTest {
 
     @ParameterizedTest
     @MethodSource("conversionData")
-    void convertDataWhenContentMeetsConditions(ContentStorage<ThreeElemContent> input, ContentStorage<String[]> expectedContent) throws ContentConversion2ReadyToWriteException, ContentStoringException {
+    void convertDataWhenContentMeetsConditions(ContentStorage<ThreeElemContent> input, ContentStorage<String[]> expectedContent) throws ContentConversion2ReadyToWriteException {
         //given
         ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
 
@@ -44,7 +43,7 @@ class ThreeElementContentToCsvLinesConverterTest {
         }
     }
 
-    static Stream<Arguments> conversionData() throws ContentStoringException {
+    static Stream<Arguments> conversionData() {
         ThreeElemContent firstThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, "Owl");
         ThreeElemContent secondThreeElemContent = new ThreeElemContent(1590147349818759790L, -45882470, "Fluff");
 

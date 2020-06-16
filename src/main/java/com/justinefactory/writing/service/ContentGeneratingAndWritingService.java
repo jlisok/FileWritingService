@@ -1,6 +1,5 @@
 package com.justinefactory.writing.service;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentGeneratingException;
 import com.justinefactory.writing.exceptions.ContentWritingException;
@@ -26,7 +25,7 @@ class ContentGeneratingAndWritingService<Content, FormattedContent> {
     }
 
 
-    public void processContent(int nLines) throws ContentWritingException, ContentGeneratingException, ContentStoringException {
+    public void processContent(int nLines) throws ContentWritingException, ContentGeneratingException {
         ContentStorage<Content> content = contentGenerator.generateContent(nLines);
         contentWritingService.writeContent(content);
         logger.info("Writing service - finished processing successfully.");

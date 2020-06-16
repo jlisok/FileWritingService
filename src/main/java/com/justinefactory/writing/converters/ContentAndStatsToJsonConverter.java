@@ -2,7 +2,6 @@ package com.justinefactory.writing.converters;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.sending.domain.ContentAndStatsStorage;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
@@ -15,7 +14,7 @@ public class ContentAndStatsToJsonConverter<Content> implements ContentConverter
 
 
     @Override
-    public ContentStorage<String> convertContent(ContentAndStatsStorage<Content> content) throws ContentConversion2ReadyToWriteException, ContentStoringException {
+    public ContentStorage<String> convertContent(ContentAndStatsStorage<Content> content) throws ContentConversion2ReadyToWriteException {
         if (content == null) {
             throw new ContentConversion2ReadyToWriteException("Converting content " + content + " into line - failed. Content is empty or does not exist.");
         }

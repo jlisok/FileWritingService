@@ -1,6 +1,5 @@
 package com.justinefactory.domain;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ThreeElemContentTest {
 
     @Test
-    void createThreeElemContentWhen3ElementsMeetsConditions() throws ContentStoringException {
+    void createThreeElemContentWhen3ElementsMeetsConditions() {
         //given
         Integer randomInt = 5;
         Long timeStamp = 4567890L;
@@ -31,7 +30,7 @@ class ThreeElemContentTest {
         String randomString = "Tiger";
 
         //then
-        assertThrows(ContentStoringException.class, ()-> new ThreeElemContent(null, randomInt, randomString));
+        assertThrows(IllegalArgumentException.class, () -> new ThreeElemContent(null, randomInt, randomString));
     }
 
     @Test
@@ -41,7 +40,7 @@ class ThreeElemContentTest {
         String randomString = "Tiger";
 
         //then
-        assertThrows(ContentStoringException.class, ()-> new ThreeElemContent(timeStamp, null, randomString));
+        assertThrows(IllegalArgumentException.class, () -> new ThreeElemContent(timeStamp, null, randomString));
     }
 
     @Test
@@ -51,7 +50,7 @@ class ThreeElemContentTest {
         Long timeStamp = 4567890L;
 
         //then
-        assertThrows(ContentStoringException.class, ()-> new ThreeElemContent(timeStamp, randomInt, null));
+        assertThrows(IllegalArgumentException.class, () -> new ThreeElemContent(timeStamp, randomInt, null));
     }
 
     @Test
@@ -62,7 +61,7 @@ class ThreeElemContentTest {
         String randomString = "";
 
         //then
-        assertThrows(ContentStoringException.class, ()-> new ThreeElemContent(timeStamp, randomInt, randomString));
+        assertThrows(IllegalArgumentException.class, () -> new ThreeElemContent(timeStamp, randomInt, randomString));
     }
 
 

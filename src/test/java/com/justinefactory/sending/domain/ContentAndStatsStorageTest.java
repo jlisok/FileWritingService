@@ -1,6 +1,5 @@
 package com.justinefactory.sending.domain;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ContentAndStatsStorageTest {
 
     @Test
-    void createContentAndStatsStorageWhenContentMeetsConditions() throws ContentStoringException {
+    void createContentAndStatsStorageWhenContentMeetsConditions() {
         // given
         ContentStorage<Integer> content = new ContentStorage<>(50);
         Stats<Integer> stats = new Stats<>(1, 1, 50);
@@ -31,7 +30,7 @@ class ContentAndStatsStorageTest {
         Stats<Integer> stats = new Stats<>(1, 1, 50);
 
         //then
-        assertThrows(ContentStoringException.class, ()-> new ContentAndStatsStorage<>(content, stats));
+        assertThrows(IllegalArgumentException.class, () -> new ContentAndStatsStorage<>(content, stats));
     }
 
     @Test
@@ -40,15 +39,15 @@ class ContentAndStatsStorageTest {
         Stats<Integer> stats = new Stats<>(1, 1, 50);
 
         //then
-        assertThrows(ContentStoringException.class, ()-> new ContentAndStatsStorage<>(null, stats));
+        assertThrows(IllegalArgumentException.class, () -> new ContentAndStatsStorage<>(null, stats));
     }
 
     @Test
-    void createContentAndStatsStorageWhenStatsAreNull() throws ContentStoringException {
+    void createContentAndStatsStorageWhenStatsAreNull() {
         // given
         ContentStorage<Integer> content = new ContentStorage<>(50);
 
         //then
-        assertThrows(ContentStoringException.class, ()-> new ContentAndStatsStorage<>(content, null));
+        assertThrows(IllegalArgumentException.class, () -> new ContentAndStatsStorage<>(content, null));
     }
 }

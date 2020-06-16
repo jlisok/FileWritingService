@@ -1,7 +1,6 @@
 package com.justinefactory.writing.converters;
 
 import com.justinefactory.domain.ThreeElemContent;
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.sending.domain.ContentAndStatsStorage;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.domain.ContentStorage;
@@ -17,17 +16,17 @@ class ContentAndStatsToJsonConverterTest {
 
 
     @Test
-    void createContentWhenStorageIsNull(){
+    void createContentWhenStorageIsNull() {
         //given
         ContentAndStatsToJsonConverter<ThreeElemContent> converter = new ContentAndStatsToJsonConverter<>();
 
         //then
-        assertThrows(ContentConversion2ReadyToWriteException.class, ()->  converter.convertContent(null));
+        assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(null));
     }
 
 
     @Test
-    void createContentWhenThreeElemContentConvertedAndMeetsConditions() throws ContentWritingException, ContentStoringException {
+    void createContentWhenThreeElemContentConvertedAndMeetsConditions() throws ContentWritingException {
         //given
         String expectedContent = "{\n" +
                 "  \"content\": {\n" +

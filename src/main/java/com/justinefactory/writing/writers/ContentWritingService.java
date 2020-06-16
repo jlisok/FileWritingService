@@ -1,7 +1,6 @@
 package com.justinefactory.writing.writers;
 
 import com.justinefactory.domain.PathData;
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.writing.converters.ContentConverter;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import com.justinefactory.writing.util.CheckerIfContentAlreadyWritten;
@@ -30,7 +29,7 @@ public class ContentWritingService<Content, ReadyToWriteContent> {
         writer = wt;
     }
 
-    public void writeContent(Content content) throws ContentWritingException, ContentStoringException {
+    public void writeContent(Content content) throws ContentWritingException {
         logger.info("Writing content to path {} - initialization.", pathData.getFilePath());
         if (content == null) {
             throw new ContentWritingException("Problem while Writing content to path " + pathData.getFilePath() + " content " + content + " is empty or does not exist.");

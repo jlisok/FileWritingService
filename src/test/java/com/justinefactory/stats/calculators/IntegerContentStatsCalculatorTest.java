@@ -1,6 +1,5 @@
 package com.justinefactory.stats.calculators;
 
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.stats.exceptions.StatsCalculatingException;
 import com.justinefactory.writing.domain.ContentStorage;
@@ -36,7 +35,7 @@ class IntegerContentStatsCalculatorTest {
 
 
     @Test
-    void calculateStatsWhenContentHas1Element() throws StatsCalculatingException, ContentStoringException {
+    void calculateStatsWhenContentHas1Element() throws StatsCalculatingException {
         //given
         ContentStorage<Integer> content = new ContentStorage<>(10);
         Stats<Integer> expectedStats = new Stats<>(1, 1, 10);
@@ -51,7 +50,7 @@ class IntegerContentStatsCalculatorTest {
 
 
     @Test
-    void calculateStatsWhenContentHasMoreElementsAndAllUnique() throws StatsCalculatingException, ContentStoringException {
+    void calculateStatsWhenContentHasMoreElementsAndAllUnique() throws StatsCalculatingException {
         //given
         ContentStorage<Integer> content = new ContentStorage<>(List.of(10, 50, 40, 20, 70, 130, 1));
         Stats<Integer> expectedStats = new Stats<>(7, 7, 130);
@@ -66,7 +65,7 @@ class IntegerContentStatsCalculatorTest {
 
 
     @Test
-    void calculateStatsWhenContentHasMoreNonUniqueElements() throws StatsCalculatingException, ContentStoringException {
+    void calculateStatsWhenContentHasMoreNonUniqueElements() throws StatsCalculatingException {
         //given
         ContentStorage<Integer> content = new ContentStorage<>(List.of(10, 20, 14, 20, 20, 12, 1));
         Stats<Integer> expectedStats = new Stats<>(7, 5, 20);

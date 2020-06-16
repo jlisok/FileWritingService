@@ -1,9 +1,8 @@
 package com.justinefactory.writing.generators;
 
 import com.justinefactory.domain.PathData;
-import com.justinefactory.reading.exceptions.ContentStoringException;
-import com.justinefactory.writing.domain.TwoElemContent;
 import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.TwoElemContent;
 import com.justinefactory.writing.exceptions.ContentGeneratingException;
 import com.justinefactory.writing.exceptions.ContentInitializationException;
 import com.justinefactory.writing.exceptions.FileWithStringsToGenerateContentIsEmptyException;
@@ -33,7 +32,7 @@ public class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemCo
 
 
     @Override
-    public ContentStorage<TwoElemContent> generateContent(int nLines) throws ContentStoringException {
+    public ContentStorage<TwoElemContent> generateContent(int nLines) {
         logger.debug("Generating random strings from file.");
         ContentStorage<TwoElemContent> randomContent = new ContentStorage<>();
 
@@ -55,7 +54,6 @@ public class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemCo
         logger.debug("{} random strings have been created successfully.", nLines);
         return randomContent;
     }
-
 
 
     private List<String> readStringsFromFile(PathData stringFile) throws ContentInitializationException {

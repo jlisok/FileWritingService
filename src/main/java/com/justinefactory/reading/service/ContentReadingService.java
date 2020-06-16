@@ -1,7 +1,6 @@
 package com.justinefactory.reading.service;
 
 import com.justinefactory.reading.exceptions.ContentReadingException;
-import com.justinefactory.reading.exceptions.ContentStoringException;
 import com.justinefactory.reading.parsers.ContentParser;
 import com.justinefactory.reading.readers.ContentReader;
 import com.justinefactory.writing.domain.ContentStorage;
@@ -24,7 +23,7 @@ public class ContentReadingService<RawContent, OutContent> {
     }
 
 
-    public ContentStorage<OutContent> processContent() throws ContentReadingException, ContentStoringException {
+    public ContentStorage<OutContent> processContent() throws ContentReadingException {
         ContentStorage<RawContent> rawContent = contentReader.readContent();
         ContentStorage<OutContent> content = new ContentStorage<>();
         for (int i = 0; i < rawContent.getContentSize(); i++) {
