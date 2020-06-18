@@ -1,6 +1,6 @@
 package com.justinefactory.writing.writers;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.writers.file.writers.CsvFileWriter;
@@ -32,7 +32,7 @@ class CsvFileWriterTest {
     void write2FileWhenFileDoesNotExist() throws Exception {
         //given
         Path filePath = dir.resolve("doc.csv");
-        PathData file2writeData = new PathData(filePath);
+        PathInfo file2writeData = new PathInfo(filePath);
         ContentStorage<String[]> readyToWriteContent = new ContentStorage<>(new String[]{"1590147349818750700", "1345882450", "Owl"});
         CsvFileWriter newFileWriter = new CsvFileWriter();
 

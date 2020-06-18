@@ -1,6 +1,6 @@
 package com.justinefactory.writing.util;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import org.junit.jupiter.api.AfterAll;
@@ -31,7 +31,7 @@ class CheckerIfFileAlreadyWrittenTest {
     void checkIfFileWrittenWhenFileDoesExist() throws Exception {
         //given
         Path file = Files.createTempFile(dir, "doc", ".csv");
-        PathData filePath = new PathData(file);
+        PathInfo filePath = new PathInfo(file);
 
         //when
         CheckerIfFileAlreadyWritten checker = new CheckerIfFileAlreadyWritten();

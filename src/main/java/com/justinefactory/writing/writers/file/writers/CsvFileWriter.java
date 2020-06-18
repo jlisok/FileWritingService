@@ -1,6 +1,6 @@
 package com.justinefactory.writing.writers.file.writers;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import com.justinefactory.writing.writers.ContentWriter;
@@ -13,14 +13,14 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 
-public class CsvFileWriter implements ContentWriter<ContentStorage<String[]>> {
+public class CsvFileWriter implements ContentWriter<ContentStorage<String[]>, PathInfo> {
 
     private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 
     @Override
-    public void writeContent(ContentStorage<String[]> content, PathData fileData) throws ContentWritingException {
-        try (BufferedWriter writer = Files.newBufferedWriter(fileData.getFilePath());
+    public void writeContent(ContentStorage<String[]> content, PathInfo fileData) throws ContentWritingException {
+        try (BufferedWriter writer = Files.newBufferedWriter(fileData.getPath());
              CSVWriter csvWriter = new CSVWriter(writer)
         ) {
             for (String[] item : content.getAllContent()) {

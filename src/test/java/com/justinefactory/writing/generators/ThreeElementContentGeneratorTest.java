@@ -1,6 +1,6 @@
 package com.justinefactory.writing.generators;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class ThreeElementContentGeneratorTest {
     void generateContentWhenRandom() throws Exception {
         //given
         Path filePathRanStrings = getPathToResource("string-content-for-tests.csv");
-        PathData fileDataRanStr = new PathData(filePathRanStrings);
+        PathInfo fileDataRanStr = new PathInfo(filePathRanStrings);
         Random newRandom = new Random();
         RandomIntegerGenerator newIntGenerator = new RandomIntegerGenerator(newRandom);
         RandomStringGeneratorFromFile new2ElemGenerator = new RandomStringGeneratorFromFile(newRandom, fileDataRanStr);

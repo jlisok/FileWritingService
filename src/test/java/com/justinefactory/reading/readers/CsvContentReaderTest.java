@@ -1,6 +1,6 @@
 package com.justinefactory.reading.readers;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.reading.exceptions.SourceFileIsEmptyException;
 import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +18,7 @@ class CsvContentReaderTest {
         //given
         Path filePath = getPathToResource("example-csv-file-for-tests.csv");
         //when
-        PathData fileData = new PathData(filePath);
+        PathInfo fileData = new PathInfo(filePath);
         CsvContentReader contentReader = new CsvContentReader(fileData);
         ContentStorage<String[]> content = contentReader.readContent();
         //then
@@ -31,7 +31,7 @@ class CsvContentReaderTest {
         //given
         Path filePath = getPathToResource("empty-string-content.csv");
         //when
-        PathData fileData = new PathData(filePath);
+        PathInfo fileData = new PathInfo(filePath);
         CsvContentReader contentReader = new CsvContentReader(fileData);
         //then
         Assertions.assertThrows(SourceFileIsEmptyException.class, contentReader::readContent);

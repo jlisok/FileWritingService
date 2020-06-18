@@ -1,6 +1,6 @@
 package com.justinefactory.reading.readers;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.reading.parsers.IntegerPlainContentParser;
 import com.justinefactory.reading.parsers.ThreeElementCsvParser;
@@ -27,7 +27,7 @@ class ContentReadingServiceTest {
 
 
         //when
-        PathData fileData = new PathData(filePath);
+        PathInfo fileData = new PathInfo(filePath);
         CsvContentReader contentReader = new CsvContentReader(fileData);
         ThreeElementCsvParser csvParser = new ThreeElementCsvParser();
         ContentReadingService contentReadingService = new ContentReadingService(contentReader, csvParser);
@@ -41,7 +41,7 @@ class ContentReadingServiceTest {
     @Test
     void processContentWhenProcessingPlainFile() throws Exception {
         //given
-        PathData fileData = new PathData(getPathToResource("txt-file-content-integers.txt"));
+        PathInfo fileData = new PathInfo(getPathToResource("txt-file-content-integers.txt"));
         ContentStorage<Integer> expectedContent = new ContentStorage<>();
         expectedContent.addContent(40000000);
         expectedContent.addContent(800000);
