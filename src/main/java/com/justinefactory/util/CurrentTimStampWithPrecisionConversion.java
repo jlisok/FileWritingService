@@ -10,8 +10,10 @@ public class CurrentTimStampWithPrecisionConversion {
         return recalculateInstantToNanoSeconds(now);
     }
 
+
      private static Long recalculateInstantToNanoSeconds(Instant tstmp) {
         return TimeUnit.SECONDS.toNanos(tstmp.getEpochSecond()) + tstmp.getNano();
     }
+
 
 }

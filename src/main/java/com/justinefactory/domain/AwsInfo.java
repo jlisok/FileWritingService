@@ -7,14 +7,14 @@ public class AwsInfo implements WritingInfo {
 
     private final URI uri;
     private final UUID id;
-    private final String BUCKET_NAME;
-    private final String KEY_NAME;
+    private final String bucketName;
+    private final String keyName;
 
 
     public AwsInfo(String bucketName, String keyName) {
-        BUCKET_NAME = bucketName;
-        KEY_NAME = keyName;
-        uri = URI.create(BUCKET_NAME + "/" + KEY_NAME);
+        this.bucketName = bucketName;
+        this.keyName = keyName;
+        uri = URI.create("s3://" + this.bucketName + "/" + this.keyName);
         id = UUID.randomUUID();
     }
 
@@ -30,11 +30,11 @@ public class AwsInfo implements WritingInfo {
     }
 
     public String getBucketName() {
-        return BUCKET_NAME;
+        return bucketName;
     }
 
     public String getKeyName() {
-        return KEY_NAME;
+        return keyName;
     }
 
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.justinefactory.testutil.AwsClientCreatorBeforeEach.createAwsClient;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CheckerIfServerContentAlreadyWrittenTest {
@@ -26,9 +27,10 @@ class CheckerIfServerContentAlreadyWrittenTest {
 
         //when
         CheckerIfServerContentAlreadyWritten checker = new CheckerIfServerContentAlreadyWritten(awsClient);
+        checker.assureNotExist(info);
 
         //then
-        checker.assureNotExist(info);
+        assertFalse(awsClient.doesObjectExist(info.getBucketName(), info.getKeyName()));
     }
 
     @Test
@@ -38,9 +40,11 @@ class CheckerIfServerContentAlreadyWrittenTest {
 
         //when
         CheckerIfServerContentAlreadyWritten checker = new CheckerIfServerContentAlreadyWritten(awsClient);
+        checker.assureNotExist(info);
 
         //then
-        checker.assureNotExist(info);
+        assertFalse(awsClient.doesObjectExist(info.getBucketName(), info.getKeyName()));
+
     }
 
     @Test

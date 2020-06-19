@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.justinefactory.testutil.AwsClientCreatorBeforeEach.createAwsClient;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JsonAwsWriterTest {
 
@@ -33,35 +33,34 @@ class JsonAwsWriterTest {
     void writeContentWhenContentDoesNotExist() throws AwsContentWritingException {
         //given
         AwsInfo info = new AwsInfo(bucketName, jsonName);
-
         ContentStorage<String> readyToWriteContent = new ContentStorage<>();
-        readyToWriteContent.addContent("\"{\\n\" +\n" +
-                "                \"  \\\"content\\\": {\\n\" +\n" +
-                "                \"    \\\"content\\\": [\\n\" +\n" +
-                "                \"      {\\n\" +\n" +
-                "                \"        \\\"timeStamp\\\": 1590147349818750700,\\n\" +\n" +
-                "                \"        \\\"randomInt\\\": -840762737,\\n\" +\n" +
-                "                \"        \\\"randomString\\\": \\\"ChristopherRobin\\\"\\n\" +\n" +
-                "                \"      }\\n\" +\n" +
-                "                \"    ]\\n\" +\n" +
-                "                \"  },\\n\" +\n" +
-                "                \"  \\\"stats\\\": {\\n\" +\n" +
-                "                \"    \\\"count\\\": 1,\\n\" +\n" +
-                "                \"    \\\"distinctCount\\\": 1,\\n\" +\n" +
-                "                \"    \\\"max\\\": {\\n\" +\n" +
-                "                \"      \\\"timeStamp\\\": 1590147349818750700,\\n\" +\n" +
-                "                \"      \\\"randomInt\\\": -840762737,\\n\" +\n" +
-                "                \"      \\\"randomString\\\": \\\"ChristopherRobin\\\"\\n\" +\n" +
-                "                \"    }\\n\" +\n" +
-                "                \"  }\\n\" +\n" +
-                "                \"}\";");
+        readyToWriteContent.addContent("{\n" +
+                "  \"content\": {\n" +
+                "    \"content\": [\n" +
+                "      {\n" +
+                "        \"timeStamp\": 1590147349818750700,\n" +
+                "        \"randomInt\": -840762737,\n" +
+                "        \"randomString\": \"ChristopherRobin\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  \"stats\": {\n" +
+                "    \"count\": 1,\n" +
+                "    \"distinctCount\": 1,\n" +
+                "    \"max\": {\n" +
+                "      \"timeStamp\": 1590147349818750700,\n" +
+                "      \"randomInt\": -840762737,\n" +
+                "      \"randomString\": \"ChristopherRobin\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "}");
         JsonAwsWriter writer = new JsonAwsWriter(awsClient);
 
         //when
         writer.writeContent(readyToWriteContent, info);
 
         //then
-        assertTrue(awsClient.doesObjectExist(info.getBucketName(),info.getKeyName()));
-        assertTrue(awsClient.getObjectMetadata(info.getBucketName(),info.getKeyName()).getContentLength() > 0);
+        assertTrue(awsClient.doesObjectExist(info.getBucketName(), info.getKeyName()));
+        assertTrue(awsClient.getObjectMetadata(info.getBucketName(), info.getKeyName()).getContentLength() > 0);
     }
 }

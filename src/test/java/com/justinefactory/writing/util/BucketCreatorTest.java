@@ -8,17 +8,22 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static com.justinefactory.testutil.AwsClientCreatorBeforeEach.createAwsClient;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BucketCreatorTest {
 
     private static AmazonS3 awsClient;
-    private static String additionalBucket = "com.justyna.lisok.factory.content-bucket-test";
+    private static String additionalBucket;
 
     @BeforeEach
     public void createAwsClientAccessKeyAndAwsInfo() throws AwsSecurityCredentialsException {
         awsClient = createAwsClient();
+        Random random = new Random();
+        additionalBucket = "com.justyna.lisok.factory.content-bucket-test-" + random.nextInt();
     }
 
 
@@ -32,12 +37,14 @@ class BucketCreatorTest {
     void createNonExistingStorageContainersWhenBucketExists() throws AwsContentWritingException {
         //given
         AwsInfo info = new AwsInfo("com.justyna.lisok.factory.content-bucket", "content.json");
+        assertTrue(awsClient.doesBucketExistV2(info.getBucketName()));
 
         //when
         BucketCreator creator = new BucketCreator(awsClient);
+        creator.createNonExistingStorageContainers(info);
 
         //then
-        creator.createNonExistingStorageContainers(info);
+        assertTrue(awsClient.doesBucketExistV2(info.getBucketName()));
     }
 
 
@@ -45,6 +52,8 @@ class BucketCreatorTest {
     void createNonExistingStorageContainersWhenBucketDoesNotExist() throws AwsContentWritingException {
         //given
         AwsInfo info = new AwsInfo(additionalBucket, "content.json");
+        assertFalse(awsClient.doesBucketExistV2(info.getBucketName()));
+
 
         //when
         BucketCreator creator = new BucketCreator(awsClient);

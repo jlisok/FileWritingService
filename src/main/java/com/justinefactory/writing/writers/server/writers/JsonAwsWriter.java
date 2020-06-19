@@ -19,11 +19,12 @@ public class JsonAwsWriter implements ContentWriter<ContentStorage<String>, AwsI
 
     @Override
     public void writeContent(ContentStorage<String> json, AwsInfo awsInfo) throws AwsContentWritingException {
+        String jsonToSend = String.join(System.lineSeparator(), json.getAllContent());
         try {
-            client.putObject(awsInfo.getBucketName(), awsInfo.getKeyName(), json.getAllContent().toString());
+            client.putObject(awsInfo.getBucketName(), awsInfo.getKeyName(), jsonToSend);
         } catch (Throwable e) {
-            logger.warn("Trouble while writing content {} to AWS server", json.getAllContent().toString(), e);
-            throw new AwsContentWritingException(e, "Trouble while writing content " + json.getAllContent().toString() + "to AWS server");
+            logger.warn("Trouble while writing content {} to AWS server", jsonToSend, e);
+            throw new AwsContentWritingException(e, "Trouble while writing content " + jsonToSend + "to AWS server");
         }
     }
 }

@@ -18,7 +18,7 @@ public class AwsS3Client implements AwsClient {
                     .withRegion(region)
                     .build();
         } catch (Throwable e) {
-            throw new AmazonClientException("Trouble while building an AWSS3 client. Incorrect credentials or region.", e);
+            throw new AmazonClientException("Trouble while building an AWSS3 client.", e);
         }
     }
 }
