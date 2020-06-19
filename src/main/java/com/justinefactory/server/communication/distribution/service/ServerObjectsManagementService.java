@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
+import java.net.URL;
 import java.time.Duration;
 
 public class ServerObjectsManagementService<RawContent, Content> {
@@ -28,7 +29,7 @@ public class ServerObjectsManagementService<RawContent, Content> {
 
     public void manageContent(AmazonS3 client, AwsInfo info, Duration duration) throws ContentWritingException, StatsCalculatingException, ContentReadingException {
         sendingService.sendContent();
-        urlCreator.createAccessWithPresignedUrl(client, info, duration);
+        URL url = urlCreator.createAccessWithPresignedUrl(client, info, duration);
         logger.debug("Creating, sending and management of server objects - success");
     }
 }
