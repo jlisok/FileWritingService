@@ -10,7 +10,7 @@ public class JsonFileWriter implements ContentWriter<JsonStorage, PathInfo> {
 
     @Override
     public void writeContent(JsonStorage jsonStorage, PathInfo pathInfo) throws ContentWritingException {
-        ContentStorage<String> contentStorage = new ContentStorage<>(jsonStorage.getJson());
+        ContentStorage<String> contentStorage = new ContentStorage<>(jsonStorage.getAllContent());
         PlainFileWriter writer = new PlainFileWriter();
         writer.writeContent(contentStorage, pathInfo);
     }

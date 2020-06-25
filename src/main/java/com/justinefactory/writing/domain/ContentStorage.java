@@ -1,11 +1,13 @@
 package com.justinefactory.writing.domain;
 
+import com.justinefactory.domain.Storage;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public class ContentStorage<Content> {
+public class ContentStorage<Content> implements Storage<Collection<Content>> {
 
     private final List<Content> content;
 
@@ -48,6 +50,7 @@ public class ContentStorage<Content> {
         this.content.add(content);
     }
 
+    @Override
     public Collection<Content> getAllContent() {
         return content;
     }

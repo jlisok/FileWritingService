@@ -1,6 +1,8 @@
 package com.justinefactory.writing.domain;
 
-public class JsonStorage {
+import com.justinefactory.domain.Storage;
+
+public class JsonStorage implements Storage<String> {
 
     private final String json;
 
@@ -15,7 +17,7 @@ public class JsonStorage {
         }
     }
 
-    public String getJson() {
+    public String getAllContent() {
         return json;
     }
 
