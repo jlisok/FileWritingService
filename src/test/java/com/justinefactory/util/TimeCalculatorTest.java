@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,12 +30,12 @@ class TimeCalculatorTest {
 
     @ParameterizedTest
     @MethodSource("testData")
-    void calculateExpirationTimeWhenDurationMeetsConditions(Instant now, Duration duration, Date expected) {
+    void calculateExpirationTimeWhenDurationMeetsConditions(Instant now, Duration duration, Instant expected) {
         //given
         TimeCalculator calculator = new TimeCalculator();
 
         //when
-        Date actual = calculator.calculateExpirationTime(now, duration);
+        Instant actual = calculator.calculateExpirationTime(now, duration);
 
         //then
         assertEquals(expected, actual);
@@ -53,10 +52,9 @@ class TimeCalculatorTest {
         );
     }
 
-    private static Date calculateExpected(Instant now, Integer time) {
-        Date expected = new Date();
-        expected.setTime(now.toEpochMilli() + Duration.ofMinutes(time).toMillis());
-        return expected;
+    private static Instant calculateExpected(Instant now, Integer time) {
+        Duration durationMinutes = Duration.ofMinutes(time);
+        return now.plus(durationMinutes);
     }
 
 

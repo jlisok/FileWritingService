@@ -1,4 +1,4 @@
-package com.justinefactory.server.communication.distribution;
+package com.justinefactory.cloud.communication.distribution;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.justinefactory.domain.AwsInfo;

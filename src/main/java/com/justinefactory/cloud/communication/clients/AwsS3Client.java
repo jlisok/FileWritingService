@@ -1,11 +1,11 @@
-package com.justinefactory.server.communication.clients;
+package com.justinefactory.cloud.communication.clients;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.justinefactory.server.communication.access.AwsSecurityCredentials;
+import com.justinefactory.cloud.communication.access.AwsSecurityCredentials;
 
 public class AwsS3Client implements AwsClient {
 

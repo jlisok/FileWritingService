@@ -1,4 +1,4 @@
-package com.justinefactory.server.communication.access;
+package com.justinefactory.cloud.communication.access;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;

@@ -1,4 +1,4 @@
-package com.justinefactory.server.communication.distribution;
+package com.justinefactory.cloud.communication.distribution;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 
 public class ServerObjectDownloadByUrlCreator {
 
@@ -28,7 +27,7 @@ public class ServerObjectDownloadByUrlCreator {
 
     public URL createAccessWithPresignedUrl(AmazonS3 client, AwsInfo info, Duration duration) {
         try {
-            Date expiration = timeCalculator.calculateExpirationTime(Instant.now(), duration);
+            Instant expiration = timeCalculator.calculateExpirationTime(Instant.now(), duration);
             URL url = client.generatePresignedUrl(urlRequest.generateRequest(info, expiration));
             logger.debug("Creating URL {} to the object {} - success", url, info.getURI());
             return url;
