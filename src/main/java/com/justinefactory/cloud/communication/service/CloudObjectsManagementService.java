@@ -1,4 +1,4 @@
-package com.justinefactory.cloud.communication.distribution.service;
+package com.justinefactory.cloud.communication.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.justinefactory.cloud.communication.distribution.ServerObjectDownloadByUrlCreator;

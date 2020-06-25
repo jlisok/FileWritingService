@@ -1,11 +1,12 @@
 package com.justinefactory.sending.domain;
 
+import com.justinefactory.domain.Storage;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.domain.ContentStorage;
 
 import java.util.Objects;
 
-public class ContentAndStatsStorage<Content> {
+public class ContentAndStatsStorage<Content> implements Storage<ContentStorage<Content>> {
 
     private final ContentStorage<Content> content;
     private final Stats<Content> stats;
@@ -23,7 +24,8 @@ public class ContentAndStatsStorage<Content> {
         }
     }
 
-    public ContentStorage<Content> getContent() {
+    @Override
+    public ContentStorage<Content> getAllContent() {
         return content;
     }
 
