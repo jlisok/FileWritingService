@@ -45,39 +45,4 @@ class PlainFileWriterTest {
     }
 
 
-    @Test
-    void write2FileWhenWritingJSON() throws Exception {
-        //given
-        Path filePath = dir.resolve("doc.json");
-        PathInfo file2writeData = new PathInfo(filePath);
-        ContentStorage<String> readyToWriteContent = new ContentStorage<>();
-        readyToWriteContent.addContent("\"{\\n\" +\n" +
-                "                \"  \\\"content\\\": {\\n\" +\n" +
-                "                \"    \\\"content\\\": [\\n\" +\n" +
-                "                \"      {\\n\" +\n" +
-                "                \"        \\\"timeStamp\\\": 1590147349818750700,\\n\" +\n" +
-                "                \"        \\\"randomInt\\\": -840762737,\\n\" +\n" +
-                "                \"        \\\"randomString\\\": \\\"ChristopherRobin\\\"\\n\" +\n" +
-                "                \"      }\\n\" +\n" +
-                "                \"    ]\\n\" +\n" +
-                "                \"  },\\n\" +\n" +
-                "                \"  \\\"stats\\\": {\\n\" +\n" +
-                "                \"    \\\"count\\\": 1,\\n\" +\n" +
-                "                \"    \\\"distinctCount\\\": 1,\\n\" +\n" +
-                "                \"    \\\"max\\\": {\\n\" +\n" +
-                "                \"      \\\"timeStamp\\\": 1590147349818750700,\\n\" +\n" +
-                "                \"      \\\"randomInt\\\": -840762737,\\n\" +\n" +
-                "                \"      \\\"randomString\\\": \\\"ChristopherRobin\\\"\\n\" +\n" +
-                "                \"    }\\n\" +\n" +
-                "                \"  }\\n\" +\n" +
-                "                \"}\";");
-
-        //when
-        PlainFileWriter writer = new PlainFileWriter();
-        writer.writeContent(readyToWriteContent, file2writeData);
-
-        //then
-        assertTrue(Files.exists(filePath));
-        assertTrue(Files.size(filePath) > 0);
-    }
 }
