@@ -1,14 +1,14 @@
-package com.justinefactory.writing.writers.server.writers;
+package com.justinefactory.writing.writers.cloud.writers;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.justinefactory.domain.AwsInfo;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.JsonStorage;
 import com.justinefactory.writing.exceptions.AwsContentWritingException;
 import com.justinefactory.writing.writers.ContentWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class JsonAwsWriter implements ContentWriter<ContentStorage<String>, AwsInfo> {
+public class JsonAwsWriter implements ContentWriter<JsonStorage, AwsInfo> {
 
     private final AmazonS3 client;
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -18,8 +18,8 @@ public class JsonAwsWriter implements ContentWriter<ContentStorage<String>, AwsI
     }
 
     @Override
-    public void writeContent(ContentStorage<String> json, AwsInfo awsInfo) throws AwsContentWritingException {
-        String jsonToSend = String.join(System.lineSeparator(), json.getAllContent());
+    public void writeContent(JsonStorage jsonStorage, AwsInfo awsInfo) throws AwsContentWritingException {
+        String jsonToSend = jsonStorage.getJson();
         try {
             client.putObject(awsInfo.getBucketName(), awsInfo.getKeyName(), jsonToSend);
         } catch (Throwable e) {
