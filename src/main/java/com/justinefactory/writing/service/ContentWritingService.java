@@ -1,10 +1,11 @@
-package com.justinefactory.writing.writers;
+package com.justinefactory.writing.service;
 
 import com.justinefactory.domain.WritingInfo;
 import com.justinefactory.writing.converters.ContentConverter;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import com.justinefactory.writing.util.CheckerIfContentAlreadyWritten;
 import com.justinefactory.writing.util.StorageContainerCreator;
+import com.justinefactory.writing.writers.ContentWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

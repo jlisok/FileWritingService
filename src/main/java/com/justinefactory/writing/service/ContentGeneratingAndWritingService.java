@@ -4,7 +4,6 @@ import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentGeneratingException;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import com.justinefactory.writing.generators.ContentGenerator;
-import com.justinefactory.writing.writers.ContentWritingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

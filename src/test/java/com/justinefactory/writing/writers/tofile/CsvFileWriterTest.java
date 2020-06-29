@@ -1,9 +1,8 @@
-package com.justinefactory.writing.writers;
+package com.justinefactory.writing.writers.tofile;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
 import com.justinefactory.writing.domain.ContentReadyForCsvWriter;
-import com.justinefactory.writing.writers.file.writers.CsvFileWriter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

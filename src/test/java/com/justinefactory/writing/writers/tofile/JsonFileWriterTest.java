@@ -1,4 +1,4 @@
-package com.justinefactory.writing.writers.file.writers;
+package com.justinefactory.writing.writers.tofile;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;

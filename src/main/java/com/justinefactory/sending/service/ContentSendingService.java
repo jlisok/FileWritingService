@@ -8,7 +8,7 @@ import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.stats.exceptions.StatsCalculatingException;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.exceptions.ContentWritingException;
-import com.justinefactory.writing.writers.ContentWritingService;
+import com.justinefactory.writing.service.ContentWritingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
