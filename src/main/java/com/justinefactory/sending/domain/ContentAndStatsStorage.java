@@ -16,6 +16,14 @@ public class ContentAndStatsStorage<Content> {
         stats = st;
     }
 
+    /*
+    public ContentAndStatsStorage(){
+        content = null;
+        stats = null;
+    }
+
+     */
+
 
     private void checkIfIsNullOrEmpty(ContentStorage<Content> content, Stats<Content> stats) throws IllegalArgumentException {
         if (content == null || content.getContent() == null || content.getContent().isEmpty() || stats == null) {

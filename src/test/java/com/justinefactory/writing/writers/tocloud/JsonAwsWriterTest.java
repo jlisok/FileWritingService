@@ -1,4 +1,4 @@
-package com.justinefactory.writing.writers.cloud.writers;
+package com.justinefactory.writing.writers.tocloud;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
@@ -28,6 +28,7 @@ class JsonAwsWriterTest {
     public static void removeObjectFromAws() {
         awsClient.deleteObject(new DeleteObjectRequest(bucketName, jsonName));
     }
+
 
     @Test
     void writeContentWhenContentDoesNotExist() throws AwsContentWritingException {
