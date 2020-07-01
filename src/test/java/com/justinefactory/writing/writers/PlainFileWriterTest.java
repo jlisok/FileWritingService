@@ -2,7 +2,7 @@ package com.justinefactory.writing.writers;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.ContentReadyForPlainWriter;
 import com.justinefactory.writing.writers.file.writers.PlainFileWriter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PlainFileWriterTest {
 
     static Path dir;
+
     @BeforeAll
     static void createDirsBeforeAll() throws Exception {
         dir = CreateAndDeleteFilesBeforeAfterAll.createTemporaryDirectory();
@@ -33,7 +34,7 @@ class PlainFileWriterTest {
         //given
         Path filePath = dir.resolve("doc.csv");
         PathInfo file2writeData = new PathInfo(filePath);
-        ContentStorage<String> readyToWriteContent = new ContentStorage<>(List.of("1","2"));
+        ContentReadyForPlainWriter readyToWriteContent = new ContentReadyForPlainWriter(List.of("1", "2"));
 
         //when
         PlainFileWriter writer = new PlainFileWriter();

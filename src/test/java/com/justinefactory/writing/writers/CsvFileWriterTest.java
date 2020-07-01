@@ -2,7 +2,7 @@ package com.justinefactory.writing.writers;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.ContentReadyForCsvWriter;
 import com.justinefactory.writing.writers.file.writers.CsvFileWriter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -33,7 +33,7 @@ class CsvFileWriterTest {
         //given
         Path filePath = dir.resolve("doc.csv");
         PathInfo file2writeData = new PathInfo(filePath);
-        ContentStorage<String[]> readyToWriteContent = new ContentStorage<>(new String[]{"1590147349818750700", "1345882450", "Owl"});
+        ContentReadyForCsvWriter readyToWriteContent = new ContentReadyForCsvWriter(new String[]{"1590147349818750700", "1345882450", "Owl"});
         CsvFileWriter newFileWriter = new CsvFileWriter();
 
         //when

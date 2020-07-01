@@ -13,7 +13,7 @@ class JsonStorageTest {
         String json = null;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new JsonStorage(json));
+        assertThrows(IllegalArgumentException.class, () -> new JsonReadyForJsonWriter(json));
     }
 
 
@@ -23,7 +23,7 @@ class JsonStorageTest {
         String json = "";
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new JsonStorage(json));
+        assertThrows(IllegalArgumentException.class, () -> new JsonReadyForJsonWriter(json));
     }
 
 
@@ -39,7 +39,7 @@ class JsonStorageTest {
                 "    ]\n";
 
         //when
-        JsonStorage jsonStorage = new JsonStorage(json);
+        JsonReadyForJsonWriter jsonStorage = new JsonReadyForJsonWriter(json);
 
         //then
         assertEquals(json, jsonStorage.getContent());
