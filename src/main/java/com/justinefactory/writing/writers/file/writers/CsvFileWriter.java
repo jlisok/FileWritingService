@@ -23,7 +23,7 @@ public class CsvFileWriter implements ContentWriter<ContentStorage<String[]>, Pa
         try (BufferedWriter writer = Files.newBufferedWriter(fileData.getPath());
              CSVWriter csvWriter = new CSVWriter(writer)
         ) {
-            for (String[] item : content.getAllContent()) {
+            for (String[] item : content.getContent()) {
                 csvWriter.writeNext(item);
             }
 

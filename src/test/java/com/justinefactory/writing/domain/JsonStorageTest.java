@@ -42,7 +42,7 @@ class JsonStorageTest {
         JsonStorage jsonStorage = new JsonStorage(json);
 
         //then
-        assertEquals(json, jsonStorage.getAllContent());
+        assertEquals(json, jsonStorage.getContent());
     }
 
 }

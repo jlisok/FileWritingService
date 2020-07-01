@@ -19,7 +19,7 @@ public class JsonAwsWriter implements ContentWriter<JsonStorage, AwsInfo> {
 
     @Override
     public void writeContent(JsonStorage jsonStorage, AwsInfo awsInfo) throws AwsContentWritingException {
-        String jsonToSend = jsonStorage.getAllContent();
+        String jsonToSend = jsonStorage.getContent();
         try {
             client.putObject(awsInfo.getBucketName(), awsInfo.getKeyName(), jsonToSend);
         } catch (Throwable e) {

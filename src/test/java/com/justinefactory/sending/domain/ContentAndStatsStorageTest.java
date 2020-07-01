@@ -19,7 +19,7 @@ class ContentAndStatsStorageTest {
         ContentAndStatsStorage<Integer> contentAndStatsStorage = new ContentAndStatsStorage<>(content, stats);
 
         //then
-        assertEquals(content, contentAndStatsStorage.getAllContent());
+        assertEquals(content, contentAndStatsStorage.getContent());
         assertEquals(stats, contentAndStatsStorage.getStats());
     }
 

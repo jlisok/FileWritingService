@@ -1,12 +1,11 @@
 package com.justinefactory.sending.domain;
 
-import com.justinefactory.domain.Storage;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.domain.ContentStorage;
 
 import java.util.Objects;
 
-public class ContentAndStatsStorage<Content> implements Storage<ContentStorage<Content>> {
+public class ContentAndStatsStorage<Content> {
 
     private final ContentStorage<Content> content;
     private final Stats<Content> stats;
@@ -19,13 +18,13 @@ public class ContentAndStatsStorage<Content> implements Storage<ContentStorage<C
 
 
     private void checkIfIsNullOrEmpty(ContentStorage<Content> content, Stats<Content> stats) throws IllegalArgumentException {
-        if (content == null || content.getAllContent() == null || content.getAllContent().isEmpty() || stats == null) {
+        if (content == null || content.getContent() == null || content.getContent().isEmpty() || stats == null) {
             throw new IllegalArgumentException("Trouble while writing content: " + content + " and stats: " + stats + " to ContentStorage. Content or stats are empty or null.");
         }
     }
 
-    @Override
-    public ContentStorage<Content> getAllContent() {
+
+    public ContentStorage<Content> getContent() {
         return content;
     }
 
