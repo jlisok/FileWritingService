@@ -11,25 +11,23 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Type;
 
-class CloudObjectTransferService<Content, DeserializedContent> {
+class CloudObjectTransferService<ContentType, DeserializedContent> {
 
-    private final CloudObjectContentGetter<Content> cloudObjectContentGetter;
-    private final Deserializer<Content, DeserializedContent> deserializer;
+    private final CloudObjectContentGetter<ContentType> cloudObjectContentGetter;
+    private final Deserializer<ContentType, DeserializedContent> deserializer;
     private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
-    CloudObjectTransferService(CloudObjectContentGetter<Content> cloudObjectContentGetter, Deserializer<Content, DeserializedContent> deserializer) {
+    CloudObjectTransferService(CloudObjectContentGetter<ContentType> cloudObjectContentGetter, Deserializer<ContentType, DeserializedContent> deserializer) {
         logger.info("Transfer service - initialization");
         this.cloudObjectContentGetter = cloudObjectContentGetter;
         this.deserializer = deserializer;
     }
 
-    public DeserializedContent getAndDeserializeCloudObject(AwsInfo info, Type classToDeserialize) throws IOException, AwsContentReadingException, ContentDeserializationException {
-        Content input = cloudObjectContentGetter.getObjectContent(info);
+    public DeserializedContent getAndDeserializeCloudObject(AwsInfo info, Class<DeserializedContent> classToDeserialize) throws IOException, AwsContentReadingException, ContentDeserializationException {
+        ContentType input = cloudObjectContentGetter.getObjectContent(info);
         logger.debug("Transfer Service - extracting content from cloud object - success.");
         DeserializedContent deserializedContent = deserializer.deserialize(input, classToDeserialize);
-        logger.debug("Transfer Service - content deserialization - success.");
         logger.info("Transfer Service - finished with success.");
         return deserializedContent;
     }

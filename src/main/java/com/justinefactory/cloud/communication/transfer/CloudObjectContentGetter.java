@@ -5,7 +5,7 @@ import com.justinefactory.reading.exceptions.AwsContentReadingException;
 
 import java.io.IOException;
 
-public interface CloudObjectContentGetter<Content> {
+public interface CloudObjectContentGetter<ContentType> {
 
-    Content getObjectContent(AwsInfo info) throws IOException, AwsContentReadingException;
+    ContentType getObjectContent(AwsInfo info) throws IOException, AwsContentReadingException;
 }

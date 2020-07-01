@@ -1,8 +1,8 @@
 package com.justinefactory.writing.converters;
 
 import com.justinefactory.domain.ThreeElemContent;
-import com.justinefactory.writing.domain.ContentStorage;
-import com.justinefactory.writing.domain.ContentReadyForCsvWriter;
+import com.justinefactory.writing.domain.Content;
+import com.justinefactory.writing.domain.CsvContent;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +20,7 @@ class ThreeElementContentToCsvLinesConverterTest {
     void convertDataWhenContentIsEmpty() {
         //given
         ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
-        ContentStorage<ThreeElemContent> input = new ContentStorage<>();
+        Content<ThreeElemContent> input = new Content<>();
 
         //then
         assertThrows(ContentConversion2ReadyToWriteException.class, () -> converter.convertContent(input));
@@ -29,12 +29,12 @@ class ThreeElementContentToCsvLinesConverterTest {
 
     @ParameterizedTest
     @MethodSource("conversionData")
-    void convertDataWhenContentMeetsConditions(ContentStorage<ThreeElemContent> input, ContentReadyForCsvWriter expectedContent) throws ContentConversion2ReadyToWriteException {
+    void convertDataWhenContentMeetsConditions(Content<ThreeElemContent> input, CsvContent expectedContent) throws ContentConversion2ReadyToWriteException {
         //given
         ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
 
         //when
-        ContentReadyForCsvWriter actualContent = converter.convertContent(input);
+        CsvContent actualContent = converter.convertContent(input);
 
         //then
         for (int i = 0; i < expectedContent.getContent().size(); i++) {
@@ -48,14 +48,14 @@ class ThreeElementContentToCsvLinesConverterTest {
         ThreeElemContent firstThreeElemContent = new ThreeElemContent(1590147349818750700L, 1345882450, "Owl");
         ThreeElemContent secondThreeElemContent = new ThreeElemContent(1590147349818759790L, -45882470, "Fluff");
 
-        ContentStorage<ThreeElemContent> firstInput = new ContentStorage<>();
+        Content<ThreeElemContent> firstInput = new Content<>();
         firstInput.addContent(firstThreeElemContent);
-        ContentStorage<ThreeElemContent> secondInput = firstInput;
+        Content<ThreeElemContent> secondInput = firstInput;
         secondInput.addContent(secondThreeElemContent);
 
-        ContentReadyForCsvWriter firstString = new ContentReadyForCsvWriter();
+        CsvContent firstString = new CsvContent();
         firstString.addContent(new String[]{firstThreeElemContent.getTimeStamp().toString(), firstThreeElemContent.getRandomInt().toString(), firstThreeElemContent.getRandomString()});
-        ContentReadyForCsvWriter secondString = firstString;
+        CsvContent secondString = firstString;
         secondString.addContent(new String[]{secondThreeElemContent.getTimeStamp().toString(), secondThreeElemContent.getRandomInt().toString(), secondThreeElemContent.getRandomString()});
 
 

@@ -1,10 +1,10 @@
 package com.justinefactory.writing.domain;
 
-public class JsonReadyForJsonWriter {
+public class Json {
 
     private final String json;
 
-    public JsonReadyForJsonWriter(String json) {
+    public Json(String json) {
         ensureJsonNotEmptyAndNotNull(json);
         this.json = json;
     }

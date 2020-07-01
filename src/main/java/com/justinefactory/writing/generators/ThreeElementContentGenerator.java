@@ -1,7 +1,7 @@
 package com.justinefactory.writing.generators;
 
 import com.justinefactory.domain.ThreeElemContent;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import com.justinefactory.writing.domain.TwoElemContent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,11 +22,11 @@ public class ThreeElementContentGenerator implements ContentGenerator<ThreeElemC
 
 
     @Override
-    public ContentStorage<ThreeElemContent> generateContent(int nLines) {
+    public Content<ThreeElemContent> generateContent(int nLines) {
         logger.debug("Generating {} items of 3 element content.", nLines);
-        ContentStorage<Integer> randomInt = intGenerator.generateContent(nLines);
-        ContentStorage<TwoElemContent> randomStrTStamp = strAndTStampGenerator.generateContent(nLines);
-        ContentStorage<ThreeElemContent> randomContent = new ContentStorage<>();
+        Content<Integer> randomInt = intGenerator.generateContent(nLines);
+        Content<TwoElemContent> randomStrTStamp = strAndTStampGenerator.generateContent(nLines);
+        Content<ThreeElemContent> randomContent = new Content<>();
 
         for (int i = 0; i < nLines; i++) {
             ThreeElemContent threeContent = createThreeElemContentObject(randomInt.getContent(i), randomStrTStamp.getContent(i));

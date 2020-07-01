@@ -2,10 +2,10 @@ package com.justinefactory.stats.calculators;
 
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.stats.exceptions.StatsCalculatingException;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 
-public interface StatsCalculator<Content> {
+public interface StatsCalculator<ContentType> {
 
-    Stats<Content> calculateStats(ContentStorage<Content> content) throws StatsCalculatingException;
+    Stats<ContentType> calculateStats(Content<ContentType> content) throws StatsCalculatingException;
 
 }

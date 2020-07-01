@@ -1,8 +1,9 @@
 package com.justinefactory.reading.parsers;
 
 import com.justinefactory.reading.exceptions.ContentParsingException;
+import com.justinefactory.writing.domain.Content;
 
-public interface ContentParser<Line, Content> {
+public interface ContentParser<RawContent, ContentType> {
 
-    public Content parseLine(Line line) throws ContentParsingException;
+    Content<ContentType> parse(RawContent rawContent) throws ContentParsingException;
 }

@@ -1,10 +1,10 @@
 package com.justinefactory.writing.converters;
 
 import com.justinefactory.domain.ThreeElemContent;
-import com.justinefactory.sending.domain.ContentAndStatsStorage;
+import com.justinefactory.sending.domain.ContentAndStats;
 import com.justinefactory.stats.domain.Stats;
-import com.justinefactory.writing.domain.ContentStorage;
-import com.justinefactory.writing.domain.JsonReadyForJsonWriter;
+import com.justinefactory.writing.domain.Content;
+import com.justinefactory.writing.domain.Json;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import org.junit.jupiter.api.Test;
@@ -49,17 +49,17 @@ class ContentAndStatsToJsonConverterTest {
                 "    }\n" +
                 "  }\n" +
                 "}";
-        ContentStorage<ThreeElemContent> threeElemContentContentStorage = new ContentStorage<>();
+        Content<ThreeElemContent> threeElemContentContentStorage = new Content<>();
         ThreeElemContent threeElemContentContent = new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin");
         threeElemContentContentStorage.addContent(threeElemContentContent);
 
         Stats<ThreeElemContent> stats = new Stats<>(1, 1, threeElemContentContent);
-        ContentAndStatsStorage<ThreeElemContent> content = new ContentAndStatsStorage<>(threeElemContentContentStorage, stats);
+        ContentAndStats<ThreeElemContent> content = new ContentAndStats<>(threeElemContentContentStorage, stats);
 
         ContentAndStatsToJsonConverter<ThreeElemContent> converter = new ContentAndStatsToJsonConverter<>();
 
         //when
-        JsonReadyForJsonWriter json = converter.convertContent(content);
+        Json json = converter.convertContent(content);
 
         //then
         assertEquals(expectedContent, json.getContent());

@@ -3,7 +3,7 @@ package com.justinefactory.stats.calculators;
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.stats.exceptions.StatsCalculatingException;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
     private static final ThreeElementContentComparatorByRandomInt comparator = new ThreeElementContentComparatorByRandomInt();
 
     @Override
-    public Stats<ThreeElemContent> calculateStats(ContentStorage<ThreeElemContent> content) throws StatsCalculatingException {
+    public Stats<ThreeElemContent> calculateStats(Content<ThreeElemContent> content) throws StatsCalculatingException {
         logger.debug("Calculating stats from ThreeElementContent content.");
         if (content == null || content.isEmpty()) {
             logger.warn("Calculating stats from ThreeElementContent content - failed. Storage class {} is empty or does not exist.", content);
@@ -30,12 +30,12 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
         return stats;
     }
 
-    private Integer calculateCount(ContentStorage<ThreeElemContent> content) {
+    private Integer calculateCount(Content<ThreeElemContent> content) {
         return content.getContentSize();
     }
 
 
-    private Integer calculateUniqueCount(ContentStorage<ThreeElemContent> content) {
+    private Integer calculateUniqueCount(Content<ThreeElemContent> content) {
         Set<StringIntContent> uniqueContent = new HashSet<>();
         for (ThreeElemContent item : content.getContent()) {
             uniqueContent.add(new StringIntContent(item));
@@ -44,7 +44,7 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
     }
 
 
-    private ThreeElemContent calculateMax(ContentStorage<ThreeElemContent> content) {
+    private ThreeElemContent calculateMax(Content<ThreeElemContent> content) {
         return Collections.max(content.getContent(), comparator);
     }
 

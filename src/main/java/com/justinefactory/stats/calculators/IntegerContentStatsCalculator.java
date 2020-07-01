@@ -2,7 +2,7 @@ package com.justinefactory.stats.calculators;
 
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.stats.exceptions.StatsCalculatingException;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class IntegerContentStatsCalculator implements StatsCalculator<Integer> {
     private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     @Override
-    public Stats<Integer> calculateStats(ContentStorage<Integer> content) throws StatsCalculatingException {
+    public Stats<Integer> calculateStats(Content<Integer> content) throws StatsCalculatingException {
         logger.debug("Calculating stats from Integer content.");
         if (content == null || content.isEmpty()) {
             logger.warn("Calculating stats from Integer content - failed. Collection {} was empty.", content);
@@ -31,16 +31,16 @@ public class IntegerContentStatsCalculator implements StatsCalculator<Integer> {
     }
 
 
-    private Integer calculateCount(ContentStorage<Integer> content) {
+    private Integer calculateCount(Content<Integer> content) {
         return content.getContentSize();
     }
 
-    private Integer calculateUniqueCount(ContentStorage<Integer> content) {
+    private Integer calculateUniqueCount(Content<Integer> content) {
         Set<Integer> uniqueContent = new HashSet<>(content.getContent());
         return uniqueContent.size();
     }
 
-    private Integer calculateMax(ContentStorage<Integer> content) {
+    private Integer calculateMax(Content<Integer> content) {
         return Collections.max(content.getContent());
     }
 

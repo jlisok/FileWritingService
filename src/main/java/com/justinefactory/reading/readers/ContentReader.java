@@ -1,10 +1,10 @@
 package com.justinefactory.reading.readers;
 
 import com.justinefactory.reading.exceptions.ContentReadingException;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 
-public interface ContentReader<RawContent> {
+public interface ContentReader<ContentType> {
 
-    ContentStorage<RawContent> readContent() throws ContentReadingException;
+    ContentType readContent() throws ContentReadingException;
 
 }

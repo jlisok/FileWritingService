@@ -1,7 +1,7 @@
 package com.justinefactory.sending.domain;
 
 import com.justinefactory.stats.domain.Stats;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,11 +12,11 @@ class ContentAndStatsStorageTest {
     @Test
     void createContentAndStatsStorageWhenContentMeetsConditions() {
         // given
-        ContentStorage<Integer> content = new ContentStorage<>(50);
+        Content<Integer> content = new Content<>(50);
         Stats<Integer> stats = new Stats<>(1, 1, 50);
 
         //when
-        ContentAndStatsStorage<Integer> contentAndStatsStorage = new ContentAndStatsStorage<>(content, stats);
+        ContentAndStats<Integer> contentAndStatsStorage = new ContentAndStats<>(content, stats);
 
         //then
         assertEquals(content, contentAndStatsStorage.getContent());
@@ -26,11 +26,11 @@ class ContentAndStatsStorageTest {
     @Test
     void createContentAndStatsStorageWhenContentEmpty() {
         // given
-        ContentStorage<Integer> content = new ContentStorage<>();
+        Content<Integer> content = new Content<>();
         Stats<Integer> stats = new Stats<>(1, 1, 50);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new ContentAndStatsStorage<>(content, stats));
+        assertThrows(IllegalArgumentException.class, () -> new ContentAndStats<>(content, stats));
     }
 
     @Test
@@ -39,15 +39,15 @@ class ContentAndStatsStorageTest {
         Stats<Integer> stats = new Stats<>(1, 1, 50);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new ContentAndStatsStorage<>(null, stats));
+        assertThrows(IllegalArgumentException.class, () -> new ContentAndStats<>(null, stats));
     }
 
     @Test
     void createContentAndStatsStorageWhenStatsAreNull() {
         // given
-        ContentStorage<Integer> content = new ContentStorage<>(50);
+        Content<Integer> content = new Content<>(50);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new ContentAndStatsStorage<>(content, null));
+        assertThrows(IllegalArgumentException.class, () -> new ContentAndStats<>(content, null));
     }
 }
