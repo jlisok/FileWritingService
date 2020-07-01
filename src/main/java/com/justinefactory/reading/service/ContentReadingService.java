@@ -3,7 +3,7 @@ package com.justinefactory.reading.service;
 import com.justinefactory.reading.exceptions.ContentReadingException;
 import com.justinefactory.reading.parsers.ContentParser;
 import com.justinefactory.reading.readers.ContentReader;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,12 +23,9 @@ public class ContentReadingService<RawContent, OutContent> {
     }
 
 
-    public ContentStorage<OutContent> processContent() throws ContentReadingException {
-        ContentStorage<RawContent> rawContent = contentReader.readContent();
-        ContentStorage<OutContent> content = new ContentStorage<>();
-        for (int i = 0; i < rawContent.getContentSize(); i++) {
-            content.addContent(contentParser.parseLine(rawContent.getContent(i)));
-        }
+    public Content<OutContent> processContent() throws ContentReadingException {
+        RawContent rawContent = contentReader.readContent();
+        Content<OutContent> content = contentParser.parse(rawContent);
         logger.info("Reading service - finished processing successfully.");
         return content;
     }

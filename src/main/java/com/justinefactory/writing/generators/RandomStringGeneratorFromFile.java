@@ -1,7 +1,7 @@
 package com.justinefactory.writing.generators;
 
 import com.justinefactory.domain.PathInfo;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import com.justinefactory.writing.domain.TwoElemContent;
 import com.justinefactory.writing.exceptions.ContentGeneratingException;
 import com.justinefactory.writing.exceptions.ContentInitializationException;
@@ -32,9 +32,9 @@ public class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemCo
 
 
     @Override
-    public ContentStorage<TwoElemContent> generateContent(int nLines) {
+    public Content<TwoElemContent> generateContent(int nLines) {
         logger.debug("Generating random strings from file.");
-        ContentStorage<TwoElemContent> randomContent = new ContentStorage<>();
+        Content<TwoElemContent> randomContent = new Content<>();
 
         for (int i = 0; i < nLines; i++) {
 

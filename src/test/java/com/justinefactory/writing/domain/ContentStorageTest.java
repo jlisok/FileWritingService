@@ -16,7 +16,7 @@ class ContentStorageTest {
         String string = null;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new ContentStorage<>(string));
+        assertThrows(IllegalArgumentException.class, () -> new Content<>(string));
     }
 
     @Test
@@ -25,7 +25,7 @@ class ContentStorageTest {
         String string = "Tiger";
 
         //when
-        ContentStorage<String> contentStorage = new ContentStorage<>(string);
+        Content<String> contentStorage = new Content<>(string);
 
         //then
         assertEquals(string, contentStorage.getContent(0));
@@ -39,7 +39,7 @@ class ContentStorageTest {
         list.add(null);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new ContentStorage<>(list));
+        assertThrows(IllegalArgumentException.class, () -> new Content<>(list));
     }
 
     @Test
@@ -48,7 +48,7 @@ class ContentStorageTest {
         List<String> list = null;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new ContentStorage<>(list));
+        assertThrows(IllegalArgumentException.class, () -> new Content<>(list));
     }
 
     @Test
@@ -57,7 +57,7 @@ class ContentStorageTest {
         List<Integer> list = new ArrayList<>(List.of(1, 15, 32));
 
         //when
-        ContentStorage<Integer> contentStorage = new ContentStorage<>(list);
+        Content<Integer> contentStorage = new Content<>(list);
 
         //then
         assertEquals(list, contentStorage.getContent());
@@ -67,7 +67,7 @@ class ContentStorageTest {
     @Test
     void createContentStorageWhenAddingNull() {
         //given
-        ContentStorage<String> content = new ContentStorage<>();
+        Content<String> content = new Content<>();
 
         //then
         assertThrows(IllegalArgumentException.class, () -> content.addContent(null));
@@ -77,7 +77,7 @@ class ContentStorageTest {
     @Test
     void createContentStorageWhenAddingContentThatMeetsConditions() {
         //given
-        ContentStorage<String> content = new ContentStorage<>();
+        Content<String> content = new Content<>();
         String string = "Tiger";
 
         //when

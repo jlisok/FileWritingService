@@ -1,9 +1,8 @@
-package com.justinefactory.writing.writers;
+package com.justinefactory.writing.writers.tofile;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
-import com.justinefactory.writing.domain.ContentReadyForPlainWriter;
-import com.justinefactory.writing.writers.file.writers.PlainFileWriter;
+import com.justinefactory.writing.domain.PlainContent;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -34,7 +33,7 @@ class PlainFileWriterTest {
         //given
         Path filePath = dir.resolve("doc.csv");
         PathInfo file2writeData = new PathInfo(filePath);
-        ContentReadyForPlainWriter readyToWriteContent = new ContentReadyForPlainWriter(List.of("1", "2"));
+        PlainContent readyToWriteContent = new PlainContent(List.of("1", "2"));
 
         //when
         PlainFileWriter writer = new PlainFileWriter();

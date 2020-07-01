@@ -1,34 +1,34 @@
 package com.justinefactory.sending.domain;
 
 import com.justinefactory.stats.domain.Stats;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 
 import java.util.Objects;
 
-public class ContentAndStatsStorage<Content> {
+public class ThreeElemContentAndStatsStorage<ContentType> {
 
-    private final ContentStorage<Content> content;
-    private final Stats<Content> stats;
 
-    public ContentAndStatsStorage(ContentStorage<Content> ct, Stats<Content> st) throws IllegalArgumentException {
+    private final Content<ContentType> content;
+    private final Stats<ContentType> stats;
+
+    public ThreeElemContentAndStatsStorage(Content<ContentType> ct, Stats<ContentType> st) throws IllegalArgumentException {
         checkIfIsNullOrEmpty(ct, st);
         content = ct;
         stats = st;
     }
 
 
-    private void checkIfIsNullOrEmpty(ContentStorage<Content> content, Stats<Content> stats) throws IllegalArgumentException {
+    private void checkIfIsNullOrEmpty(Content<ContentType> content, Stats<ContentType> stats) throws IllegalArgumentException {
         if (content == null || content.getContent() == null || content.getContent().isEmpty() || stats == null) {
             throw new IllegalArgumentException("Trouble while writing content: " + content + " and stats: " + stats + " to ContentStorage. Content or stats are empty or null.");
         }
     }
 
-
-    public ContentStorage<Content> getContent() {
+    public Content<ContentType> getContent() {
         return content;
     }
 
-    public Stats<Content> getStats() {
+    public Stats<ContentType> getStats() {
         return stats;
     }
 
@@ -36,7 +36,7 @@ public class ContentAndStatsStorage<Content> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContentAndStatsStorage<Content> that = (ContentAndStatsStorage<Content>) o;
+        ThreeElemContentAndStatsStorage<ContentType> that = (ThreeElemContentAndStatsStorage<ContentType>) o;
         return Objects.equals(content, that.content) &&
                 Objects.equals(stats, that.stats);
     }
@@ -48,3 +48,4 @@ public class ContentAndStatsStorage<Content> {
 
 
 }
+
