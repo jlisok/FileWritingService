@@ -1,10 +1,9 @@
 package com.justinefactory.writing.util;
 
-import com.justinefactory.domain.PathData;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 
-public interface CheckerIfContentAlreadyWritten {
+public interface CheckerIfContentAlreadyWritten<WritingInfo> {
 
-    public void assureNotExist(PathData fileData) throws ContentWritingException;
+    void assureNotExist(WritingInfo writingInfo) throws ContentWritingException;
 
 }

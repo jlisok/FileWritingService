@@ -1,6 +1,6 @@
 package com.justinefactory.writing.generators;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.domain.TwoElemContent;
 import com.justinefactory.writing.exceptions.FileWithStringsToGenerateContentIsEmptyException;
@@ -24,7 +24,7 @@ class RandomStringGeneratorFromFileTest {
         Path filePathRandomStrings = getPathToResource("empty-string-content.csv");
 
         //when
-        PathData fileDataRanStr = new PathData(filePathRandomStrings);
+        PathInfo fileDataRanStr = new PathInfo(filePathRandomStrings);
 
         //then
         Assertions.assertThrows(FileWithStringsToGenerateContentIsEmptyException.class, () -> new RandomStringGeneratorFromFile(newRandom, fileDataRanStr));
@@ -35,7 +35,7 @@ class RandomStringGeneratorFromFileTest {
         //given
         Random newRandom = new Random();
         Path filePathRandomStrings = getPathToResource("string-content-only-1string.csv");
-        PathData fileDataRanStr = new PathData(filePathRandomStrings);
+        PathInfo fileDataRanStr = new PathInfo(filePathRandomStrings);
         RandomStringGeneratorFromFile newGenerator = new RandomStringGeneratorFromFile(newRandom, fileDataRanStr);
 
         //when
@@ -55,7 +55,7 @@ class RandomStringGeneratorFromFileTest {
         //given
         Random newRandom = new Random();
         Path filePathRandomStrings = getPathToResource("string-content-for-tests.csv");
-        PathData fileDataRanStr = new PathData(filePathRandomStrings);
+        PathInfo fileDataRanStr = new PathInfo(filePathRandomStrings);
         RandomStringGeneratorFromFile newGenerator = new RandomStringGeneratorFromFile(newRandom, fileDataRanStr);
 
         //when

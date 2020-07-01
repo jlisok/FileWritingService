@@ -1,6 +1,6 @@
 package com.justinefactory.writing.writers;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.writers.file.writers.PlainFileWriter;
@@ -32,7 +32,7 @@ class PlainFileWriterTest {
     void write2FileWhenWritingRandomInteger() throws Exception {
         //given
         Path filePath = dir.resolve("doc.csv");
-        PathData file2writeData = new PathData(filePath);
+        PathInfo file2writeData = new PathInfo(filePath);
         ContentStorage<String> readyToWriteContent = new ContentStorage<>(List.of("1","2"));
 
         //when
@@ -49,7 +49,7 @@ class PlainFileWriterTest {
     void write2FileWhenWritingJSON() throws Exception {
         //given
         Path filePath = dir.resolve("doc.json");
-        PathData file2writeData = new PathData(filePath);
+        PathInfo file2writeData = new PathInfo(filePath);
         ContentStorage<String> readyToWriteContent = new ContentStorage<>();
         readyToWriteContent.addContent("\"{\\n\" +\n" +
                 "                \"  \\\"content\\\": {\\n\" +\n" +

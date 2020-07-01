@@ -1,6 +1,6 @@
 package com.justinefactory.writing.generators;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.writing.domain.ContentStorage;
 import com.justinefactory.writing.domain.TwoElemContent;
 import com.justinefactory.writing.exceptions.ContentGeneratingException;
@@ -24,7 +24,7 @@ public class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemCo
     private final int stringListSize;
     private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
-    public RandomStringGeneratorFromFile(Random newNumber, PathData fileWithRandomStrings) throws ContentInitializationException {
+    public RandomStringGeneratorFromFile(Random newNumber, PathInfo fileWithRandomStrings) throws ContentInitializationException {
         this.newNumber = newNumber;
         this.stringList = readStringsFromFile(fileWithRandomStrings);
         stringListSize = stringList.size();
@@ -56,20 +56,20 @@ public class RandomStringGeneratorFromFile implements ContentGenerator<TwoElemCo
     }
 
 
-    private List<String> readStringsFromFile(PathData stringFile) throws ContentInitializationException {
-        logger.debug("Reading file id {} containing strings for random generator.", stringFile.getFileId());
+    private List<String> readStringsFromFile(PathInfo stringFile) throws ContentInitializationException {
+        logger.debug("Reading file id {} containing strings for random generator.", stringFile.getId());
         try {
-            List<String> randomStrings = Files.readAllLines(stringFile.getFilePath());
+            List<String> randomStrings = Files.readAllLines(stringFile.getPath());
 
             if (randomStrings.isEmpty()) {
-                logger.warn("File id {} containing strings for random generator is empty.", stringFile.getFileId());
+                logger.warn("File id {} containing strings for random generator is empty.", stringFile.getId());
                 throw new FileWithStringsToGenerateContentIsEmptyException("File containing strings for random generator is empty.");
             }
 
-            logger.info("File id {} containing strings for random generator has been read successfully.", stringFile.getFileId());
+            logger.info("File id {} containing strings for random generator has been read successfully.", stringFile.getId());
             return randomStrings;
         } catch (IOException e) {
-            logger.error("Could not read file id {} containing strings for random generator.", stringFile.getFileId());
+            logger.error("Could not read file id {} containing strings for random generator.", stringFile.getId());
             throw new ContentGeneratingException(e, "Could not read file containing strings for random generator.");
         }
     }

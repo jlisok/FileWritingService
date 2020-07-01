@@ -1,6 +1,6 @@
 package com.justinefactory.reading.readers;
 
-import com.justinefactory.domain.PathData;
+import com.justinefactory.domain.PathInfo;
 import com.justinefactory.reading.exceptions.SourceFileIsEmptyException;
 import com.justinefactory.writing.domain.ContentStorage;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +17,7 @@ class PlainContentReaderTest {
     @Test
     void readContentWhenFileContentMeetsConditions() throws Exception {
         //given
-        PathData fileData = new PathData(getPathToResource("txt-file-content-integers.txt"));
+        PathInfo fileData = new PathInfo(getPathToResource("txt-file-content-integers.txt"));
         ContentStorage<String> expectedContent = new ContentStorage<>(Arrays.asList("40000000", "800000", "3245", "2143567"));
 
         //when
@@ -33,7 +33,7 @@ class PlainContentReaderTest {
     void readContentWhenFileIsEmpty() throws Exception {
         //given
         Path filePath = getPathToResource("empty-string-content.csv");
-        PathData fileData = new PathData(filePath);
+        PathInfo fileData = new PathInfo(filePath);
 
         //when
         PlainContentReader contentReader = new PlainContentReader(fileData);
