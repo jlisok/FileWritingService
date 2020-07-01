@@ -2,8 +2,8 @@ package com.justinefactory.cloud.communication.transfer;
 
 import com.justinefactory.reading.exceptions.AwsContentReadingException;
 
-public interface ContentExtractor<Object, Content> {
+public interface ContentExtractor<Object, ContentType> {
 
-    Content extractContent(Object object) throws AwsContentReadingException;
+    ContentType extractContent(Object object) throws AwsContentReadingException;
 
 }

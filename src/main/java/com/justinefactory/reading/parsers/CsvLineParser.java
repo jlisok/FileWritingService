@@ -1,5 +1,7 @@
 package com.justinefactory.reading.parsers;
 
-public interface CsvLineParser<Line> extends ContentParser<String[], Line> {
+import com.justinefactory.writing.domain.CsvContent;
+
+public interface CsvLineParser<RawContent> extends ContentParser<CsvContent, RawContent> {
 
 }

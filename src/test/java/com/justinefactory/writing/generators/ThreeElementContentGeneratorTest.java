@@ -2,7 +2,7 @@ package com.justinefactory.writing.generators;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.domain.ThreeElemContent;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
@@ -25,7 +25,7 @@ class ThreeElementContentGeneratorTest {
 
         //when
         int nLines = 12;
-        ContentStorage<ThreeElemContent> new3ElemContent = new3ElemGenerator.generateContent(nLines);
+        Content<ThreeElemContent> new3ElemContent = new3ElemGenerator.generateContent(nLines);
 
         //then
         assertEquals(new3ElemContent.getContentSize(), nLines);

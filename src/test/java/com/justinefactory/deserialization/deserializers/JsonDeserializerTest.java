@@ -1,17 +1,16 @@
 package com.justinefactory.deserialization.deserializers;
 
-import com.google.gson.reflect.TypeToken;
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.reading.exceptions.ContentDeserializationException;
-import com.justinefactory.sending.domain.ContentAndStatsStorage;
+import com.justinefactory.sending.domain.ContentAndStats;
+import com.justinefactory.sending.domain.IntegerAndStats;
+import com.justinefactory.sending.domain.ThreeElementContentAndStats;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.converters.ContentAndStatsToJsonConverter;
-import com.justinefactory.writing.domain.ContentStorage;
-import com.justinefactory.writing.domain.JsonStorage;
+import com.justinefactory.writing.domain.Content;
+import com.justinefactory.writing.domain.Json;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Type;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,14 +20,15 @@ class JsonDeserializerTest {
     @Test
     void deserializeToThreeElemContentAndStats() throws ContentDeserializationException, ContentConversion2ReadyToWriteException {
         // given
-        ContentAndStatsStorage<ThreeElemContent> expectedStorage = mockContentAndStatsStorage(new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin"));
-        JsonStorage json = serializeContentAndStats(expectedStorage);
-        JsonDeserializer<ContentAndStatsStorage<ThreeElemContent>> deserializer = new JsonDeserializer<>();
-        Type classType = new TypeToken<ContentAndStatsStorage<ThreeElemContent>>() {
-        }.getType();
+        Content<ThreeElemContent> content = new Content<>(new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin"));
+        Stats<ThreeElemContent> stats = new Stats<>(1, 1, content.getContent(0));
+        ThreeElementContentAndStats expectedStorage = new ThreeElementContentAndStats(content, stats);
+        Json json = serializeContentAndStats(expectedStorage);
+        JsonDeserializer<ThreeElementContentAndStats> deserializer = new JsonDeserializer<>();
+        Class<ThreeElementContentAndStats> classType = ThreeElementContentAndStats.class;
 
         //when
-        ContentAndStatsStorage<ThreeElemContent> actualStorage = deserializer.deserialize(json, classType);
+        ThreeElementContentAndStats actualStorage = deserializer.deserialize(json, classType);
 
         //then
         assertEquals(expectedStorage, actualStorage);
@@ -38,14 +38,15 @@ class JsonDeserializerTest {
     @Test
     void deserializeToIntegerContentAndStats() throws ContentDeserializationException, ContentConversion2ReadyToWriteException {
         // given
-        ContentAndStatsStorage<Integer> expectedStorage = mockContentAndStatsStorage(8);
-        JsonStorage json = serializeContentAndStats(expectedStorage);
-        JsonDeserializer<ContentAndStatsStorage<Integer>> deserializer = new JsonDeserializer<>();
-        Type classType = new TypeToken<ContentAndStatsStorage<Integer>>() {
-        }.getType();
+        Content<Integer> content = new Content<>(8);
+        Stats<Integer> stats = new Stats<>(1, 1, 8);
+        IntegerAndStats expectedStorage = new IntegerAndStats(content, stats);
+        Json json = serializeContentAndStats(expectedStorage);
+        JsonDeserializer<IntegerAndStats> deserializer = new JsonDeserializer<>();
+        Class<IntegerAndStats> classType = IntegerAndStats.class;
 
         //when
-        ContentAndStatsStorage<Integer> actualStorage = deserializer.deserialize(json, classType);
+        IntegerAndStats actualStorage = deserializer.deserialize(json, classType);
 
         //then
         assertEquals(expectedStorage, actualStorage);
@@ -53,14 +54,8 @@ class JsonDeserializerTest {
     }
 
 
-    private static <Content> ContentAndStatsStorage<Content> mockContentAndStatsStorage(Content content) {
-        Stats<Content> stats = new Stats<>(1, 1, content);
-        return new ContentAndStatsStorage<>(new ContentStorage<>(content), stats);
-    }
-
-
-    private static <Content> JsonStorage serializeContentAndStats(ContentAndStatsStorage<Content> storage) throws ContentConversion2ReadyToWriteException {
-        ContentAndStatsToJsonConverter<Content> converter = new ContentAndStatsToJsonConverter<>();
+    private static <ContentType> Json serializeContentAndStats(ContentAndStats<ContentType> storage) throws ContentConversion2ReadyToWriteException {
+        ContentAndStatsToJsonConverter<ContentType> converter = new ContentAndStatsToJsonConverter<>();
         return converter.convertContent(storage);
     }
 

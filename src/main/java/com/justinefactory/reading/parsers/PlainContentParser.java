@@ -1,5 +1,7 @@
 package com.justinefactory.reading.parsers;
 
-public interface PlainContentParser<Line> extends ContentParser<String, Line> {
+import com.justinefactory.writing.domain.PlainContent;
+
+public interface PlainContentParser<RawContent> extends ContentParser<PlainContent, RawContent> {
 
 }

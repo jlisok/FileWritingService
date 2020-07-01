@@ -1,6 +1,6 @@
 package com.justinefactory.writing.generators;
 
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
@@ -17,7 +17,7 @@ class RandomIntegerGeneratorTest {
 
         //when
         int nLines = 5;
-        ContentStorage<Integer> newContent = newGenerator.generateContent(nLines);
+        Content<Integer> newContent = newGenerator.generateContent(nLines);
 
         //then
         assertEquals(newContent.getContentSize(), nLines);
@@ -31,7 +31,7 @@ class RandomIntegerGeneratorTest {
 
         //when
         int nLines = 0;
-        ContentStorage<Integer> content = randomGenerator.generateContent(nLines);
+        Content<Integer> content = randomGenerator.generateContent(nLines);
 
         //then
         assertEquals(content.getContentSize(), 0);

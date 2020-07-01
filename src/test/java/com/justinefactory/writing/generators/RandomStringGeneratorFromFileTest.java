@@ -1,7 +1,7 @@
 package com.justinefactory.writing.generators;
 
 import com.justinefactory.domain.PathInfo;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import com.justinefactory.writing.domain.TwoElemContent;
 import com.justinefactory.writing.exceptions.FileWithStringsToGenerateContentIsEmptyException;
 import org.junit.jupiter.api.Assertions;
@@ -40,7 +40,7 @@ class RandomStringGeneratorFromFileTest {
 
         //when
         int nLines = 5;
-        ContentStorage<TwoElemContent> newContent = newGenerator.generateContent(nLines);
+        Content<TwoElemContent> newContent = newGenerator.generateContent(nLines);
 
         //then
         assertEquals(newContent.getContentSize(), nLines);
@@ -61,7 +61,7 @@ class RandomStringGeneratorFromFileTest {
         //when
         Long timeStart = getCurrentTimeInNanoSeconds();
         int nLines = 3;
-        ContentStorage<TwoElemContent> newContent = newGenerator.generateContent(nLines);
+        Content<TwoElemContent> newContent = newGenerator.generateContent(nLines);
         Long timeStop = getCurrentTimeInNanoSeconds();
 
         //then

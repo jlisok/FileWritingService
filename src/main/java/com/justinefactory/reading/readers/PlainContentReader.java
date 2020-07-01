@@ -4,7 +4,7 @@ import com.justinefactory.domain.PathInfo;
 import com.justinefactory.reading.exceptions.ContentReadingException;
 import com.justinefactory.reading.exceptions.ReadingContentFromFileException;
 import com.justinefactory.reading.exceptions.SourceFileIsEmptyException;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.PlainContent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +13,7 @@ import java.nio.file.Files;
 
 import static com.justinefactory.util.FileNotEmptyAndExistChecker.checkIfFileExistsIsNotDirAndNotEmpty;
 
-class PlainContentReader implements ContentReader<String> {
+class PlainContentReader implements ContentReader<PlainContent> {
 
     private final PathInfo fileData;
     private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
@@ -25,14 +25,14 @@ class PlainContentReader implements ContentReader<String> {
 
 
     @Override
-    public ContentStorage<String> readContent() throws ContentReadingException {
+    public PlainContent readContent() throws ContentReadingException {
         logger.debug("Reading data from file id {}", fileData.getId());
         if (!checkIfFileExistsIsNotDirAndNotEmpty(fileData.getPath())) {
             logger.warn("Reading data from file id {} failed. File does not exist or is empty.", fileData.getId());
             throw new SourceFileIsEmptyException("Reading data from file id " + fileData.getId() + " - failed. File does not exist or is empty.");
         }
-        try{
-            ContentStorage<String> rawContent = new ContentStorage<>(Files.readAllLines(fileData.getPath()));
+        try {
+            PlainContent rawContent = new PlainContent(Files.readAllLines(fileData.getPath()));
             logger.debug("Reading data from file id {} - success.", fileData.getId());
             return rawContent;
         } catch (Throwable e) {

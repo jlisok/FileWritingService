@@ -1,6 +1,6 @@
 package com.justinefactory.writing.generators;
 
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.Content;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,9 +17,9 @@ public class RandomIntegerGenerator implements ContentGenerator<Integer> {
     }
 
     @Override
-    public ContentStorage<Integer> generateContent(int nLines) {
+    public Content<Integer> generateContent(int nLines) {
         logger.debug("Generating random Integers.");
-        ContentStorage<Integer> randomContent = new ContentStorage<>();
+        Content<Integer> randomContent = new Content<>();
         for (int i = 0; i < nLines; i++) {
             randomContent.addContent(newNumber.nextInt());
         }

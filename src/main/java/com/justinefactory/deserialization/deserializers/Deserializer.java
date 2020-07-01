@@ -4,8 +4,8 @@ import com.justinefactory.reading.exceptions.ContentDeserializationException;
 
 import java.lang.reflect.Type;
 
-public interface Deserializer<Object, Content> {
+public interface Deserializer<Object, ContentType> {
 
-    Content deserialize(Object object, Type type) throws ContentDeserializationException;
+    ContentType deserialize(Object object, Class<ContentType> type) throws ContentDeserializationException;
 
 }

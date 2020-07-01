@@ -2,7 +2,7 @@ package com.justinefactory.reading.readers;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.reading.exceptions.SourceFileIsEmptyException;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.CsvContent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +20,9 @@ class CsvContentReaderTest {
         //when
         PathInfo fileData = new PathInfo(filePath);
         CsvContentReader contentReader = new CsvContentReader(fileData);
-        ContentStorage<String[]> content = contentReader.readContent();
+        CsvContent content = contentReader.readContent();
         //then
-        assertNotEquals(0, content.getContentSize());
+        assertNotEquals(0, content.size());
     }
 
 

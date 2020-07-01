@@ -2,14 +2,14 @@ package com.justinefactory.stats.domain;
 
 import java.util.Objects;
 
-public class Stats<Content> {
+public class Stats<ContentType> {
 
     private final Integer count;
     private final Integer distinctCount;
-    private final Content max;
+    private final ContentType max;
 
 
-    public Stats(Integer count, Integer distinctCount, Content max) {
+    public Stats(Integer count, Integer distinctCount, ContentType max) {
         this.count = count;
         this.distinctCount = distinctCount;
         this.max = max;
@@ -19,7 +19,7 @@ public class Stats<Content> {
         return distinctCount;
     }
 
-    public Content getMax() {
+    public ContentType getMax() {
         return max;
     }
 

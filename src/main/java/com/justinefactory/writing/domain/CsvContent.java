@@ -5,18 +5,26 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public class ContentReadyForCsvWriter {
+public class CsvContent {
 
     private final List<String[]> content;
 
-    public ContentReadyForCsvWriter() {
+    public CsvContent() {
         content = new ArrayList<>();
     }
 
-    public ContentReadyForCsvWriter(String[] rc) throws IllegalArgumentException {
+    public CsvContent(String[] rc) throws IllegalArgumentException {
         checkIfContentNull(rc);
         content = new ArrayList<>();
         content.add(rc);
+    }
+
+    public CsvContent(List<String[]> list) {
+        for (String[] item : list) {
+            checkIfContentNull(item);
+        }
+        content = new ArrayList<>();
+        content.addAll(list);
     }
 
     public String[] getContent(int i) {
@@ -43,12 +51,15 @@ public class ContentReadyForCsvWriter {
         return content.size() == 0;
     }
 
+    public Integer size() {
+        return content.size();
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContentReadyForCsvWriter that = (ContentReadyForCsvWriter) o;
+        CsvContent that = (CsvContent) o;
         if (content.size() != that.content.size()) return false;
         return content.equals(that.content);
     }
