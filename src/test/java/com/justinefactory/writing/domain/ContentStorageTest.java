@@ -60,7 +60,7 @@ class ContentStorageTest {
         ContentStorage<Integer> contentStorage = new ContentStorage<>(list);
 
         //then
-        assertEquals(list, contentStorage.getAllContent());
+        assertEquals(list, contentStorage.getContent());
     }
 
 

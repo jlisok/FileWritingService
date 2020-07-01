@@ -9,7 +9,7 @@ public class IntegersToLinesConverter implements ContentConverter<ContentStorage
     public ContentStorage<String> convertContent(ContentStorage<Integer> content) throws ContentConversion2ReadyToWriteException {
         checkIfContentNull(content);
         ContentStorage<String> readyToWriteContent = new ContentStorage<>();
-        for (Integer item : content.getAllContent()) {
+        for (Integer item : content.getContent()) {
             readyToWriteContent.addContent(item.toString());
         }
         return readyToWriteContent;

@@ -16,7 +16,7 @@ public class ThreeElementContentToCsvLinesConverter implements ContentToCsvLines
     public ContentStorage<String[]> convertContent(ContentStorage<ThreeElemContent> content) throws ContentConversion2ReadyToWriteException {
         checkIfContentEmpty(content);
         ContentStorage<String[]> readyToWriteContent = new ContentStorage<>();
-        for (ThreeElemContent item : content.getAllContent()) {
+        for (ThreeElemContent item : content.getContent()) {
             readyToWriteContent.addContent(new String[]{item.getTimeStamp().toString(), item.getRandomInt().toString(), item.getRandomString()});
             logger.debug("Converting ThreeElemContent object {} into csvFile lines - success.", content);
         }
@@ -24,7 +24,7 @@ public class ThreeElementContentToCsvLinesConverter implements ContentToCsvLines
     }
 
     private void checkIfContentEmpty(ContentStorage<ThreeElemContent> content) throws ContentConversion2ReadyToWriteException {
-        if (content.getAllContent().isEmpty()) {
+        if (content.getContent().isEmpty()) {
             throw new ContentConversion2ReadyToWriteException("Converting content " + content + " into csvFile lines - failed. Content was empty.");
         }
     }

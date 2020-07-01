@@ -19,7 +19,7 @@ public class PlainFileWriter implements ContentWriter<ContentStorage<String>, Pa
     @Override
     public void writeContent(ContentStorage<String> content, PathInfo fileData) throws ContentWritingException {
         try (BufferedWriter writer = Files.newBufferedWriter(fileData.getPath())) {
-            for (String item : content.getAllContent()) {
+            for (String item : content.getContent()) {
                 writer.write(item);
                 writer.newLine();
             }

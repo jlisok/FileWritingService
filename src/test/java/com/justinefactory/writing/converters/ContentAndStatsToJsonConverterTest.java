@@ -62,7 +62,7 @@ class ContentAndStatsToJsonConverterTest {
         JsonStorage json = converter.convertContent(content);
 
         //then
-        assertEquals(expectedContent, json.getAllContent());
+        assertEquals(expectedContent, json.getContent());
     }
 
 

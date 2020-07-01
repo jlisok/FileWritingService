@@ -39,7 +39,6 @@ public class ContentWritingService<Content, ReadyToWriteContent> {
         ReadyToWriteContent readyToWriteContent = converter.convertContent(content);
         logger.debug("Writing content to path {} - content has been converted to lines.", writingInfo.getURI());
         writer.writeContent(readyToWriteContent, writingInfo);
-        logger.debug("Writing content to path {} - lines have been written and appended into path.", writingInfo.getURI());
         logger.info("Writing content to path {} - success.", writingInfo.getURI());
     }
 
