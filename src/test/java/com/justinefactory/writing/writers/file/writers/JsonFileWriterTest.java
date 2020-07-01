@@ -2,7 +2,7 @@ package com.justinefactory.writing.writers.file.writers;
 
 import com.justinefactory.domain.PathInfo;
 import com.justinefactory.testutil.CreateAndDeleteFilesBeforeAfterAll;
-import com.justinefactory.writing.domain.JsonStorage;
+import com.justinefactory.writing.domain.JsonReadyForJsonWriter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class JsonFileWriterTest {
         //given
         Path filePath = dir.resolve("doc.json");
         PathInfo file2writeData = new PathInfo(filePath);
-        JsonStorage readyToWriteContent = new JsonStorage("{\n" +
+        JsonReadyForJsonWriter readyToWriteContent = new JsonReadyForJsonWriter("{\n" +
                 "  \"content\": {\n" +
                 "    \"content\": [\n" +
                 "      {\n" +
