@@ -4,6 +4,6 @@ import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteExcep
 
 public interface ContentConverter<Content, ReadyToWriteContent> {
 
-    public ReadyToWriteContent convertContent(Content content) throws ContentConversion2ReadyToWriteException;
+    ReadyToWriteContent convertContent(Content content) throws ContentConversion2ReadyToWriteException;
 
 }

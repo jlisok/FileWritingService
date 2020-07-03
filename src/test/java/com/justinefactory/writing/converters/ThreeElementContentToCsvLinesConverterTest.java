@@ -2,6 +2,7 @@ package com.justinefactory.writing.converters;
 
 import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.ContentReadyForCsvWriter;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,15 +29,15 @@ class ThreeElementContentToCsvLinesConverterTest {
 
     @ParameterizedTest
     @MethodSource("conversionData")
-    void convertDataWhenContentMeetsConditions(ContentStorage<ThreeElemContent> input, ContentStorage<String[]> expectedContent) throws ContentConversion2ReadyToWriteException {
+    void convertDataWhenContentMeetsConditions(ContentStorage<ThreeElemContent> input, ContentReadyForCsvWriter expectedContent) throws ContentConversion2ReadyToWriteException {
         //given
         ThreeElementContentToCsvLinesConverter converter = new ThreeElementContentToCsvLinesConverter();
 
         //when
-        ContentStorage<String[]> actualContent = converter.convertContent(input);
+        ContentReadyForCsvWriter actualContent = converter.convertContent(input);
 
         //then
-        for (int i = 0; i < expectedContent.getContentSize(); i++) {
+        for (int i = 0; i < expectedContent.getContent().size(); i++) {
             assertEquals(expectedContent.getContent(i)[0], actualContent.getContent(i)[0]);
             assertEquals(expectedContent.getContent(i)[1], actualContent.getContent(i)[1]);
             assertEquals(expectedContent.getContent(i)[2], actualContent.getContent(i)[2]);
@@ -52,9 +53,9 @@ class ThreeElementContentToCsvLinesConverterTest {
         ContentStorage<ThreeElemContent> secondInput = firstInput;
         secondInput.addContent(secondThreeElemContent);
 
-        ContentStorage<String[]> firstString = new ContentStorage<>();
+        ContentReadyForCsvWriter firstString = new ContentReadyForCsvWriter();
         firstString.addContent(new String[]{firstThreeElemContent.getTimeStamp().toString(), firstThreeElemContent.getRandomInt().toString(), firstThreeElemContent.getRandomString()});
-        ContentStorage<String[]> secondString = firstString;
+        ContentReadyForCsvWriter secondString = firstString;
         secondString.addContent(new String[]{secondThreeElemContent.getTimeStamp().toString(), secondThreeElemContent.getRandomInt().toString(), secondThreeElemContent.getRandomString()});
 
 

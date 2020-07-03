@@ -18,10 +18,11 @@ public class ContentAndStatsStorage<Content> {
 
 
     private void checkIfIsNullOrEmpty(ContentStorage<Content> content, Stats<Content> stats) throws IllegalArgumentException {
-        if (content == null || content.getAllContent() == null || content.getAllContent().isEmpty() || stats == null) {
+        if (content == null || content.getContent() == null || content.getContent().isEmpty() || stats == null) {
             throw new IllegalArgumentException("Trouble while writing content: " + content + " and stats: " + stats + " to ContentStorage. Content or stats are empty or null.");
         }
     }
+
 
     public ContentStorage<Content> getContent() {
         return content;

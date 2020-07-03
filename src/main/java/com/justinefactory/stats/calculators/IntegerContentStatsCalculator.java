@@ -36,12 +36,12 @@ public class IntegerContentStatsCalculator implements StatsCalculator<Integer> {
     }
 
     private Integer calculateUniqueCount(ContentStorage<Integer> content) {
-        Set<Integer> uniqueContent = new HashSet<>(content.getAllContent());
+        Set<Integer> uniqueContent = new HashSet<>(content.getContent());
         return uniqueContent.size();
     }
 
     private Integer calculateMax(ContentStorage<Integer> content) {
-        return Collections.max(content.getAllContent());
+        return Collections.max(content.getContent());
     }
 
 

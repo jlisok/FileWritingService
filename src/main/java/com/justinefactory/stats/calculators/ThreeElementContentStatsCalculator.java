@@ -37,7 +37,7 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
 
     private Integer calculateUniqueCount(ContentStorage<ThreeElemContent> content) {
         Set<StringIntContent> uniqueContent = new HashSet<>();
-        for (ThreeElemContent item : content.getAllContent()) {
+        for (ThreeElemContent item : content.getContent()) {
             uniqueContent.add(new StringIntContent(item));
         }
         return uniqueContent.size();
@@ -45,7 +45,7 @@ public class ThreeElementContentStatsCalculator implements StatsCalculator<Three
 
 
     private ThreeElemContent calculateMax(ContentStorage<ThreeElemContent> content) {
-        return Collections.max(content.getAllContent(), comparator);
+        return Collections.max(content.getContent(), comparator);
     }
 
 

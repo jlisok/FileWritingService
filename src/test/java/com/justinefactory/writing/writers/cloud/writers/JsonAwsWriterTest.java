@@ -1,10 +1,10 @@
-package com.justinefactory.writing.writers.server.writers;
+package com.justinefactory.writing.writers.cloud.writers;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.justinefactory.domain.AwsInfo;
 import com.justinefactory.sending.exceptions.AwsSecurityCredentialsException;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.JsonReadyForJsonWriter;
 import com.justinefactory.writing.exceptions.AwsContentWritingException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,8 +33,7 @@ class JsonAwsWriterTest {
     void writeContentWhenContentDoesNotExist() throws AwsContentWritingException {
         //given
         AwsInfo info = new AwsInfo(bucketName, jsonName);
-        ContentStorage<String> readyToWriteContent = new ContentStorage<>();
-        readyToWriteContent.addContent("{\n" +
+        JsonReadyForJsonWriter readyToWriteContent = new JsonReadyForJsonWriter("{\n" +
                 "  \"content\": {\n" +
                 "    \"content\": [\n" +
                 "      {\n" +

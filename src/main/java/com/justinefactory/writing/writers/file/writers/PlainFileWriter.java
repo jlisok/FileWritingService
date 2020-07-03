@@ -1,7 +1,7 @@
 package com.justinefactory.writing.writers.file.writers;
 
 import com.justinefactory.domain.PathInfo;
-import com.justinefactory.writing.domain.ContentStorage;
+import com.justinefactory.writing.domain.ContentReadyForPlainWriter;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import com.justinefactory.writing.writers.ContentWriter;
 import org.apache.logging.log4j.LogManager;
@@ -12,14 +12,14 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 
-public class PlainFileWriter implements ContentWriter<ContentStorage<String>, PathInfo> {
+public class PlainFileWriter implements ContentWriter<ContentReadyForPlainWriter, PathInfo> {
 
     private final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     @Override
-    public void writeContent(ContentStorage<String> content, PathInfo fileData) throws ContentWritingException {
+    public void writeContent(ContentReadyForPlainWriter content, PathInfo fileData) throws ContentWritingException {
         try (BufferedWriter writer = Files.newBufferedWriter(fileData.getPath())) {
-            for (String item : content.getAllContent()) {
+            for (String item : content.getContent()) {
                 writer.write(item);
                 writer.newLine();
             }
