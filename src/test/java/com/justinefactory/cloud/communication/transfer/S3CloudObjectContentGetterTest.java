@@ -5,7 +5,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.justinefactory.domain.AwsInfo;
 import com.justinefactory.reading.exceptions.AwsContentReadingException;
 import com.justinefactory.sending.exceptions.AwsSecurityCredentialsException;
-import com.justinefactory.writing.domain.Json;
+import com.justinefactory.writing.domain.JsonContent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,10 +30,10 @@ class S3CloudObjectContentGetterTest {
     public void getObjectWhenMeetingConditions() throws IOException, AwsContentReadingException {
         //given
         JsonExtractorFromS3ObjectInputStream extractor = new JsonExtractorFromS3ObjectInputStream();
-        S3CloudObjectContentGetter<Json> getter = new S3CloudObjectContentGetter<>(awsClient, extractor);
+        S3CloudObjectContentGetter<JsonContent> getter = new S3CloudObjectContentGetter<>(awsClient, extractor);
 
         //when
-        Json storage = getter.getObjectContent(info);
+        JsonContent storage = getter.getObjectContent(info);
 
         //then
         assertNotNull(storage.getContent());
@@ -45,7 +45,7 @@ class S3CloudObjectContentGetterTest {
     public void getObjectWhenNoSuchFile() {
         //given
         JsonExtractorFromS3ObjectInputStream extractor = new JsonExtractorFromS3ObjectInputStream();
-        S3CloudObjectContentGetter<Json> getter = new S3CloudObjectContentGetter<>(awsClient, extractor);
+        S3CloudObjectContentGetter<JsonContent> getter = new S3CloudObjectContentGetter<>(awsClient, extractor);
 
         //when
         AwsInfo infoNoSuchFile = new AwsInfo("com.justyna.lisok.factory.content-bucket", "three-element-content-test-no-such-file.json");

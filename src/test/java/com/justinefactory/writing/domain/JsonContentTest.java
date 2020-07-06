@@ -5,30 +5,30 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class JsonStorageTest {
+class JsonContentTest {
 
     @Test
-    public void createJsonStorageWhenJsonIsNull() {
+    public void createJsonContentWhenJsonIsNull() {
         //given
         String json = null;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new Json(json));
+        assertThrows(IllegalArgumentException.class, () -> new JsonContent(json));
     }
 
 
     @Test
-    public void createJsonStorageWhenJsonIsEmpty() {
+    public void createJsonContentWhenJsonIsEmpty() {
         //given
         String json = "";
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new Json(json));
+        assertThrows(IllegalArgumentException.class, () -> new JsonContent(json));
     }
 
 
     @Test
-    public void createJsonStorageWhenJsonMeetsConditions() {
+    public void createJsonContentWhenJsonMeetsConditions() {
         //given
         String json = "{\"content\": [\n" +
                 "      {\n" +
@@ -39,10 +39,10 @@ class JsonStorageTest {
                 "    ]\n";
 
         //when
-        Json jsonStorage = new Json(json);
+        JsonContent jsonContent = new JsonContent(json);
 
         //then
-        assertEquals(json, jsonStorage.getContent());
+        assertEquals(json, jsonContent.getContent());
     }
 
 }

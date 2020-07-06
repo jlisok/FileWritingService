@@ -8,13 +8,13 @@ import com.justinefactory.sending.domain.ThreeElementContentAndStats;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.converters.ContentAndStatsToJsonConverter;
 import com.justinefactory.writing.domain.Content;
-import com.justinefactory.writing.domain.Json;
+import com.justinefactory.writing.domain.JsonContent;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class JsonDeserializerTest {
+class JsonContentDeserializerTest {
 
 
     @Test
@@ -23,12 +23,12 @@ class JsonDeserializerTest {
         Content<ThreeElemContent> content = new Content<>(new ThreeElemContent(1590147349818750700L, -840762737, "ChristopherRobin"));
         Stats<ThreeElemContent> stats = new Stats<>(1, 1, content.getContent(0));
         ThreeElementContentAndStats expectedStorage = new ThreeElementContentAndStats(content, stats);
-        Json json = serializeContentAndStats(expectedStorage);
+        JsonContent jsonContent = serializeContentAndStats(expectedStorage);
         JsonDeserializer<ThreeElementContentAndStats> deserializer = new JsonDeserializer<>();
         Class<ThreeElementContentAndStats> classType = ThreeElementContentAndStats.class;
 
         //when
-        ThreeElementContentAndStats actualStorage = deserializer.deserialize(json, classType);
+        ThreeElementContentAndStats actualStorage = deserializer.deserialize(jsonContent, classType);
 
         //then
         assertEquals(expectedStorage, actualStorage);
@@ -41,12 +41,12 @@ class JsonDeserializerTest {
         Content<Integer> content = new Content<>(8);
         Stats<Integer> stats = new Stats<>(1, 1, 8);
         IntegerAndStats expectedStorage = new IntegerAndStats(content, stats);
-        Json json = serializeContentAndStats(expectedStorage);
+        JsonContent jsonContent = serializeContentAndStats(expectedStorage);
         JsonDeserializer<IntegerAndStats> deserializer = new JsonDeserializer<>();
         Class<IntegerAndStats> classType = IntegerAndStats.class;
 
         //when
-        IntegerAndStats actualStorage = deserializer.deserialize(json, classType);
+        IntegerAndStats actualStorage = deserializer.deserialize(jsonContent, classType);
 
         //then
         assertEquals(expectedStorage, actualStorage);
@@ -54,7 +54,7 @@ class JsonDeserializerTest {
     }
 
 
-    private static <ContentType> Json serializeContentAndStats(ContentAndStats<ContentType> storage) throws ContentConversion2ReadyToWriteException {
+    private static <ContentType> JsonContent serializeContentAndStats(ContentAndStats<ContentType> storage) throws ContentConversion2ReadyToWriteException {
         ContentAndStatsToJsonConverter<ContentType> converter = new ContentAndStatsToJsonConverter<>();
         return converter.convertContent(storage);
     }

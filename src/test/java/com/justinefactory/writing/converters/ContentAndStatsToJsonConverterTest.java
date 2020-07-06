@@ -4,7 +4,7 @@ import com.justinefactory.domain.ThreeElemContent;
 import com.justinefactory.sending.domain.ContentAndStats;
 import com.justinefactory.stats.domain.Stats;
 import com.justinefactory.writing.domain.Content;
-import com.justinefactory.writing.domain.Json;
+import com.justinefactory.writing.domain.JsonContent;
 import com.justinefactory.writing.exceptions.ContentConversion2ReadyToWriteException;
 import com.justinefactory.writing.exceptions.ContentWritingException;
 import org.junit.jupiter.api.Test;
@@ -59,10 +59,10 @@ class ContentAndStatsToJsonConverterTest {
         ContentAndStatsToJsonConverter<ThreeElemContent> converter = new ContentAndStatsToJsonConverter<>();
 
         //when
-        Json json = converter.convertContent(content);
+        JsonContent jsonContent = converter.convertContent(content);
 
         //then
-        assertEquals(expectedContent, json.getContent());
+        assertEquals(expectedContent, jsonContent.getContent());
     }
 
 

@@ -4,7 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.justinefactory.domain.AwsInfo;
 import com.justinefactory.sending.exceptions.AwsSecurityCredentialsException;
-import com.justinefactory.writing.domain.Json;
+import com.justinefactory.writing.domain.JsonContent;
 import com.justinefactory.writing.exceptions.AwsContentWritingException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import static com.justinefactory.testutil.AwsClientCreatorBeforeEach.createAwsClient;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class JsonAwsWriterTest {
+class JsonContentAwsWriterTest {
 
     private static AmazonS3 awsClient;
     private static String jsonName = "content.json";
@@ -34,7 +34,7 @@ class JsonAwsWriterTest {
     void writeContentWhenContentDoesNotExist() throws AwsContentWritingException {
         //given
         AwsInfo info = new AwsInfo(bucketName, jsonName);
-        Json readyToWriteContent = new Json("{\n" +
+        JsonContent readyToWriteContent = new JsonContent("{\n" +
                 "  \"content\": {\n" +
                 "    \"content\": [\n" +
                 "      {\n" +
